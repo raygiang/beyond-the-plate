@@ -4,6 +4,7 @@
     <img id="banner-image" src="images/homepage-categories/request-banner1.jpg" alt="Picture of cutting board with tomatoes">
   </div>
   <div class="page-wrapper flex-container">
+    <!-- The table will be auto generated when the db is ready -->
     <div>
       <table>
         <thead>
@@ -44,9 +45,12 @@
       </ul>
     </aside>
 <!-- Form put in modal or separate page -->
+<!-- Only registered users can request a recipe -->
+<!-- After a request is replied it should be automatically removed from request table and an email notifying should be sent to the user -->
 
 <div>
       <form action="#" method="POST" name="recipeRequest">
+        <!-- Name should be generated automatically where user id = :id -->
         <!-- <div class="form-group">
           <label class="col-form-label" for="uName">Name:</label>
           <input type="text" class="form-control" name="uName" id="uName">
