@@ -128,6 +128,7 @@ a {
 
 #main-nav a:hover {
   text-decoration: underline;
+  color: #ed1c24;
 }
 
 /*4.BANNER SECTION*/
@@ -214,6 +215,9 @@ a {
   font-weight: normal;
   color: #ffffff;
 }
+#sidebar-nav a:hover{
+   text-decoration: none;
+}
 
 /*8.FOOTER*/
 
@@ -246,6 +250,7 @@ a {
   text-align: right;
 }
 
+/*********Meal Plan******************/
 .table-container {
   overflow-x: auto;
 }
@@ -266,4 +271,33 @@ a {
 
 .ingredients th, td {
   padding: 1em 1em;
+}
+
+/*********Request Recipe******************/
+.banner-content-request{
+  font-family: Georgia;
+  font-style: italic;
+  font-size:4.5em;
+  color: #ffffff;
+  position:absolute;
+  text-align: center;
+  margin: 2em 3em 3em 2em;
+  text-shadow: 1.5px 1.5px 1px #ed1c24;
+}
+
+table {
+  color: #000000;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 3em;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+th{
+  color: #ed1c24;
 }
