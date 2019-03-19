@@ -55,6 +55,7 @@ a {
 .flex-container {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 /*2.HEADER, SEARCH BAR, LOGO */

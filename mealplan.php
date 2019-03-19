@@ -1,6 +1,5 @@
 <?php
-  require_once('lib/classes/Page.php');
-  require_once('lib/classes/Mealplan.php');
+  require_once 'vendor/autoload.php';
   date_default_timezone_set('Canada/Eastern');
 
   $page = new Mealplan('Meal Plan', getdate());
