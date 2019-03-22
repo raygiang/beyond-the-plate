@@ -4,7 +4,7 @@ class Database{
 
 	private static $user = 'root';
 	private static $pass = 'root';
-	private static $dsn = 'mysql:host=localhost;dbname=cook_book';
+	private static $dsn = 'mysql:host=localhost;dbname=cookbook';
 	private static $dbcon;
 
 	private function __construct(){

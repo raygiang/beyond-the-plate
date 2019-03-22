@@ -1,3 +1,4 @@
+
 function pageReady(){
 	var nav = document.getElementById("header");
 	var main = document.getElementById("main");
@@ -16,5 +17,24 @@ function pageReady(){
 		}
 	}
 	window.onscroll = stickyMenuFunction;
+
+//Recipe Request Modal
+	var createModalBtn = document.getElementById('create-modal-btn');
+	var createModal = document.getElementById('create-modal');
+	var span = document.getElementsByClassName("close")[0];
+
+	createModalBtn.onclick = function() {
+	  createModal.style.display = "block";
+	}
+	span.onclick = function() {
+	  createModal.style.display = "none";
+	}
+	window.onclick = function(event) {
+	  if (event.target == createModal) {
+	    createModal.style.display = "none";
+	  }
+	}
+
 }
 window.onload = pageReady;
+

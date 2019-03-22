@@ -1,12 +1,12 @@
 <main id="main">
   <div id="banner">
     <p class="banner-content">Eat What You Like!</p>
-    <img id="banner-image" src="images/homepage-categories/showcase.jpeg" alt="Picture of a Plate of Waffles with Fruits on Top">
+    <img id="banner-image" src="images/homepage-categories/showcase2.jpg" alt="Picture of a Plate of Waffles with Fruits on Top">
   </div>
   <div class="page-wrapper flex-container">
     <div id="categories" class="flex-container">
       <a href="#" class="food-category">
-        <img class="category-image" src="images/homepage-categories/pexels-photo-374092.jpeg" alt="Picture of a Plate of Waffles with Fruits on Top">
+        <img class="category-image" src="images/homepage-categories/pexels-photo-374092.jpg" alt="Picture of a Plate of Waffles with Fruits on Top">
         <div class="category-name">Breakfast</div>
       </a>
 
@@ -26,7 +26,7 @@
       </a>
 
       <a href="#" class="food-category">
-        <img class="category-image" src="images/homepage-categories/pexels-photo-266873.jpeg" alt="Picture of a Plate of Waffles with Fruits on Top">
+        <img class="category-image" src="images/homepage-categories/pexels-photo-266873.jpg" alt="Picture of a Plate of Waffles with Fruits on Top">
         <div class="category-name">Party Snacks</div>
       </a>
 
@@ -41,7 +41,7 @@
       </a>
 
       <a href="#" class="food-category">
-        <img class="category-image" src="images/homepage-categories/pexels-photo-1157861.jpeg" alt="Picture of a Plate of Waffles with Fruits on Top">
+        <img class="category-image" src="images/homepage-categories/pexels-photo-1157861.jpg" alt="Picture of a Plate of Waffles with Fruits on Top">
         <div class="category-name">Drinks</div>
       </a>
     </div>
