@@ -1,8 +1,13 @@
 <?php
  require_once('lib/classes/Page.php');
  require_once('lib/classes/Requestrecipe.php');
+ require_once('lib/classes/Database.php');
 
-$page = new Requestrecipe('Recipe Request');
+ $dbconnection = Database::getDb();
+ $page = new Requestrecipe('Recipe Request');
+ $listrequests = $page->getAllRequests(Database::getDb());
+
+
 ?>
 
 <html lang="en">
@@ -14,7 +19,10 @@ $page = new Requestrecipe('Recipe Request');
   <link rel="stylesheet" type="text/css" href="css/cookbook.css">
 </head>
 <body>
+
   <?php
+  var_dump($page->getAllRequests(Database::getDb()));
+
     echo $page->generateHeader();
     echo $page->displayRequestRecipe();
     echo $page->generateFooter();

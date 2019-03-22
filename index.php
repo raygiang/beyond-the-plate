@@ -1,6 +1,5 @@
 <?php
-  require_once('lib/classes/Page.php');
-  require_once('lib/classes/Homepage.php');
+  require_once 'vendor/autoload.php';
 
   $page = new Homepage('Home Page');
 ?>
