@@ -31,7 +31,7 @@ html {
 body {
   margin: 0;
   box-sizing: border-box;
-  height: 100%;
+
 }
 
 img {
@@ -76,14 +76,13 @@ a {
 }
 
 #logo-container {
-  max-width: 15%;
+  max-width: 50%;
   margin-left: 1em;
 }
 
 #search-form {
   flex: 100%;
   text-align: right;
-  margin: ;
 }
 
 #search-bar {
@@ -139,30 +138,23 @@ a {
 
 /*4.BANNER SECTION*/
 #banner{
-<<<<<<< HEAD
   margin-bottom: 3em;
 }
 #banner-image{
  max-width: 100%;
-=======
-  background-image: url("../images/homepage-categories/showcase.jpeg") no-repeat;
-  background-size: 100%;
-  overflow: auto;
-}
-
-#banner-image{
-  width: 100%;
   height: auto;
 }
+
 .banner-content{
   font-family: Georgia;
   font-style: italic;
-  font-size:4.5rem;
-  position:inherit;
-  text-align: center;
-  margin: 4em;
+  font-size:calc(3vw + 3vh + 2vmin);
+  position:absolute;
+  left: 5em;
+  margin: 1.4em 0;
   text-shadow: 1.5px 1.5px 1px #656565;
 }
+
 
 /*5.MAIN SECTION*/
 
@@ -241,14 +233,7 @@ a {
 #footer {
   background-color: #f3f3f3;
   border-top: 1px solid  #ed1c24;
-  padding: 3em;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
+  padding: 2em;
 }
 
 .icon-container {
@@ -327,7 +312,6 @@ a {
 #request-tbl th{
   color: #ed1c24;
 }
-<<<<<<< HEAD
 
 /*Create Request Recipe Modal*/
 #create-modal-btn{
@@ -374,7 +358,7 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-=======
+
 /*********Admin Module******************/
 #login{
   text-align: center;
