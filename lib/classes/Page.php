@@ -3,18 +3,19 @@ class Page
 {
     private $title;
     private $navLinks;
-
-    private const DEFAULT_LINKS = [
+	
+	const DEFAULT_LINKS = [
         'Home' => 'index.php',
         'Browse Recipes' => '#',
-        'Log In' => '#',
+        'Log In' => 'login.php',
         'Register' => '#'
-    ];
+    	];
 
     public function __construct($title, $custLinks=null)
     {
         $this->setTitle($title);
         $this->setNav($custLinks);
+        
     }
 
     public function setTitle($title) {
@@ -39,11 +40,27 @@ class Page
     }
 
     private function generateMenuLinks() {
-        $returnString = '<ul class="menu">';
-
-        foreach($this->navLinks as $linkName => $linkPath) {
-            $returnString .= '<li><a href="' . $linkPath . '">';
-            $returnString .= $linkName . '</a></li>';
+        $returnString ='<ul class="menu">';
+        session_start();
+        foreach($this->navLinks as $linkName => $linkPath) 
+        {
+            if(isset($_SESSION["user"]))
+            {
+                if($linkName=="Log In")
+                {
+                    $returnString .= '<li><a href="logout.php">Logout</a></li><li><a href="userdash.php">Dashboard</a></li>';
+                }
+                else
+                {
+                    $returnString .= '<li><a href="' . $linkPath . '">';
+                    $returnString .= $linkName . '</a></li>';
+                }
+            }
+            else
+            {
+                $returnString .= '<li><a href="' . $linkPath . '">';
+                $returnString .= $linkName . '</a></li>';
+            }
         }
 
         $returnString .= '</ul>';

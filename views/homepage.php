@@ -1,7 +1,9 @@
 <main id="main">
   <div id="banner">
     <p class="banner-content">Eat What You Like!</p>
+    <!--
     <img id="banner-image" src="images/homepage-categories/showcase.jpeg" alt="Picture of a Plate of Waffles with Fruits on Top">
+-->
   </div>
   <div class="page-wrapper flex-container">
     <div id="categories" class="flex-container">

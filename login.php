@@ -10,13 +10,14 @@
   <meta charset="utf-8" />
   <title><?php echo $page->getTitle(); ?></title>
   <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="css/cookbook.css">
+
 </head>
 <body>
   <?php
-    error_reporting(E_ALL ^ E_NOTICE);  
     echo $page->generateHeader();
-    echo $page->displayHomepageContent();
+    require_once("views/login.php");
     echo $page->generateFooter();
   ?>
 </body>
