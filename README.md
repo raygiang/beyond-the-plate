@@ -3,8 +3,13 @@
 ## March 22 Update
 
 **Amandeep - Login Feature**
+Username: johnsmith@testmail.com
+Password: password
 
 **Birinder - Recipe Feature**
+After logging in, user can add new recipe. 
+Can upload images as well as instructions for the recipes
+
 
 **Raymond - Meal Plan Feature**
   - can view meal plans in a seven month time span
