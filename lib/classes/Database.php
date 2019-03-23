@@ -1,7 +1,7 @@
 <?php
     class Database {
         private static $user = 'root';
-        private static $pass = 'root';
+        private static $pass = '';
         private static $dsn = 'mysql:host=localhost;dbname=cookbook';
 
         private static $dbh;
