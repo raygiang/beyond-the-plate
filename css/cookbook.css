@@ -9,6 +9,7 @@
  * 6. FOOD CATEGORY
  * 7. SIDEBAR
  * 8. FOOTER
+ * 9. ADMIN MODULE
  ***********************************************/
 
 
@@ -30,6 +31,7 @@ html {
 body {
   margin: 0;
   box-sizing: border-box;
+
 }
 
 img {
@@ -41,7 +43,10 @@ a {
   color: #ed1c24;
   text-decoration: none;
 }
-
+.nav-pills .nav-link.active
+{
+  background-color: #dc3545;
+}
 .page-wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -62,7 +67,7 @@ a {
 
 #header {
   border-bottom: 5px solid #ed1c24;
-  padding: 1em 0;
+  padding: 0.3em 0;
   background-color: #ffffff;
 }
 
@@ -71,14 +76,13 @@ a {
 }
 
 #logo-container {
-  max-width: 20%;
+  max-width: 50%;
   margin-left: 1em;
 }
 
 #search-form {
   flex: 100%;
   text-align: right;
-  margin: 0;
 }
 
 #search-bar {
@@ -108,7 +112,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  /*background-color: #fff;*/
+  /*background-color: #ffffff;*/
   background: rgba(243,243,243, 0.95);
   z-index: 10;
   padding: 0 5em 1em 0;
@@ -133,33 +137,37 @@ a {
 }
 
 /*4.BANNER SECTION*/
-
-#banner-image{
-  width: 100%;
-  height: 500px;
+#banner{
+  margin-bottom: 3em;
 }
+#banner-image{
+ max-width: 100%;
+  height: auto;
+}
+
 .banner-content{
   font-family: Georgia;
   font-style: italic;
-  font-size:4.5em;
+  font-size:calc(3vw + 3vh + 2vmin);
   position:absolute;
-  text-align: center;
-  margin: 4em;
+  left: 5em;
+  margin: 1.4em 0;
   text-shadow: 1.5px 1.5px 1px #656565;
 }
+
 
 /*5.MAIN SECTION*/
 
 #main {
-  margin:0 0 5em 0;
+  margin: 0 0 5em 0;
 }
 
 #main a {
-  color: #000;
+  color: #000000;
 }
 
 #main a:hover {
-  font-weight: bold;
+  /*font-weight: bold;*/
   background: #f3f3f3;
 }
 
@@ -225,7 +233,7 @@ a {
 #footer {
   background-color: #f3f3f3;
   border-top: 1px solid  #ed1c24;
-  padding: 3em;
+  padding: 2em;
 }
 
 .icon-container {
@@ -268,7 +276,6 @@ a {
 
 #meal-plan-cal th, td {
   border: 1px solid #000;
-}
 
 #meal-plan-cal th {
   text-align: center;
@@ -302,28 +309,111 @@ a {
 .banner-content-request{
   font-family: Georgia;
   font-style: italic;
-  font-size:4.5em;
-  color: #ffffff;
+  font-size:calc(3vw + 3vh + 2vmin);
+  color: #ed1c24;
   position:absolute;
   text-align: center;
-  margin: 2em 3em 3em 2em;
-  text-shadow: 1.5px 1.5px 1px #ed1c24;
+  left: 50%;
+  margin-left: -60px;
+  top: 40%;
+  margin-top: -60px;
+  text-shadow: 1.5px 1.5px 1px #656565;
+  width: auto;
 }
 
-/* table {
+#request-tbl table {
   color: #000000;
   border-collapse: collapse;
-  width: 100%;
-  margin-top: 3em;
 }
 
-th,
-td {
+#request-tbl th,
+#request-tbl td {
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
+  border-top: none; border-left: none; border-right: none;
 }
-th{
+#request-tbl th{
   color: #ed1c24;
 }
- */
+
+/*Create Request Recipe Modal*/
+#create-modal-btn{
+  margin: 2em;
+}
+#create-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 30%;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  /*background-color: rgba(0, 0, 0, 0.5);*/
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 40% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*********Admin Module******************/
+#login{
+  text-align: center;
+  padding: 5em;
+  margin: 5em 0px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/*Image Uploader */
+input[type=file]{
+  display: inline;
+}
+#image_preview{
+  border: 1px dashed gray;
+  padding: 10px;
+}
+#image_preview img{
+  width: 200px;
+  padding: 5px;
+}
+.modal-dialog{
+  max-width: 1200px;
+}
+.float-clear{clear:both;}
+.float-left{float:left;}
+#outer {margin: 0 auto;width: 50%;border-top: #333 2px solid;background-color: #FFFFFF;}
+.product-item input[type="text"] {padding: 5px;border:#ccc 1px solid;border-radius:4px;margin: 0px 10px;}
+.product-item input[type="checkbox"] {margin: 10px;}
+.col-heading{width:150px;font-size:16px;font-weight:bold;}
+.footer{padding:10px; background:#333;margin-top:20px;}
+.btn-action{padding:10px;}
+.btn-action input[type="button"]{padding:5px; border:#CCCCCC 1px solid; border-radius: 4px;}
+input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 4px; background-color:#09f;color:#fff;}
+.success{color:#66CC00;padding: 5px; font-weight:bold;}

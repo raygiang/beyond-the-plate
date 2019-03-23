@@ -1,7 +1,5 @@
 <?php
- require_once('lib/classes/Page.php');
- require_once('lib/classes/Requestrecipe.php');
- require_once('lib/classes/Database.php');
+  require_once 'vendor/autoload.php';
 
  $dbconnection = Database::getDb();
  $page = new Requestrecipe('Recipe Request');
@@ -21,7 +19,7 @@
 <body>
 
   <?php
-  var_dump($page->getAllRequests(Database::getDb()));
+  // var_dump($page->getAllRequests(Database::getDb()));
 
     echo $page->generateHeader();
     echo $page->displayRequestRecipe();
