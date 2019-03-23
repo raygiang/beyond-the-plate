@@ -1,6 +1,6 @@
 <?php
 	require_once('lib/classes/User.php');
-	require_once('lib/classes/database.php');
+	require_once('lib/classes/Database.php');
 
 	if(isset($_POST["loginBtn"]))
 	{
