@@ -33,7 +33,7 @@
 
 			if($user=$pst->fetch(PDO::FETCH_OBJ))
 			{
-				var_dump($user);
+				//var_dump($user);
 				if(password_verify($password,$user->password))
 				{
 					return $user;

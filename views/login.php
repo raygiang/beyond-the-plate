@@ -7,7 +7,7 @@
 		$email=$_POST["email"];
 		$password=$_POST["password"];
 		$db = Database::getDb();
-
+		
 		$u = new User();
 		if($user=$u->verifyUser($email,$password,$db))
 		{
