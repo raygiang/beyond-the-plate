@@ -14,7 +14,7 @@
   - added functionality for adding a plan, view needs to be added to the recipe page (will be added at a later date)
 
 **Mariya - Request a Recipe Feature**
-	- can create a recipe request
+  - can create a recipe request
 	- can view requests
 	-	can edit the request
 	- can delete the request

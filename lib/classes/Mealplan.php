@@ -1,5 +1,5 @@
-<?php 
-class Mealplan extends Page 
+<?php
+class Mealplan extends Page
 {
     private $dbh;
     private $refDate;
@@ -78,7 +78,7 @@ class Mealplan extends Page
         $month = $baseDate['mon'];
         $year = $baseDate['year'];
 
-        $monthStartRef = $baseDate['year'] . '-' 
+        $monthStartRef = $baseDate['year'] . '-'
             . $baseDate['mon'] . '-1';
         $monthStartDate = new DateTime($monthStartRef);
         $monthStart = getdate($monthStartDate->getTimestamp());
@@ -124,9 +124,9 @@ class Mealplan extends Page
             ON r.id = mp.recipe_id
             JOIN plan_categories pc
             ON pc.id = mp.plan_category_id
-            WHERE from_unixtime(date, '%d') = $currentDay 
-            AND from_unixtime(date, '%m') = $currentMonth 
-            AND from_unixtime(date, '%Y') = $currentYear 
+            WHERE from_unixtime(date, '%d') = $currentDay
+            AND from_unixtime(date, '%m') = $currentMonth
+            AND from_unixtime(date, '%Y') = $currentYear
             AND mp.is_deleted = 0
             AND mp.user_id = $user
             ORDER BY plan_category_id";
