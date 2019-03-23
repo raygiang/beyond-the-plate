@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2019 at 01:41 AM
+-- Generation Time: Mar 23, 2019 at 02:07 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -159,7 +159,15 @@ CREATE TABLE `meal_plans` (
 --
 
 INSERT INTO `meal_plans` (`id`, `recipe_id`, `date`, `user_id`, `is_deleted`, `created_date`, `modified_date`, `plan_category_id`) VALUES
-(1, 1, 2147483647, 1, 0, 2147483647, 2147483647, 1);
+(1, 1, 1553167228, 1, 0, 1553167228, 1553167228, 3),
+(2, 2, 1552021200, 1, 0, 1552029628, 1553298831, 1),
+(3, 1, 1547787600, 1, 0, 1550793733, 1553298934, 2),
+(4, 1, 1550224933, 1, 1, 1550793733, 1550793733, 2),
+(5, 2, 1553140800, 1, 0, 1553167228, 1553300126, 2),
+(6, 1, 1553167228, 1, 0, 1553167228, 1553167228, 1),
+(7, 1, 1543744933, 1, 0, 1543744933, 1543744933, 3),
+(8, 2, 1551330000, 1, 0, 1553299664, 1553299685, 2),
+(9, 2, 1555387200, 1, 0, 1553299685, 1553299707, 2);
 
 -- --------------------------------------------------------
 
@@ -169,7 +177,7 @@ INSERT INTO `meal_plans` (`id`, `recipe_id`, `date`, `user_id`, `is_deleted`, `c
 
 CREATE TABLE `plan_categories` (
   `id` int(10) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `category` varchar(100) NOT NULL,
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   `created_date` int(10) NOT NULL,
   `modified_date` int(10) NOT NULL
@@ -179,8 +187,10 @@ CREATE TABLE `plan_categories` (
 -- Dumping data for table `plan_categories`
 --
 
-INSERT INTO `plan_categories` (`id`, `name`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'Breakfast', 0, 1552696665, 1552696665);
+INSERT INTO `plan_categories` (`id`, `category`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(1, 'Breakfast', 0, 1552696665, 1552696665),
+(2, 'Lunch', 0, 1552029628, 1552029628),
+(3, 'Dinner', 0, 1552029628, 1552029628);
 
 -- --------------------------------------------------------
 
@@ -351,7 +361,7 @@ INSERT INTO `units` (`id`, `unit_name`, `is_deleted`, `created_date`, `modified_
 CREATE TABLE `users` (
   `id` int(10) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(256) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `last_login` int(10) NOT NULL,
@@ -366,7 +376,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `last_login`, `role`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'johnsmith@testmail.com', 'password', 'John', 'Smith', 2147483647, 1, 0, 2147483647, 2147483647);
+(1, 'johnsmith@testmail.com', 'password', 'John', 'Smith', 2147483647, 1, 0, 2147483647, 2147483647),
+(2, 'bobjim@testmail.ca', 'testpass', 'Bob', 'Jim', 1550793733, 2, 0, 1550793733, 1550793733);
 
 --
 -- Indexes for dumped tables
@@ -519,13 +530,13 @@ ALTER TABLE `instructions`
 -- AUTO_INCREMENT for table `meal_plans`
 --
 ALTER TABLE `meal_plans`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `plan_categories`
 --
 ALTER TABLE `plan_categories`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -573,7 +584,7 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
