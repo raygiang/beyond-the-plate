@@ -1,35 +1,27 @@
-<?php
+<?php 
+    class Database {
+        private static $user = 'root';
+        private static $pass = '';
+        private static $dsn = 'mysql:host=localhost;dbname=cookbook';
 
-class Database{
+        private static $dbh;
 
-	private static $user = 'root';
-	private static $pass = 'root';
-	private static $dsn = 'mysql:host=localhost;dbname=cook_book';
-	private static $dbcon;
+        private function __construct() {
+        }
 
-	private function __construct(){
-
-	}
-//get pdo connection
-	public static function getDb(){
-		if(!isset(self::$dbcon))
-		try{
-			self::$dbcon = new PDO(self::$dsn, self::$user, self::$pass);
-
-		//show the sql error
-			self::$dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}catch
-			(PDOException $e){
-				echo $msg = $e->getMessage();
-				// include 'customerror.php';
-				exit();
-			}
-
-
-		return self::$dbcon;
-	}
-}
-
-
-
+        public static function getDb() {
+            if(!isset(self::$dbh)){
+                try {
+                    self::$dbh = new PDO(self::$dsn, self::$user, self::$pass);
+                    self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                } catch (PDOException $e) {
+                    $errMsg = $e->getMessage();
+                    include 'views/customError.php';
+                    exit();
+                }
+            }
+            
+            return self::$dbh;
+        }
+    }
 ?>

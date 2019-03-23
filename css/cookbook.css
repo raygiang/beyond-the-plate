@@ -256,13 +256,22 @@ a {
   overflow-x: auto;
 }
 
+#month-select {
+  width: 50%;
+  margin-bottom: 1em;
+}
+
 #meal-plan-cal, .ingredients {
   border-spacing: 0;
   overflow-x: auto;
 }
 
-#meal-plan-cal, .ingredients th, td {
+#meal-plan-cal th, td {
   border: 1px solid #000;
+}
+
+#meal-plan-cal th {
+  text-align: center;
 }
 
 #meal-plan-cal td {
@@ -270,8 +279,23 @@ a {
   text-align: right;
 }
 
+.planDay {
+  background: lightyellow;
+  cursor: pointer;
+}
+
 .ingredients th, td {
+  border: 1px solid #000;
   padding: 1em 1em;
+}
+
+.plan-category {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+#plan-info a {
+  color: darkblue;
 }
 
 /*********Request Recipe******************/
@@ -286,7 +310,7 @@ a {
   text-shadow: 1.5px 1.5px 1px #ed1c24;
 }
 
-table {
+/* table {
   color: #000000;
   border-collapse: collapse;
   width: 100%;
@@ -302,3 +326,4 @@ td {
 th{
   color: #ed1c24;
 }
+ */
