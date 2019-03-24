@@ -5,6 +5,7 @@
 **Amandeep - Login Feature**
 Username: johnsmith@testmail.com
 Password: password
+**Amandeep - Register user**
 
 **Birinder - Recipe Feature**
 After logging in, user can add new recipe. 
