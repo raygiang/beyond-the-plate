@@ -48,20 +48,23 @@
 				return false;
 			}
 		}
-		public function addUser($email,$password,$firstname,$lastname,$role,$db)
+		public function addUser($email,$password,$firstname,$lastname,$db)
 		{
+			$pass = password_hash($password,PASSWORD_BCRYPT);
+			
 			$sql = "INSERT INTO users (email,password,first_name,last_name,last_login,role,is_deleted,created_date,modified_date) 
 			VALUES (:email,:password,:first_name,:last_name,:last_login,:role,:is_deleted,:created_date,:modified_date)";
 			$pst = $db->prepare($sql);
 			$pst->bindParam(':email',$email);
-			$pst->bindParam(':password',password_hash($password,PASSWORD_BCRYPT));
+			$pst->bindParam(':password',$pass);
 			$pst->bindParam(':first_name',$firstname);
 			$pst->bindParam(':last_name',$lastname);
-			$pst->bindParam(':last_login',0);
-			$pst->bindParam(':role',2);
-			$pst->bindParam(':is_deleted',0);
+			$pst->bindParam(':last_login',$a= 0);
+			$pst->bindParam(':role',$b=2);
+			$pst->bindParam(':is_deleted',$c=0);
 			$pst->bindParam(':created_date',time());
 			$pst->bindParam(':modified_date',time());
+			
 			$count = $pst->execute();
 			return $count;
 		}
