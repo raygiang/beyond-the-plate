@@ -47,13 +47,15 @@ class Page
         foreach($this->navLinks as $linkName => $linkPath) 
         {
             if(isset($_SESSION["user"]))
-            {
-                if($linkName=="Log In")
+            {				
+				if($linkName=="Log In")
                 {
-                    $returnString .= '<li><a href="logout.php">Logout</a></li><li><a href="userdash.php">Dashboard</a></li>';
-                }
-                else
+                    $returnString .= '<li><a href="userdash.php">Dashboard</a></li><li><a href="logout.php">Logout</a></li>';
+                }else if($linkName=="Register")
                 {
+                    //for removing Register menu in log in status
+					
+                } else {
                     $returnString .= '<li><a href="' . $linkPath . '">';
                     $returnString .= $linkName . '</a></li>';
                 }

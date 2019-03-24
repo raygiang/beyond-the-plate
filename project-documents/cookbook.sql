@@ -376,8 +376,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `last_login`, `role`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'johnsmith@testmail.com', 'password', 'John', 'Smith', 2147483647, 1, 0, 2147483647, 2147483647),
-(2, 'bobjim@testmail.ca', 'testpass', 'Bob', 'Jim', 1550793733, 2, 0, 1550793733, 1550793733);
+(1, 'johnsmith@testmail.com', '$2y$10$WdIfV4nVjsKvk3xmd6C8j.62f302Gi01.QemsZZVYR.4zIt1j.JLW', 'John', 'Smith', 2147483647, 1, 0, 2147483647, 2147483647),
+(2, 'bobjim@testmail.ca', '$2y$10$Kf6WfJqqTvkumQ0.vY5QN.pPldbvX7sN7VyKmzN2/B8oQCgQ9.Unu', 'Bob', 'Jim', 1550793733, 2, 0, 1550793733, 1550793733);
 
 --
 -- Indexes for dumped tables
