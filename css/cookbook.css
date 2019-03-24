@@ -337,52 +337,13 @@ a {
 #request-tbl th{
   color: #ed1c24;
 }
-
-/*Create Request Recipe Modal*/
-#create-modal-btn{
-  margin: 2em;
+#addRequest{
+margin-left: 30vw;
 }
-#create-modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 30%;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: hidden; /* Enable scroll if needed */
-  /*background-color: rgba(0, 0, 0, 0.5);*/
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 40% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  animation-name: modalopen;
-  animation-duration: 1s;
-}
-@keyframes modalopen {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+#addReq{
+  margin: 0 0 2vw 4vw;
 }
 
-.close:hover,
-.close:focus {
-  color: #000000;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 /*********Admin Module******************/
 #login{
