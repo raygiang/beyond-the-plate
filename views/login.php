@@ -6,6 +6,10 @@
 	{
 		$email=$_POST["email"];
 		$password=$_POST["password"];
+		if($email ==='' || $password === '')
+		{
+			header("location:login.php?e=1");
+		}
 		$db = Database::getDb();
 		
 		$u = new User();
@@ -27,7 +31,7 @@
 		}
 		else
 		{
-			require_once("login.php");
+			header("location:login.php?e=2");
 		}
 	}
 ?>
@@ -42,7 +46,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Email</div>
 						</div>
-						<input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
+						<input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" required >
 					</div>
 				</div>
 				<div class="col-auto">
@@ -56,6 +60,19 @@
 				</div>
 				<input type="submit" name="loginBtn" value="Log In" class="btn btn-danger">
 				<input type="button" value="Forgot Password" class="btn btn-primary">
+				<?php 
+					if(isset($_GET["e"]))
+					{
+						if($_GET["e"]==1)
+						{
+							echo '<div class="alert alert-danger" role="alert"> Enter Username & Password !!!</div>';
+						}else if($_GET["e"]==2)
+						{
+							echo '<div class="alert alert-danger" role="alert"> Invalid Username & Password!!!</div>';
+						}
+					}
+					
+				?>
 			</form>
 		</div>
 	</div>
