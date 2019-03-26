@@ -48,6 +48,23 @@
 				return false;
 			}
 		}
+		
+		public function verifyEmailForNewUser($email,$db)
+		{
+			$sql = "SELECT * FROM users WHERE email=:email";
+			$pst = $db->prepare($sql);
+			$pst->bindParam(':email',$email);
+			$pst->execute();
+
+			if(($pst->rowCount()) == 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		public function addUser($email,$password,$firstname,$lastname,$db)
 		{
 			$pass = password_hash($password,PASSWORD_BCRYPT);
