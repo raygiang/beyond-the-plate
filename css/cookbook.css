@@ -150,7 +150,7 @@ a {
   font-style: italic;
   font-size:calc(3vw + 3vh + 2vmin);
   position:absolute;
-  left: 5em;
+  left: 25vw;
   margin: 1.4em 0;
   text-shadow: 1.5px 1.5px 1px #656565;
 }
@@ -313,11 +313,13 @@ a {
   font-size:calc(3vw + 3vh + 2vmin);
   color: #ed1c24;
   position:absolute;
-  text-align: center;
+  left: 35vw;
+  top: 35vh;
+  /*text-align: center;
   left: 50%;
   margin-left: -60px;
   top: 40%;
-  margin-top: -60px;
+  margin-top: -60px;*/
   text-shadow: 1.5px 1.5px 1px #656565;
   width: auto;
 }
@@ -337,9 +339,9 @@ a {
 #request-tbl th{
   color: #ed1c24;
 }
-#addRequest{
-margin-left: 30vw;
-}
+/*#addRequest{
+left: 30vw;
+}*/
 #addReq{
   margin: 0 0 2vw 4vw;
 }

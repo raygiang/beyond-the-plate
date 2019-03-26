@@ -56,7 +56,8 @@ require_once 'vendor/autoload.php';
           <td><?php echo $request->first_name . " " . $request->last_name; ?></td>
           <td><?php echo $request->title; ?></td>
           <td><?php echo $request->description; ?></td>
-          <td><a href="views/reciperequest/editrequest.php?id=<?php echo $request->id ?>" class="btn btn-light btn-sm" >Edit</a>
+          <td>
+            <a href="views/reciperequest/editrequest.php?id=<?php echo $request->id ?>" class="btn btn-light btn-sm" >Edit</a>
           </td>
           <td>
             <a href="views/reciperequest/deleterequest.php?id=<?php echo $request->id ?>" class="btn btn-light btn-sm" >Delete</a>
@@ -79,7 +80,7 @@ require_once 'vendor/autoload.php';
 <!-- After a request is replied it should be automatically removed from request table and an email notifying should be sent to the user -->
  </div>
 
-<div class="modal fade col-lg-4 col-md-4 col-sm-12 col-xs-12" id="addRequest" tabindex="-1" role="dialog" aria-labelledby="addRequestTitle" aria-hidden="true">
+<div class="modal fade col-lg-6 col-md-6 col-sm-4 col-xs-4 " id="addRequest" tabindex="-1" role="dialog" aria-labelledby="addRequestTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
