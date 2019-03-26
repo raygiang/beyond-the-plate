@@ -25,15 +25,15 @@
 
       move_uploaded_file($_FILES["uploadfile"]["tmp_name"][$i], "$folder".$id."_".($i+1).".".$ext);
     }
+
+    $instructions = $_POST["instruction_text"];
     
     $r = new Recipe();
-    $count=$r->addRecipe($recipeName,$user_id,$recipeDescription,$recipeCategory,$is_deleted,$db);
-    
-    for($i=0;$i<count($_POST["instruction_text"]);$i++)
-    {
-      echo $_POST["instruction_text"][$i];
-    }
-    //header("location:userdash.php");
+    $count=$r->addRecipe($id,$recipeName,$user_id,$recipeDescription,$recipeCategory,$is_deleted,$db);
+    $count=$r->addRecipeInstructions($id,$instructions,$db);
+
+   
+    header("location:userdash.php");
     
   }
   ?>
