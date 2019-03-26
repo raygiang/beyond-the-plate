@@ -21,7 +21,7 @@
 	<div class="modal fade" id="newRecipeModal" tabindex="-1" role="dialog" aria-labelledby="newRecipeModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	    	<form action="" method="POST">
+	    	<form action="addrecipe.php" method="POST" enctype="multipart/form-data" >
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Add New Recipe</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -32,11 +32,11 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="container">
-								  <input type="file" id="uploadFile" name="uploadFile[]" multiple/>
+								  <input type="file" id="uploadFile" name="uploadfile[]" multiple/>
 								<br/>
 							  	<div id="image_preview"></div>
 							</div>
-						</div>
+						</div>	
 					</div>
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -48,7 +48,7 @@
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<label>Recipe Description</label>
 									<input type="text" class="form-control" name="recipeDescription" id="recipeDescription">
-								</div>
+								</div>	
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<label>Recipe Category</label>
 									<select name="recipeCategory" id="recipeCategory" class="form-control">
@@ -63,7 +63,7 @@
 										echo $str;
 									?>
 									</select>
-								</div>
+								</div>	
 
 
 							</div>
@@ -81,7 +81,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="submit" name="sbtBtn" class="btn btn-primary">Save changes</button>
 				</div>
 	     	</form>
 	    </div>

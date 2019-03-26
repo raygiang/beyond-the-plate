@@ -2,10 +2,9 @@
   require_once('lib/classes/Page.php');
   require_once('lib/classes/Homepage.php');
   require_once('lib/classes/Recipe.php');
-  require_once('lib/classes/Database.php');
+  require_once('lib/classes/database.php');
 
   $db = Database::getDb();
-
   session_start();
   $page = new Homepage('Dashboard@'.$_SESSION["user"]);
 ?>
@@ -21,14 +20,14 @@
 </head>
 <body>
   <?php
-    error_reporting(E_ALL ^ E_NOTICE);
+    error_reporting(E_ALL ^ E_NOTICE);  
     echo $page->generateHeader();
     require_once("views/userdash.php");
     echo $page->generateFooter();
   ?>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
-
+  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script type="text/javascript">
     $("#uploadFile").change(function(){
@@ -39,19 +38,16 @@
       $('#image_preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'>");
     }
   });
-  $('form').ajaxForm(function()
-  {
-
-  });
+ 
   </script>
   <SCRIPT>
     function addMore() {
       $("<DIV>").load("input.php", function() {
         $("#product").append($(this).html());
-      });
+      }); 
     }
     function deleteRow() {
-      $('DIV.product-item').each(function(index, item){
+      $('DIV.col-auto').each(function(index, item){
         jQuery(':checkbox', this).each(function () {
           if ($(this).is(':checked')) {
             $(item).remove();

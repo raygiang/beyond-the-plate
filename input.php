@@ -1,8 +1,9 @@
-<div class="product-item">
-	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<input type="checkbox" name="instruction_index[]" style="float:left;"/>
-			<input type="text" name="instruction_text[]" class="form-control"/>
+<div class="col-auto">
+	<label class="sr-only" for="inlineFormInputGroup">Username</label>
+	<div class="input-group mb-2">
+		<div class="input-group-prepend">
+			<div class="input-group-text"><input type="checkbox" name="instruction_index" style="float:left;"/></div>
 		</div>
-	</div>		
+		<input type="text" class="form-control" name="instruction_text[]">
+	</div>
 </div>

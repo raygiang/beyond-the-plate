@@ -8,7 +8,7 @@ class Page
         'Home' => 'index.php',
         'Browse Recipes' => '#',
         'Log In' => 'login.php',
-        'Register' => '#'
+        'Register' => 'registeruser.php'
     	];
 
     public function __construct($title, $custLinks=null)

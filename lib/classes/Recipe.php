@@ -19,18 +19,18 @@
 			$categories=$pdostm->fetchAll(PDO::FETCH_OBJ);
 			return $categories;
 		}
-		public function addRecipe($name,$user_id,$description,$category,$db)
+		public function addRecipe($name,$user_id,$description,$category,$is_deleted,$db)
 		{
-			$sql = "INSERT INTO recipes VALUES(name,user_id,description,category,is_deleted,created_date,modified_date) 
-			VALUES (:name,:user_id,:description,:category,:is_deleted,:created_date,:modified_date)";
+			$sql = "INSERT INTO recipes(name,user_id,description,category,is_deleted,created_date,modified_date) 
+			VALUES(:name,:user_id,:description,:category,0,:created_date,:modified_date)";
+			$time=time();
 			$pst = $db->prepare($sql);
 			$pst->bindParam(':name',$name);
 			$pst->bindParam(':user_id',$user_id);
 			$pst->bindParam(':description',$description);
 			$pst->bindParam(':category',$category);
-			$pst->bindParam(':is_deleted',0);
-			$pst->bindParam(':created_date',time());
-			$pst->bindParam(':modified_date',time());
+			$pst->bindParam(':created_date',$time);
+			$pst->bindParam(':modified_date',$time);
 			$count = $pst->execute();
 			return $count;
 		}
