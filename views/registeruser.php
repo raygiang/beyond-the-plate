@@ -4,15 +4,25 @@
 
 	if(isset($_POST["registerBtn"]))
 	{
+		var_dump($_POST);
 		$firstname=$_POST["firstname"];
 		$lastname=$_POST["lastname"];
 		$email=$_POST["email"];
 		$password=$_POST["password"];
-		$db = Database::getDb();
 		
+		$db = Database::getDb();		
 		$u = new User();
-		$user=$u->addUser($email,$password,$firstname,$lastname,$db);
-		header("location:login.php");
+		
+		if($u->verifyEmailForNewUser($email,$db))
+		{
+			$user=$u->addUser($email,$password,$firstname,$lastname,$db);
+			header("location:registeruser.php?e=1");
+			
+		}
+		else
+		{
+			header("location:registeruser.php?e=2");
+		}
 	}
 ?>
 <div class="row">
@@ -26,7 +36,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">First Name</div>
 						</div>
-						<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name">
+						<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name" required>
 					</div>
 				</div>
 				<div class="col-auto">
@@ -35,7 +45,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Last Name</div>
 						</div>
-						<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name">
+						<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name" required>
 					</div>
 				</div>
 				<div class="col-auto">
@@ -44,7 +54,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Email</div>
 						</div>
-						<input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
+						<input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" required>
 					</div>
 				</div>
 				<div class="col-auto">
@@ -53,15 +63,30 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Password</div>
 						</div>
-						<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+						<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
 					</div>
 				</div>
-				<div class="col-auto">
-					<div class="input-group mb-2">						
-						<input type="checkbox" class="form-control" id="agreeCheckbox" name="agreeCheckbox" >I am 13 years of age or older and agree to the Terms of Service and Privacy Policy
-					</div>
+				<div class="alert alert-info" role="alert">
+					<input type="checkbox"  id="agreeCheckbox" name="agreeCheckbox" required> I agree to the Terms of Service and Privacy Policy
 				</div>
-				<input type="submit" name="registerBtn" value="Create my profile" class="btn btn-danger">
+				<div>
+					<input type="submit" name="registerBtn" value="Create my profile" class="btn btn-danger">
+				</div>
+				<div>
+					<?php 
+						if(isset($_GET["e"]))
+						{
+							if($_GET["e"]==1)
+							{
+								echo '<div class="alert alert-success" role="alert">User Added !!!</div>';
+							}else if($_GET["e"]==2)
+							{
+								echo '<div class="alert alert-danger" role="alert"> Email already exists.!!!</div>';
+							}
+						}
+						
+					?>
+				</div>
 			</form>
 		</div>
 	</div>
