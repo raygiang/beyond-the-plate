@@ -33,7 +33,7 @@ require_once '../../vendor/autoload.php';
 
 		$db = Database::getDb();
 		$page = new Requestrecipe('Edit Request');
-		$updateReq = $r->editRequest($id, $title, $content, $db);
+		$updateReq = $page->editRequest($id, $title, $content, $db);
 		if($updateReq){
        header('Location:  ../../request.php');
     } else {
