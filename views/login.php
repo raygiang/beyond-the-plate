@@ -60,19 +60,21 @@
 				</div>
 				<input type="submit" name="loginBtn" value="Log In" class="btn btn-danger">
 				<input type="button" value="Forgot Password" class="btn btn-primary">
-				<?php 
-					if(isset($_GET["e"]))
-					{
-						if($_GET["e"]==1)
+				<div>
+					<?php 
+						if(isset($_GET["e"]))
 						{
-							echo '<div class="alert alert-danger" role="alert"> Enter Username & Password !!!</div>';
-						}else if($_GET["e"]==2)
-						{
-							echo '<div class="alert alert-danger" role="alert"> Invalid Username & Password!!!</div>';
+							if($_GET["e"]==1)
+							{
+								echo '<div class="alert alert-danger" role="alert"> Enter Username & Password !!!</div>';
+							}else if($_GET["e"]==2)
+							{
+								echo '<div class="alert alert-danger" role="alert"> Invalid Username & Password!!!</div>';
+							}
 						}
-					}
-					
-				?>
+						
+					?>
+				</div>
 			</form>
 		</div>
 	</div>

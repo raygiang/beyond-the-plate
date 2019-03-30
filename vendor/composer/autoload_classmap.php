@@ -10,5 +10,8 @@ return array(
     'Homepage' => $baseDir . '/lib/Classes/Homepage.php',
     'Mealplan' => $baseDir . '/lib/Classes/Mealplan.php',
     'Page' => $baseDir . '/lib/Classes/Page.php',
+    'Recipe' => $baseDir . '/lib/Classes/Recipe.php',
     'Requestrecipe' => $baseDir . '/lib/Classes/Requestrecipe.php',
+    'Result' => $baseDir . '/lib/Classes/Result.php',
+    'User' => $baseDir . '/lib/Classes/User.php',
 );

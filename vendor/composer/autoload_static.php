@@ -11,7 +11,10 @@ class ComposerStaticInit37f51007dd2bb461a3a4c581a99a5e40
         'Homepage' => __DIR__ . '/../..' . '/lib/Classes/Homepage.php',
         'Mealplan' => __DIR__ . '/../..' . '/lib/Classes/Mealplan.php',
         'Page' => __DIR__ . '/../..' . '/lib/Classes/Page.php',
+        'Recipe' => __DIR__ . '/../..' . '/lib/Classes/Recipe.php',
         'Requestrecipe' => __DIR__ . '/../..' . '/lib/Classes/Requestrecipe.php',
+        'Result' => __DIR__ . '/../..' . '/lib/Classes/Result.php',
+        'User' => __DIR__ . '/../..' . '/lib/Classes/User.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
