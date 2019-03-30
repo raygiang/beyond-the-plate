@@ -7,14 +7,27 @@
 
     /* Runs when the form in the create view is submitted, inserts the entered info
        into the results_test table */
+    // Reference for uploading images: https://www.w3schools.com/php/php_file_upload.asp
     if(isset($_POST['create_submit'])) {
+        $resultID = $result->getInsertID();
         $recipeID = filter_var($_POST['recipe_id'], FILTER_SANITIZE_STRING);
         $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
+        $resultImageDir = 'resultimages/';
+        $imgExtension = strtolower(pathinfo($_FILES['result_images']['name'], PATHINFO_EXTENSION));
+
+        $validateImg = getimagesize($_FILES["result_images"]["tmp_name"]);
+        if($validateImg === false) {
+            echo "The file you picked is not an image";
+        } else {
+            mkdir($resultImageDir . $resultID);
+            move_uploaded_file($_FILES["result_images"]["tmp_name"],
+                $resultImageDir . $resultID . "/result.".$imgExtension);
+        }
 
         $count = $result->addResult($recipeID, $_SESSION['user_id'], $comment);
 
         if($count) {
-            echo "Result has been added.";
+            echo "Result has been added.";            
         } else {
             echo "Problem adding the result.";
         }

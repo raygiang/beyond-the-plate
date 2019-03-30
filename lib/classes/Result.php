@@ -84,5 +84,16 @@
 
             return $pdoStatement->execute();
         }
+
+        /* Method that will return the next available ID for the results table */
+        public function getInsertID() {
+            $sqlQuery = 'SELECT MAX(id)+1 from results';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->execute();
+            $result = $pdoStatement->fetch();
+
+            return $result[0];
+        }
     }
 ?>
