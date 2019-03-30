@@ -3,9 +3,10 @@
 
 require_once 'vendor/autoload.php';
 
-
+// get user from session $userid
+// $role = r->checkUser($userid)
 //-----------------CREATE a REQUEST
-
+$role = 1;
   if(isset($_POST['add'])){
     // session_start();
     $user_id = $_SESSION['user_id'] = 1;
@@ -56,12 +57,18 @@ require_once 'vendor/autoload.php';
           <td><?php echo $request->first_name . " " . $request->last_name; ?></td>
           <td><?php echo $request->title; ?></td>
           <td><?php echo $request->description; ?></td>
-          <td>
-            <a href="views/reciperequest/editrequest.php?id=<?php echo $request->id ?>" class="btn btn-light btn-sm" >Edit</a>
-          </td>
-          <td>
+         <?php
+            if($role == 1 || $role == 2){
+            echo "<td><a href='views/reciperequest/editrequest.php?id=". $request->id . " class='btn btn-light btn-sm' >Edit</a></td>";
+            echo "<td><a href='views/reciperequest/deleterequest.php?id=". $request->id . " class='btn btn-light btn-sm' >Delete</a></td>";
+          }else{
+            echo "<td><a href='views/reciperequest/createrecipe.php?id=". $request->id . " class='btn btn-light btn-sm' >Reply</a></td>";
+          }
+          ?>
+
+         <!--  <td>
             <a href="views/reciperequest/deleterequest.php?id=<?php echo $request->id ?>" class="btn btn-light btn-sm" >Delete</a>
-          </td>
+          </td> -->
         </tr>
         <?php endforeach; ?>
        </tbody>
