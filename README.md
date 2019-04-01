@@ -8,7 +8,7 @@
 **Amandeep - Register user**
 
 **Birinder - Recipe Feature**
-  - After logging in, user can add new recipe. 
+  - After logging in, user can add new recipe.
   - Can upload images as well as instructions for the recipes
 
 
@@ -31,3 +31,10 @@
 **Raymond - Results Feature**
   - added CRUD for the results feature
   - has admin view for results, public view will be added to the recipe page
+
+## March 31 Update
+
+**Mariya - Admin Dashboard**
+- added basic admin view
+- added donutchart to display food categories
+- can count number of recipies posted by a user

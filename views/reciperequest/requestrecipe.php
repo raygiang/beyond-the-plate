@@ -62,7 +62,7 @@ $role = 1;
             echo "<td><a href='views/reciperequest/editrequest.php?id=". $request->id . " class='btn btn-light btn-sm' >Edit</a></td>";
             echo "<td><a href='views/reciperequest/deleterequest.php?id=". $request->id . " class='btn btn-light btn-sm' >Delete</a></td>";
           }else{
-            echo "<td><a href='views/reciperequest/createrecipe.php?id=". $request->id . " class='btn btn-light btn-sm' >Reply</a></td>";
+            echo "<td><a href='views/reciperequest/userdash.php?id=". $request->id . " class='btn btn-light btn-sm' >Reply</a></td>";
           }
           ?>
 

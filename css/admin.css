@@ -1,3 +1,77 @@
+import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #ed1c24;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+a {
+  color: #ed1c24;
+  text-decoration: none;
+}
+a:hover {
+  color: #ed1c24;
+}
+.admtop:hover{
+  color: #656565;
+}
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hidden {
+  position: absolute;
+  left: -100000px;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+#admwelcome{
+  margin:2em;
+}
+#admimage{
+  background-image:  url('../images/cat.jpeg');
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  margin: 2em auto;
+}
+#admheader, .nav-link, .text-center{
+  color: #ffffff;
+}
+#admheader{
+  font-family: Georgia, sans-serif;
+  font-style: italic;
+}
+i{
+  margin-right: 0.8em;
+}
+.sidebar{
+ padding: 2em 0;
+ height: 100%;
+}
+/************************************************************************************/
 #login{
 	text-align: center;
 	padding: 5em;
