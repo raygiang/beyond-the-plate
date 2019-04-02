@@ -1,4 +1,4 @@
-<?php 
+<?php
     class Result extends Page {
         private $dbh;
 
@@ -59,7 +59,7 @@
            Parameters: $resultID the id of the result being updated
                        $recipeID the id of the recipe that this result corresponds to
                        $userID the id of the user that added this result
-                       $comment the comment for this result 
+                       $comment the comment for this result
                        $currDate the date that this result was modified */
         public function updateResult($resultID, $recipeID, $userID, $comment, $currDate) {
             $sqlQuery = 'UPDATE results SET recipe_id = :recipeID, user_id = :userID, comment = :comment, modified_date = :currDate WHERE id = :resultID';

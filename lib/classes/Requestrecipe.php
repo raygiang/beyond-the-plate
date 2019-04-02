@@ -63,13 +63,8 @@ class Requestrecipe extends Page
 		$sql = "UPDATE recipe_requests
 		SET is_deleted = 1		WHERE id = :id";
 
-		// $sql = "DELETE FROM recipe_requests
-		// WHERE id = :id";
-
 		$pst = $db->prepare($sql);
-
 		$pst->bindParam(':id', $id);
-		// $pst->bindParam(':is_deleted', $is_deleted);
 
 		$count = $pst->execute();
 		return $count;

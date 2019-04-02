@@ -12,6 +12,7 @@
 		public function __construct()
 		{
 
+
 		}
 
 		public function successfulLogin($email,$db)
@@ -48,7 +49,7 @@
 				return false;
 			}
 		}
-		
+
 		public function verifyEmailForNewUser($email,$db)
 		{
 			$sql = "SELECT * FROM users WHERE email=:email";
@@ -68,8 +69,8 @@
 		public function addUser($email,$password,$firstname,$lastname,$db)
 		{
 			$pass = password_hash($password,PASSWORD_BCRYPT);
-			
-			$sql = "INSERT INTO users (email,password,first_name,last_name,last_login,role,is_deleted,created_date,modified_date) 
+
+			$sql = "INSERT INTO users (email,password,first_name,last_name,last_login,role,is_deleted,created_date,modified_date)
 			VALUES (:email,:password,:first_name,:last_name,:last_login,:role,:is_deleted,:created_date,:modified_date)";
 			$pst = $db->prepare($sql);
 			$pst->bindParam(':email',$email);
@@ -81,7 +82,7 @@
 			$pst->bindParam(':is_deleted',$c=0);
 			$pst->bindParam(':created_date',time());
 			$pst->bindParam(':modified_date',time());
-			
+
 			$count = $pst->execute();
 			return $count;
 		}
@@ -95,8 +96,8 @@
 		}
 		public function updateUser($id,$email,$password,$firstname,$lastname,$role,$db)
 		{
-			$sql = "UPDATE users SET email=:email,password=:password,first_name=:first_name,last_name=:last_name,modified_date=:modified_date 
-			WHERE id=:id"; 
+			$sql = "UPDATE users SET email=:email,password=:password,first_name=:first_name,last_name=:last_name,modified_date=:modified_date
+			WHERE id=:id";
 			$pst = $db->prepare($sql);
 			$pst->bindParam(':email',$email);
 			$pst->bindParam(':password',password_hash($password,PASSWORD_BCRYPT));
@@ -107,6 +108,7 @@
 			$count = $pst->execute();
 			return $count;
 		}
+
 	}
 
 ?>
