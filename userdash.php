@@ -14,8 +14,10 @@
   <meta charset="utf-8" />
   <title><?php echo $page->getTitle(); ?></title>
   <meta name="viewport" content="width=device-width">
+  <script src="js/main.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="css/cookbook.css">
+
 
 </head>
 <body>
@@ -29,32 +31,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
   
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script type="text/javascript">
-    $("#uploadFile").change(function(){
-    $('#image_preview').html("");
-    var total_file=document.getElementById("uploadFile").files.length;
-    for(var i=0;i<total_file;i++)
-    {
-      $('#image_preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'>");
-    }
-  });
- 
-  </script>
-  <SCRIPT>
-    function addMore() {
-      $("<DIV>").load("input.php", function() {
-        $("#product").append($(this).html());
-      }); 
-    }
-    function deleteRow() {
-      $('DIV.col-auto').each(function(index, item){
-        jQuery(':checkbox', this).each(function () {
-          if ($(this).is(':checked')) {
-            $(item).remove();
-          }
-        });
-      });
-    }
-  </SCRIPT>
+  <script src="vendor/nicolasbize/magicsuggest/magicsuggest.js"></script>
+  <script src="js/main.js"></script>
   </body>
 </html>

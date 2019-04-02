@@ -20,7 +20,7 @@
 			$_SESSION["role"]=$user->role;
 			$_SESSION["userid"]=$user->id;
 			$u->successfulLogin($email,$db);
-			if($count==1)
+			if($user->role==1)
 			{
 				header("location:admindash.php");
 			}

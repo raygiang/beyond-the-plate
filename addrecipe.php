@@ -27,12 +27,16 @@
     }
 
     $instructions = $_POST["instruction_text"];
-    
+    $ingredients = $_POST["ingredient_text"];
+    $ingredients_qty = $_POST["ingredient_quantity"];
+    $ingredients_unit = $_POST["ingredient_unit"];
+
     $r = new Recipe();
     $count=$r->addRecipe($id,$recipeName,$user_id,$recipeDescription,$recipeCategory,$is_deleted,$db);
     $count=$r->addRecipeInstructions($id,$instructions,$db);
+    $count=$r->addRecipeIngredients($id,$ingredients,$ingredients_qty,$ingredients_unit,$db);
 
-   
+  
     header("location:userdash.php");
     
   }
