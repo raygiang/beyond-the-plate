@@ -22,7 +22,7 @@
 			$u->successfulLogin($email,$db);
 			if($user->role==1)
 			{
-				header("location:admindash.php");
+				header("location:admindashboard.php");
 			}
 			else
 			{
