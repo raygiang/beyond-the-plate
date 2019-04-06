@@ -38,3 +38,9 @@
 - added basic admin view
 - added donutchart to display food categories
 - can count number of recipies posted by a user
+
+## April 6 Update
+
+**Raymond - Shopping List Feature**
+  - Allows users to search through recipes and add them to their selected recipes
+  - Using the selected recipes, a shopping list will be generated for them
