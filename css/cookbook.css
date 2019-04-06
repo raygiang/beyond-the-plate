@@ -306,6 +306,22 @@ a {
   color: darkblue;
 }
 
+/*********Shopping List*******************/
+
+#recipe-suggestions {
+  margin: 1em 0;
+}
+
+.search-results {
+  border: 1px solid #000;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.search-results div:first-child {
+  font-weight: bold;
+}
+
 /*********Request Recipe******************/
 .banner-content-request{
   font-family: Georgia;
