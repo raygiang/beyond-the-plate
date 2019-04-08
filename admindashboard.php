@@ -1,23 +1,20 @@
 <?php
- require_once 'vendor/autoload.php';
- //require_once 'config.php';
- require_once 'lib/classes/Admin.php';
- require_once 'admin/charts/category-piechart.php';
+  require_once 'vendor/autoload.php';
+  //require_once 'config.php';
+  require_once 'lib/classes/Admin.php';
+  require_once 'admin/charts/category-piechart.php';
+  require_once 'admin/charts/recipe-table.php';
 
 $db = Database::getDb();
 $admin = new Admin();
 $adminView = $admin->getAdmin(Database::getDb());
 $allUserRecipies = $admin->getAllUserRecipes(Database::getDb());
 $newUsers = $admin->numberOfUsers(Database::getDb());
-var_dump($newUsers);
-//echo gettype($adminView);
-
+$recipes = $admin->getAllPostedRecipes(Database::getDb());
+$categories = $admin->numberOfCategories(Database::getDb());
 
 ?>
 
-
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -62,11 +59,11 @@ var_dump($newUsers);
 	      	</div>
       	<?php endforeach; ?>
       	</div>
-        <ul class="nav flex-column">
+        <ul class="nav flex-column" id="side">
 					<li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" onClick='getCategories();'>
               <i class="far fa-user"></i>
-              Number of Users
+              Categories
             </a>
           </li>
           <li class="nav-item">
@@ -76,7 +73,7 @@ var_dump($newUsers);
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" onClick='getRecipes();'>
               <i class="far fa-clock"></i>
               Recently Posted Recipies
             </a>
@@ -97,7 +94,8 @@ var_dump($newUsers);
       </div>
     </nav>
     <div class="col-md-9 d-none d-md-block">
-    	<div id="donutchart"></div>
+    	<span id="chart"></span>
+      <span id="table"></span>
     <table class="table" id="request-tbl">
       <thead>
         <tr>
@@ -116,12 +114,10 @@ var_dump($newUsers);
           <td><?php echo $userrecipies->email; ?></td>
           <td><?php echo $userrecipies->number; ?></td>
           <td><?php echo date('m/d/Y H:i:s', $userrecipies->last_login); ?></td>
-           <?php echo "<td><a href='views/reciperequest/editrequest.php?id=". $userrecipies->id . " class='btn btn-light btn-sm' >Edit</a></td>";?>
-           <?php echo "<td><a href='views/reciperequest/deleterequest.php?id=". $userrecipies->id . " class='btn btn-light btn-sm' >Delete</a></td>"; ?>
+          <?php echo "<td><a href='views/reciperequest/deleterequest.php?id=". $userrecipies->id . " class='btn btn-light btn-sm' >Disable</a></td>"; ?>
 
         </tr>
       <?php endforeach; ?>
-
        </tbody>
       </table>
       </div>
@@ -132,5 +128,8 @@ var_dump($newUsers);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="
 sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="js/admin.js"></script>
 </body>
 </html>

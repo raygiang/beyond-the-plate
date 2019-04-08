@@ -2,13 +2,13 @@
 
 class Requestrecipe extends Page
 {
-    public function __construct($title, $custLinks=null)
-    {
-        parent::__construct($title, $custLinks);
-    }
+  public function __construct($title, $custLinks=null)
+  {
+      parent::__construct($title, $custLinks);
+  }
 
 
-    public function getAllRequests($db){
+  public function getAllRequests($db){
 
 		$sql = "SELECT first_name, last_name, recipe_requests.id, title, description, recipe_requests.is_deleted FROM users
 		INNER JOIN recipe_requests ON users.id = recipe_requests.user_id
@@ -16,11 +16,10 @@ class Requestrecipe extends Page
 
 		$pdostm = $db->prepare($sql);
 		$pdostm->execute();
+
 		$requests = $pdostm->fetchAll(PDO::FETCH_OBJ);
 		return $requests;
 	}
-
-
 
 	public function addRequest($user_id, $title, $description, $db){
 		$time = time();
@@ -43,11 +42,9 @@ class Requestrecipe extends Page
 	}
 
 	public function editRequest($id, $title, $description, $db){
-
 		$sql = "UPDATE recipe_requests SET title = :title, description = :description WHERE id = :id";
 
 		$pst = $db->prepare($sql);
-
 
 		$pst->bindParam(':title', $title);
 		$pst->bindParam(':description', $description);
@@ -59,7 +56,6 @@ class Requestrecipe extends Page
 	}
 
 	public function deleteRequest($id, $db){
-
 		$sql = "UPDATE recipe_requests
 		SET is_deleted = 1		WHERE id = :id";
 
@@ -73,7 +69,7 @@ class Requestrecipe extends Page
 
 
   public function displayRequestRecipe() {
-      require_once 'views/reciperequest/requestrecipe.php';
+    require_once 'views/reciperequest/requestrecipe.php';
   }
 }
 ?>

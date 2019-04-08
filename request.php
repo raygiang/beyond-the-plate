@@ -1,9 +1,9 @@
 <?php
   require_once 'vendor/autoload.php';
 
- $dbconnection = Database::getDb();
- $page = new Requestrecipe('Recipe Request');
- $listrequests = $page->getAllRequests(Database::getDb());
+  $dbconnection = Database::getDb();
+  $page = new Requestrecipe('Recipe Request');
+  $listrequests = $page->getAllRequests(Database::getDb());
 
 
 ?>
@@ -19,7 +19,6 @@
 <body>
 
   <?php
-
     echo $page->generateHeader();
     echo $page->displayRequestRecipe();
     echo $page->generateFooter();
