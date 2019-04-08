@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Admin' => $baseDir . '/lib/Classes/Admin.php',
     'Database' => $baseDir . '/lib/Classes/Database.php',
     'Homepage' => $baseDir . '/lib/Classes/Homepage.php',
     'Mealplan' => $baseDir . '/lib/Classes/Mealplan.php',
@@ -13,5 +14,6 @@ return array(
     'Recipe' => $baseDir . '/lib/Classes/Recipe.php',
     'Requestrecipe' => $baseDir . '/lib/Classes/Requestrecipe.php',
     'Result' => $baseDir . '/lib/Classes/Result.php',
+    'ShoppingList' => $baseDir . '/lib/Classes/ShoppingList.php',
     'User' => $baseDir . '/lib/Classes/User.php',
 );

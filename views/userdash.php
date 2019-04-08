@@ -31,15 +31,15 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="container">
-								  <input type="file" id="uploadFile" name="uploadfile[]" multiple/>
+							<div>
+								  <input type="file" id="uploadFile" name="uploadfile[]" class='btn btn-primary' multiple/>
 								<br/>
 							  	<div id="image_preview"></div>
 							</div>
 						</div>	
 					</div>
 					<div class="row">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<label>Recipe Name</label>
@@ -64,20 +64,43 @@
 									?>
 									</select>
 								</div>	
-
+								
+								
 
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<h5 class="modal-title" id="exampleModalLabel">Add Instructions</h5>
-							<input type="button" name="add_item" value="+" class="btn btn-success" onClick="addMore();" />
-							<input type="button" name="del_item" value="-" class="btn btn-danger" onClick="deleteRow();" />
-							<div id="product">
-								<?php require_once("input.php") ?>
-							</div>
+						
 
+						<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+							<h5 class="modal-title" id="ingredientsModalLabel">Add Ingredients</h5>
+							<div class="form-group">
+   								<input id="ms" class="form-control" name="countries[]" value=""/>
+							</div>
+							<div id="ingredient">
+								<?php require_once("input_ingredient.php") ?>
+							</div>
+							<input type="button" name="add_item" value="+" class="btn btn-success" onClick="addMore('ingredient');" />
+							<input type="button" name="del_item" value="-" class="btn btn-danger" onClick="deleteRow();" />
+
+						</div>
+
+
+					</div>
+
+
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<hr/>
+							<h5 class="modal-title" id="instructionsModalLabel">Add Instructions</h5>
+							<div id="instruction">
+								<?php require_once("input_instruction.php") ?>
+							</div>
+							<input type="button" name="add_item" value="+" class="btn btn-success" onClick="addMore('instruction');" />
+							<input type="button" name="del_item" value="-" class="btn btn-danger" onClick="deleteRow();" />
 						</div>
 					</div>
+
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -88,10 +111,38 @@
 	  </div>
 	</div>
 
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<?php
+			$r=new Recipe();
+			$recipes=$r->getAllRecipes($db);
+			$str="<table class='table table-striped'><tr>
+				<td>Name</td>
+				<td>Description</td>
+				<td>Author</td>
+				<td>Ratings</td>
+				<td>Actions</td>
+			</tr>";
+			foreach($recipes as $recipe)
+			{
+				$str.="<tr>
+					<td>".$recipe->name."</td>
+					<td>".$recipe->description."</td>
+					<td>".$recipe->authorfname." ".$recipe->authorlname."</td>
+					<td></td>
+					<td><button class='btn btn-success'>Edit</button><button class='btn btn-danger'>Delete</button></td>
+				</tr>";
+			}
+			echo $str."</table>";
+		?>
+		</div>
+	</div>
   </div>
+  
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
   	Profile
   </div>
+  
   <div class="tab-pane fade" id="pills-mealplan" role="tabpanel" aria-labelledby="pills-mealplan-tab">
   	Mealplan
   </div>

@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit37f51007dd2bb461a3a4c581a99a5e40
 {
     public static $classMap = array (
+        'Admin' => __DIR__ . '/../..' . '/lib/Classes/Admin.php',
         'Database' => __DIR__ . '/../..' . '/lib/Classes/Database.php',
         'Homepage' => __DIR__ . '/../..' . '/lib/Classes/Homepage.php',
         'Mealplan' => __DIR__ . '/../..' . '/lib/Classes/Mealplan.php',
@@ -14,6 +15,7 @@ class ComposerStaticInit37f51007dd2bb461a3a4c581a99a5e40
         'Recipe' => __DIR__ . '/../..' . '/lib/Classes/Recipe.php',
         'Requestrecipe' => __DIR__ . '/../..' . '/lib/Classes/Requestrecipe.php',
         'Result' => __DIR__ . '/../..' . '/lib/Classes/Result.php',
+        'ShoppingList' => __DIR__ . '/../..' . '/lib/Classes/ShoppingList.php',
         'User' => __DIR__ . '/../..' . '/lib/Classes/User.php',
     );
 
