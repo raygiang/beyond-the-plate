@@ -17,7 +17,6 @@ private $recipeId;
 
 
 	public function getTime($db){
-	//$recipe = $this->getRecipeId();
 	$sql = "SELECT * FROM instructions
 	WHERE recipe_id = ?
 	AND is_deleted = 0";

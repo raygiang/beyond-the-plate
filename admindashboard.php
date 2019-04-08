@@ -1,8 +1,8 @@
 <?php
- require_once 'vendor/autoload.php';
- //require_once 'config.php';
- require_once 'lib/classes/Admin.php';
- require_once 'admin/charts/category-piechart.php';
+  require_once 'vendor/autoload.php';
+  //require_once 'config.php';
+  require_once 'lib/classes/Admin.php';
+  require_once 'admin/charts/category-piechart.php';
   require_once 'admin/charts/recipe-table.php';
 
 $db = Database::getDb();
@@ -13,16 +13,8 @@ $newUsers = $admin->numberOfUsers(Database::getDb());
 $recipes = $admin->getAllPostedRecipes(Database::getDb());
 $categories = $admin->numberOfCategories(Database::getDb());
 
-//var_dump($newUsers);
-//var_dump($recipes);
-//echo gettype($adminView);
-
-
 ?>
 
-
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -122,12 +114,10 @@ $categories = $admin->numberOfCategories(Database::getDb());
           <td><?php echo $userrecipies->email; ?></td>
           <td><?php echo $userrecipies->number; ?></td>
           <td><?php echo date('m/d/Y H:i:s', $userrecipies->last_login); ?></td>
-           <?php echo "<td><a href='views/reciperequest/editrequest.php?id=". $userrecipies->id . " class='btn btn-light btn-sm' >Edit</a></td>";?>
-           <?php echo "<td><a href='views/reciperequest/deleterequest.php?id=". $userrecipies->id . " class='btn btn-light btn-sm' >Delete</a></td>"; ?>
+          <?php echo "<td><a href='views/reciperequest/deleterequest.php?id=". $userrecipies->id . " class='btn btn-light btn-sm' >Disable</a></td>"; ?>
 
         </tr>
       <?php endforeach; ?>
-
        </tbody>
       </table>
       </div>
