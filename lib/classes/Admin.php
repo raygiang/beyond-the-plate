@@ -4,10 +4,13 @@ class Admin
 {
 	private $id;
 	private $email;
-	private $password;
 	private $firstname;
 	private $lastname;
 	private $role;
+	private $name;
+
+
+
 
 	public function __construct()
 	{
@@ -43,7 +46,25 @@ public function numberOfUsers($db){
 	$count = $pdostm->fetchAll(PDO::FETCH_OBJ);
 	return $count;
 }
-
+public function getAllPostedRecipes($db){
+	$sql = "SELECT recipes.name, description, recipes.created_date, first_name, last_name FROM recipes
+	JOIN users ON  recipes.user_id = users.id";
+	// WHERE FROM_UNIXTIME (created_date, '%m') = 01
+	//GROUP BY name
+	$pdostm = $db->prepare($sql);
+	$pdostm->execute();
+	$count = $pdostm->fetchAll(PDO::FETCH_OBJ);
+	return $count;
 }
-
+public function numberOfCategories($db){
+	$sql = "SELECT name, COUNT(*) AS number FROM categories
+	GROUP BY name";
+	$pst = $db->prepare($sql);
+	$pst->execute();
+	$categories = $pst->fetchAll(PDO::FETCH_OBJ);
+	return $categories;
+	}
+}
+//project email: beyondtheplatephp@gmail.com
+//password: humber2019
 ?>

@@ -1,13 +1,11 @@
 <?php
 // require_once '../../vendor/autoload.php';
 // require_once '../../config.php';
-$db = Database::getDb();
+// require_once '../../lib/classes/Admin.php';
 
-$sql = "SELECT name, COUNT(*) AS number FROM categories
-GROUP BY name";
-		$pst = $db->prepare($sql);
-		$pst->execute();
-		$categories = $pst->fetchAll(PDO::FETCH_OBJ);
+$db = Database::getDb();
+$admin = new Admin();
+$categories = $admin->numberOfCategories(Database::getDb());
 
 		//var_dump($categories);
 
@@ -29,15 +27,15 @@ GROUP BY name";
 
         var options = {
           title: 'The most popular food category',
-          pieHole: 0.4,
+          pieHole: 0.3,
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart'));
         chart.draw(data, options);
       }
     </script>
   </head>
-  <body>
-   <!--  <div id="donutchart" style="width: 900px; height: 500px;"></div> -->
-  </body>
+  <!-- <body>
+    <div id="chart" style="width: 900px; height: 500px;"></div>
+  </body> -->
 </html>
