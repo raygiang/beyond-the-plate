@@ -11,9 +11,49 @@
 		{
 
 		}
+		public function displayAllRecipes($db)
+		{
+
+		}
+		public function getRecipe($id,$db)
+		{
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
+			FROM recipes
+			INNER JOIN users 
+			ON recipes.user_id=users.id  where recipes.is_deleted=0 and recipes.id=:id";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':id',$id);
+			$pdostm->execute();
+			$recipe=$pdostm->fetch(PDO::FETCH_OBJ);
+			return $recipe;
+		}
+		public function getIngredients($id,$db)
+		{
+			$sql = "SELECT ingredients.*,units.unit_name AS unit 
+			FROM ingredients INNER JOIN units
+			ON ingredients.unit_id = units.id 
+			WHERE ingredients.is_deleted=0 and recipe_id=:id";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':id',$id);
+			$pdostm->execute();
+			$ingredients=$pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $ingredients;
+		}
+		public function getInstructions($id,$db)
+		{
+			$sql = "SELECT * 
+			FROM instructions  
+			WHERE is_deleted=0 and recipe_id=:id
+			ORDER BY step ASC";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':id',$id);
+			$pdostm->execute();
+			$instructions=$pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $instructions;
+		}
 		public function getAllRecipes($db)
 		{
-			$sql = "SELECT *,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
 			FROM recipes
 			INNER JOIN users 
 			ON recipes.user_id=users.id  where recipes.is_deleted=0";

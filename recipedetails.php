@@ -1,6 +1,5 @@
 <?php
   require_once 'vendor/autoload.php';
-
   $page = new Homepage('Recipes');
 ?>
 
@@ -16,7 +15,7 @@
   <?php
     error_reporting(E_ALL ^ E_NOTICE);  
     echo $page->generateHeader();
-    require_once("views/recipes.php");
+    require_once("views/recipedetails.php");
     echo $page->generateFooter();
   ?>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -24,5 +23,12 @@
   
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="vendor/nicolasbize/magicsuggest/magicsuggest.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".secondaryImage").mouseover(function(){
+        $("#primaryImage").attr("src",$(this).attr("src"));
+      });
+    });
+  </script>>
 </body>
 </html>
