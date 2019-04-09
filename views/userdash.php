@@ -22,6 +22,9 @@
   <li class="nav-item">
     <a class="nav-link" id="pills-mealplan-tab" data-toggle="pill" href="#pills-mealplan" role="tab" aria-controls="pills-mealplan" aria-selected="false">My Mealplans</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-requests-tab" data-toggle="pill" href="#pills-requests" role="tab" aria-controls="pills-requests" aria-selected="false">My Recipe Requests</a>
+  </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-recipe" role="tabpanel" aria-labelledby="pills-recipe-tab">
@@ -228,6 +231,14 @@
   <div class="tab-pane fade" id="pills-mealplan" role="tabpanel" aria-labelledby="pills-mealplan-tab">
   	Mealplan
   </div>
+ 
+ <div class="tab-pane fade" id="pills-requests" role="tabpanel" aria-labelledby="pills-requests-tab">
+  	<?php
+  		//require_once("requestrecipe.php");
+  	?>
+  </div>
+
+
 </div>
 </div>
 

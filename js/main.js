@@ -14,7 +14,20 @@ function deleteRow() {
     });
   });
 }
-
+function render(val)
+{
+        var n=1;
+        for(i=1;i<=val;i++)
+        {
+                document.getElementById("star"+n).style.backgroundImage="url('images/greenstar.png')";
+                n++;
+        }
+        for(i=1;i<=5-val;i++)
+        {
+                document.getElementById("star"+n).style.backgroundImage="url('images/greystar.png')";
+                n++;
+        }
+}
 function pageReady(){
 	var nav = document.getElementById("header");
 	var main = document.getElementById("main");

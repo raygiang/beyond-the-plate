@@ -6,7 +6,7 @@ class Page
 	
 	const DEFAULT_LINKS = [
         'Home' => 'index.php',
-        'Browse Recipes' => '#',
+        'Browse Recipes' => 'recipes.php',
         'Log In' => 'login.php',
         'Register' => 'registeruser.php'
     	];
