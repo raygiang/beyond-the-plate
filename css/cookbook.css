@@ -409,6 +409,15 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/*********** Update Profile ************/
+
+#profile-general{
+	display:block;
+  }
+  
+#profile-password{
+	display:none;
+  }
 
 /* Auto Suggest */
 .container{
@@ -715,4 +724,47 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
     width:24px;
     right: 1px;
     border-radius: 0 3px 3px 0;
+}
+/****************************** Recipe ******************************/
+.recipe{
+  width:100%;
+  height:200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:#FFF;
+  text-decoration: none;
+}
+.recipeOuter{
+  background-color: black;
+  width:100%;
+  height:100%;
+  opacity:0;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+}
+.recipeOuter:hover{
+  opacity:.7;
+  font-size:1.4em; 
+  padding: .2em; 
+  text-align: justify;
+  text-decoration: none;
+}
+.h3{
+  color:red;
+  font-size:1.2em;
+}
+.h2{
+  color:red;
+  font-size: 2em;
+}
+.secondaryImage{
+  cursor: pointer;
+}
+.star{
+  float:left;
+  height:1rem;
+  width:1rem;
+  background-size:contain;
 }
