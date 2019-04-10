@@ -11,12 +11,25 @@
 
 		public function __construct()
 		{
-			$time=time();
-			$is_deleted=0;
-			$created_date=$time;
-			$modified_date=$time;
+			
 		}
 
+		public function addComments($rid,$userid,$comment,$db)
+		{
+			$sql = "INSERT INTO comments(recipe_id,comment,user_id,is_deleted,created_date,modified_date) 
+			VALUES(:recipe_id,:comment,:user_id,:0,:created_date,:modified_date)";
+			$time=time();
+			$pst = $db->prepare($sql);
+			$pst->bindParam(':recipe_id',$rid);
+			$pst->bindParam(':comment',$comment);
+			$pst->bindParam(':user_id',$userid);
+			$pst->bindParam(':description',$description);
+			$pst->bindParam(':category',$category);
+			$pst->bindParam(':created_date',$time);
+			$pst->bindParam(':modified_date',$time);
+			$count = $pst->execute();
+			return $count;
+		}
 
 	}
 ?>
