@@ -409,6 +409,15 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/*********** Update Profile ************/
+
+#profile-general{
+	display:block;
+  }
+  
+#profile-password{
+	display:none;
+  }
 
 /* Auto Suggest */
 .container{
