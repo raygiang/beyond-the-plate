@@ -35,7 +35,7 @@ $categories = $admin->numberOfCategories(Database::getDb());
         <a class="nav-link admtop" href="#">Admin Dashboard <i class="fas fa-tachometer-alt"></i><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link admtop" href="#">Log out</a>
+        <a class="nav-link admtop" href="logout.php">Log out</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
