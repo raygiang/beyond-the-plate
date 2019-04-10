@@ -148,7 +148,10 @@
 	</div>
   </div>
   
+	<!-- Profile changes -->
+	
 	<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+	<hr/>
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 			<li class="nav-item">
 				<a class="nav-link active" id="pills-profile-tab" data-toggle="pill"  href="#" role="tab" aria-controls="pills-home" aria-selected="true"  onClick="showGeneral('profile-password','profile-general');">General</a>
