@@ -161,5 +161,101 @@
 		}
 
 
+		//Favourite Recipe
+		public function checkIfRecipeFav($recipeid,$userid,$db)
+		{
+			$sql = "SELECT * FROM favourites where user_id=:userid and recipe_id = :recipeid and is_deleted = 0";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':userid',$userid);
+			$pdostm->bindParam(':recipeid',$recipeid);
+			$pdostm->execute();
+			
+			
+			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
+		public function addFavouriteRecipe($recipeid,$userid,$db)
+		{
+			$sql = "SELECT * FROM favourites where user_id=:userid and recipe_id = :recipeid";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':userid',$userid);
+			$pdostm->bindParam(':recipeid',$recipeid);
+			$pdostm->execute();
+			
+			
+			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
+			{
+				//if record already exist update the status 				
+				$sql = "UPDATE favourites SET is_deleted=0 WHERE user_id=:userid and recipe_id = :recipeid";
+				$pst = $db->prepare($sql);
+				$pst->bindParam(':userid',$userid);
+				$pst->bindParam(':recipeid',$recipeid);
+				$count = $pst->execute();
+				return "existing updated";
+			}
+			else
+			{
+				/*
+				imp: change column modified_date in favourites
+				*/
+				//if record doesn't exist create a new record
+				$sql = "INSERT INTO favourites(recipe_id,user_id,is_deleted,created_date,modified_date) 
+				VALUES(:recipe_id,:user_id,0,:created_date,:modified_date)";
+				$time=time();
+				$pst = $db->prepare($sql);
+				$pst->bindParam(':recipe_id',$recipeid);
+				$pst->bindParam(':user_id',$userid);
+				$pst->bindParam(':created_date',$time);
+				$pst->bindParam(':modified_date',$time);
+				$count = $pst->execute();
+				return "new inserted";
+			}
+		}
+		
+		public function removeFavouriteRecipe($recipeid,$userid,$db)
+		{
+			$sql = "SELECT * FROM favourites where user_id=:userid and recipe_id = :recipeid";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':userid',$userid);
+			$pdostm->bindParam(':recipeid',$recipeid);
+			$pdostm->execute();
+			
+			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
+			{
+				//if record already exist update the status 				
+				$sql = "UPDATE favourites SET is_deleted=1 WHERE user_id=:userid and recipe_id = :recipeid";
+				$pst = $db->prepare($sql);
+				$pst->bindParam(':userid',$userid);
+				$pst->bindParam(':recipeid',$recipeid);
+				$count = $pst->execute();
+				return "existing updated";
+			}
+			else
+			{
+				// record does not exist				
+				return "record does not exist";
+			}
+		}
+	
+		public function getAllFavRecipes($uid,$db)
+		{
+			$sql = "SELECT favourites.*,recipes.name 
+					FROM favourites 
+					INNER JOIN recipes 
+					ON favourites.recipe_id=recipes.id
+					where favourites.user_id=:uid and favourites.is_deleted=0";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':uid',$uid);
+			$pdostm->execute();
+			$recipes=$pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $recipes;
+		}
 	}
 ?>

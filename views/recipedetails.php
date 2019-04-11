@@ -7,6 +7,26 @@
 	$recipe=$r->getRecipe($id,$db);
 	$images=glob("recipeimages/$id*");
 	//var_dump($images);
+	
+	//Favourite
+	//null = not logged in
+	//true = logged in and favourite
+	//false = logged in but not favourite
+	
+	$fav =null;
+	if(isset($_SESSION['userid']))
+		{
+			$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
+			/* if($fav == false)
+			{
+				$fav = false;
+			}
+			else
+			{
+				$fav = true;
+			} */
+		}
+	//var_dump($fav);
 ?>
 <div class="page-wrapper">
 	<div class="row">
@@ -34,10 +54,28 @@
 			
 		</div>
 		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-			<div class='recipeName'><span class='h2'><?php echo $recipe->name; ?></span></div>
-			<div class='recipeDetails'>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?>
-				<div class='rating'>
+			<div class='recipeName'><span class='h2'><?php echo $recipe->name; ?></span>
+				
+				<!-- To display or hide favourite icon -->
+				<?php 
 					
+					if($fav === false)
+					{
+						echo "<div class='makefavouriteRecipe'>
+							<img src='./images/favRecipeIcoBefore.png' alt='Make favourite recipe'>
+							<img src='./images/favRecipeIcoAfter.png' class='img-top' alt='Favourite recipe' onClick='updateFavourite(2,".$_SESSION['userid'].",".$_GET['id'].")'>
+						</div><span id='favstatus'></span>";
+					}else if($fav === true)
+					{
+						echo "<div class='favouriteRecipe'>
+							<img src='./images/favRecipeIcoAfter.png' alt='Favourite recipe'>
+							<img src='./images/favRecipeIcoBefore.png' class='img-top' alt='Remove Favourite recipe' onClick='updateFavourite(1,".$_SESSION['userid'].",".$_GET['id'].")'>
+						</div>";
+					}
+				?>
+			</div>
+			<div class='recipeDetails'>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?>
+				<div class='rating'>					
 					<?php 
 					$str="";
 					for($i=1;$i<=5;$i++)
@@ -112,7 +150,6 @@
 					*/
 					?>
 				</div>
-			</div>
 			<hr/>
 			<div class='recipeIngredients'><span class='h3'>Ingredients</span><br> 
 				<?php
@@ -140,3 +177,46 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	 function updateFavourite(status,uid,rid) {
+		 
+		/* status 
+			1 = not fav icon
+			2 = fav icon
+		*/
+		if (status === 1)
+		{
+			var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					//document.getElementById("favstatus").innerHTML = this.responseText;	
+					//alert(this.responseText);
+					location.reload();
+				 }
+			};
+			xmlhttp.open("GET", "favouriteRecipe.php?status=1&userid="+uid+"&recipeid=" + rid, true);
+			xmlhttp.send(); 
+		}else if (status === 2)
+			{
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						//document.getElementById("favstatus").innerHTML = this.responseText;	
+						//alert(this.responseText);
+						location.reload();
+					 }
+				};
+				xmlhttp.open("GET", "favouriteRecipe.php?status=2&userid="+uid+"&recipeid=" + rid, true);
+				xmlhttp.send(); 
+			}
+	}
+	
+/* 	var auto_refresh = setInterval( 
+				function() 
+					{
+						//alert("aman1");
+						$('#makefavouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");
+						$('#favouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");
+					}, 1000); */
+</script>

@@ -418,7 +418,47 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
 #profile-password{
 	display:none;
   }
-
+/******* Favorite Recipe **************/
+  .makefavouriteRecipe {
+        width: 2.5em;
+        height: auto;
+        position: relative;
+        display: inline-block;
+		float: right;
+		margin-top: 0.5em
+    }
+    .makefavouriteRecipe .img-top {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
+    .makefavouriteRecipe:hover .img-top {
+        display: inline;
+		cursor:pointer;
+    }
+	/*if already favourite Recipe*/
+  .favouriteRecipe {
+        width: 2.5em;
+        height: auto;
+        position: relative;
+        display: inline-block;
+		float: right;
+		margin-top: 0.5em
+    }
+    .favouriteRecipe .img-top {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
+    .favouriteRecipe:hover .img-top {
+        display: inline;
+		cursor:pointer;
+    }	
+	
 /* Auto Suggest */
 .container{
     max-width: 500px;
