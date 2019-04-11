@@ -10,6 +10,7 @@
   <title><?php echo $page->getTitle(); ?></title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" type="text/css" href="css/cookbook.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 </head>
 <body>
   <?php

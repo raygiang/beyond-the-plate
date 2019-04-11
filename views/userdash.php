@@ -1,6 +1,10 @@
 <?php
 	require_once('lib/classes/User.php');
 	require_once('lib/classes/Database.php');
+	require_once('lib/classes/Recipe.php');
+  	
+	
+	
 	$db = Database::getDb();
 	$userid = $_SESSION['userid'];
 	
@@ -9,6 +13,11 @@
 	
 	$fname = $user->first_name;
 	$lname = $user->last_name;
+	
+	//get all favourite recipes for this user
+	$r=new Recipe();
+	$favrecipes=$r->getAllFavRecipes($userid,$db);
+	//var_dump($favrecipes);
 ?>
 
 <div class="page-wrapper">
@@ -24,6 +33,9 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-requests-tab" data-toggle="pill" href="#pills-requests" role="tab" aria-controls="pills-requests" aria-selected="false">My Recipe Requests</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-requests-tab" data-toggle="pill" href="#pills-favourite" role="tab" aria-controls="pills-requests" aria-selected="false">My Favourite Recipe's</a>
   </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
@@ -242,6 +254,43 @@
   </div>
 
 
+  <!-- Favourite Recipe -->
+	
+	<div class="tab-pane fade" id="pills-favourite" role="tabpanel" aria-labelledby="pills-profile-tab">
+	<hr/>
+		<!--  Display list of favourite recipes -->
+		
+		<div class="row">
+			<?php
+				$n=0;
+				foreach($favrecipes as $frecipe)
+				{
+					$n++;
+					echo "	<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>
+								<a href='recipedetails.php?id=$frecipe->recipe_id'>
+									<div class='recipe' style=background-image:url('recipeimages/$frecipe->recipe_id"."_1.jpg"."');>
+										<div class='recipeOuter'>
+											$frecipe->name
+										</div>
+									</div>
+								</a>
+							</div>";		
+					if($n==4)
+					{
+						echo "	</div>
+									<div class='row'>
+										<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+										<hr/>
+									</div>
+								</div>
+								<div class='row'>";
+						$n=0;
+					}
+				}
+			?>
+		</div>
+	</div>
+  
 </div>
 </div>
 
