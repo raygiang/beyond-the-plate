@@ -7,13 +7,16 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Admin' => $baseDir . '/lib/Classes/Admin.php',
+    'Comment' => $baseDir . '/lib/Classes/Comments.php',
     'Database' => $baseDir . '/lib/Classes/Database.php',
     'Homepage' => $baseDir . '/lib/Classes/Homepage.php',
     'Mealplan' => $baseDir . '/lib/Classes/Mealplan.php',
     'Page' => $baseDir . '/lib/Classes/Page.php',
+    'Rating' => $baseDir . '/lib/Classes/Ratings.php',
     'Recipe' => $baseDir . '/lib/Classes/Recipe.php',
     'Requestrecipe' => $baseDir . '/lib/Classes/Requestrecipe.php',
     'Result' => $baseDir . '/lib/Classes/Result.php',
     'ShoppingList' => $baseDir . '/lib/Classes/ShoppingList.php',
+    'Timer' => $baseDir . '/lib/Classes/Timer.php',
     'User' => $baseDir . '/lib/Classes/User.php',
 );

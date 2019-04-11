@@ -40,8 +40,14 @@
 					
 					<?php 
 					$str="";
+					$r = new Rating();
+					$userRating = $r->getUserRating($id,$_SESSION["userid"],$db);
+
+					getUserRating($rid,$userid,$db)
 					for($i=1;$i<=5;$i++)
 					{
+
+
 						$str.="<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);'></div>
 						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
 							<div class='modal-dialog' role='document'>
@@ -52,7 +58,8 @@
                                     		<span aria-hidden='true'>&times;</span>
                                 		</button>
                         			</div>
-                        			<div class='modal-body'>";
+                        			<div class='modal-body'>
+                        			<form action='' method='POST'>";
 										for($j=1;$j<=$i;$j++)
 		                                {
 		                                    $str.="<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\"></div>";
@@ -63,53 +70,21 @@
 		                                }
 										$str.="<br><br>
 		                            	Tell us why do feel this way for <b></b>
-		                            	<textarea id='comments$i' style='width:100%' rows='4'></textarea>
+		                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
+		                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
+		                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
+
 									</div>
                         			<div class='modal-footer'>
                                 		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-                                		<button type='button' class='btn btn-success' >Post Review</button>
+                                		<button type='submit' class='btn btn-success' >Post Review</button>
                            	 		</div>
                         		</div>
                         	</div>
 						</div>";
 					}
 					echo $str;
-					/*
-						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                    		<div class='modal-dialog' role='document' style='z-index:2000;'>
-                        		<div class='modal-content'>
-                            		<div class='modal-header'>
-                            	    	<h3 class='modal-title' id='exampleModalLabel'>Rate $recipe->name</h3>
-                                		<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                    		<span aria-hidden='true'>&times;</span>
-                                		</button>
-                            		</div>
-                            		<div class='modal-body'>
-		                                <img src='$images[0]' style='height:10rem;width:10rem;border-radius:50%;'><br>Rating for <b></b> is<br>
-		                                for($j=1;$j<=$i;$j++)
-		                                {
-		                                    //echo "<img src='images/greenstar.png'>";
-		                                    echo "<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\">";
-		                                }
-		                                for($j=1;$j<=5-$i;$j++)
-		                                {
-		                                    //echo "<img src='images/greystar.png'>";
-		                                    echo "<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\">";
-		                                }
-		                           	 	echo "<br><br>
-		                            	Tell us why do feel this way for <b></b>
-		                            	<textarea id='comments$i' style='width:100%' rows='4'></textarea>
-		                            </div>
-                            	
-                            		<div class='modal-footer'>
-                                		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-                                		<button type='button' class='btn btn-success' onClick=\"\">Post Review</button>
-                           	 		</div>
-                        		</div>
-                   	 		</div>
-                		</div>";
-					}
-					*/
+					
 					?>
 				</div>
 			</div>
