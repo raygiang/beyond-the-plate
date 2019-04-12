@@ -1,19 +1,9 @@
 <?php
-  require_once 'vendor/autoload.php';
-  //require_once 'config.php';
-  require_once 'lib/classes/Admin.php';
-  require_once 'admin/charts/category-piechart.php';
-  require_once 'admin/charts/recipe-table.php';
-
-$db = Database::getDb();
-$admin = new Admin();
-$adminView = $admin->getAdmin(Database::getDb());
-$allUserRecipies = $admin->getAllUserRecipes(Database::getDb());
-$newUsers = $admin->numberOfUsers(Database::getDb());
-$recipes = $admin->getAllPostedRecipes(Database::getDb());
-$categories = $admin->numberOfCategories(Database::getDb());
-
+ require_once('lib/controllers/admin-controller.php');
 ?>
+
+
+
 
 <html lang="en">
 <head>
@@ -35,7 +25,7 @@ $categories = $admin->numberOfCategories(Database::getDb());
         <a class="nav-link admtop" href="#">Admin Dashboard <i class="fas fa-tachometer-alt"></i><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link admtop" href="#">Log out</a>
+        <a class="nav-link admtop" href="logout.php">Log out</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -52,16 +42,11 @@ $categories = $admin->numberOfCategories(Database::getDb());
       	<div class="text-center">
 
       	<div id="admimage" class="rounded-circle" alt=""></div>
-      	 <?php foreach($adminView as $admin): ?>
-      	 	<div id="admwelcome">
-	      	<div class="text-center">Welcome back <?php echo $admin->first_name . " " . $admin->last_name; ?>!</div>
-	      	<div class="text-center"><i class="far fa-envelope"></i><?php echo $admin->email; ?></div>
-	      	</div>
-      	<?php endforeach; ?>
+      	<?php echo printAdmin($admin) ?>
       	</div>
         <ul class="nav flex-column" id="side">
 					<li class="nav-item">
-            <a class="nav-link" href="#" onClick='getCategories();'>
+            <a class="nav-link" href="#" id="categories">
               <i class="far fa-user"></i>
               Categories
             </a>
@@ -73,7 +58,7 @@ $categories = $admin->numberOfCategories(Database::getDb());
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" onClick='getRecipes();'>
+            <a class="nav-link" href="#" id="recipes" >
               <i class="far fa-clock"></i>
               Recently Posted Recipies
             </a>
@@ -107,18 +92,8 @@ $categories = $admin->numberOfCategories(Database::getDb());
         </tr>
       </thead>
       <tbody>
-			<?php foreach($allUserRecipies as $userrecipies): ?>
-        <tr>
-
-          <td><?php echo $userrecipies->first_name . " " . $userrecipies->last_name; ?></td>
-          <td><?php echo $userrecipies->email; ?></td>
-          <td><?php echo $userrecipies->number; ?></td>
-          <td><?php echo date('m/d/Y H:i:s', $userrecipies->last_login); ?></td>
-          <?php echo "<td><a href='views/reciperequest/deleterequest.php?id=". $userrecipies->id . " class='btn btn-light btn-sm' >Disable</a></td>"; ?>
-
-        </tr>
-      <?php endforeach; ?>
-       </tbody>
+			<?php echo printUsers($admin);?>
+      </tbody>
       </table>
       </div>
     </div>
@@ -128,6 +103,9 @@ $categories = $admin->numberOfCategories(Database::getDb());
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="
 sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<!-- script for loading google charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script src="js/admin.js"></script>
