@@ -4,7 +4,6 @@
   $db = Database::getDb();  
   session_start();
 
-  var_dump($_POST);
   if(isset($_POST["sbmtBtn"]))
   {
     $rating = $_POST["rating"];
