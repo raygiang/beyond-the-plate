@@ -44,8 +44,7 @@
 					{
 						echo "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6'>
 							<img src='$image'/ class='secondaryImage'>
-						</div>";
-					}
+						</div>";					}
 				?>
 			</div>
 			
@@ -78,15 +77,21 @@
 				<div class='rating'>					
 					<?php 
 					$str="";
-					$r = new Rating();
-					$userRating = $r->getUserRating($id,$_SESSION["userid"],$db);
+					$rt = new Rating();
+					if(isset($_SESSION["userid"])){
+						$userRating = $rt->getUserRating($id,$_SESSION["userid"],$db);
+					}
+					else{
+						$userRating = $rt->getAverageRatings($id,$db);	
+					}
 
-					getUserRating($rid,$userid,$db)
+
 					for($i=1;$i<=5;$i++)
 					{
 
+						$image=$i<=$userRating?"greenstar":"greystar";
 
-						$str.="<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);'></div>
+						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);	'></div>
 						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
 							<div class='modal-dialog' role='document'>
                         		<div class='modal-content'>
@@ -97,7 +102,7 @@
                                 		</button>
                         			</div>
                         			<div class='modal-body'>
-                        			<form action='' method='POST'>";
+                        				<form action='' method='POST'>";
 										for($j=1;$j<=$i;$j++)
 		                                {
 		                                    $str.="<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\"></div>";
@@ -109,14 +114,15 @@
 										$str.="<br><br>
 		                            	Tell us why do feel this way for <b></b>
 		                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
-		                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
-		                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
-
+		                            	<input type='text' id='rating' name='rating' value='$i' class='form-control'>
+		                            	<input type='text' id='recipeid' name='recipeid' value='$id' class='form-control'>
+		      
 									</div>
                         			<div class='modal-footer'>
                                 		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-                                		<button type='submit' class='btn btn-success' >Post Review</button>
+                                		<button type='submit' name='sbmtBtn' class='btn btn-success' >Post Review</button>
                            	 		</div>
+                           	 		</form>
                         		</div>
                         	</div>
 						</div>";
@@ -160,31 +166,17 @@
 			1 = not fav icon
 			2 = fav icon
 		*/
-		if (status === 1)
-		{
-			var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
+		var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					//document.getElementById("favstatus").innerHTML = this.responseText;	
-					//alert(this.responseText);
+					alert(this.responseText);
 					location.reload();
 				 }
 			};
-			xmlhttp.open("GET", "favouriteRecipe.php?status=1&userid="+uid+"&recipeid=" + rid, true);
+			xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
 			xmlhttp.send(); 
-		}else if (status === 2)
-			{
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						//document.getElementById("favstatus").innerHTML = this.responseText;	
-						//alert(this.responseText);
-						location.reload();
-					 }
-				};
-				xmlhttp.open("GET", "favouriteRecipe.php?status=2&userid="+uid+"&recipeid=" + rid, true);
-				xmlhttp.send(); 
-			}
+		
 	}
 	
 /* 	var auto_refresh = setInterval( 

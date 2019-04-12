@@ -33,7 +33,7 @@
 		{
 			$sql = "SELECT sum(rating) as sum,count(rating) as cnt FROM ratings where is_deleted=0 and recipe_id=:rid";
 			$pdostm = $db->prepare($sql);
-			$pst->bindParam(':rid',$rid);
+			$pdpstm->bindParam(':rid',$rid);
 			$pdostm->execute();
 			$recipeRating=$pdostm->fetch(PDO::FETCH_OBJ);
 			$averageRating=$recipeRating->sum/$recipeRating->cnt;
@@ -44,8 +44,8 @@
 		{
 			$sql = "SELECT rating FROM ratings WHERE recipe_id = :rid and user_id=:uid and is_deleted=0";
 			$pdostm = $db->prepare($sql);
-			$pst->bindParam(':rid',$rid);
-			$pst->bindParam(':uid',$userid);
+			$pdostm->bindParam(':rid',$rid);
+			$pdostm->bindParam(':uid',$userid);
 			$pdostm->execute();
 			$recipeRating=$pdostm->fetch(PDO::FETCH_OBJ);
 			if($recipeRating->rating){

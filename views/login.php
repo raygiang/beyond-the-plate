@@ -19,14 +19,21 @@
 			$_SESSION["user"]=$user->email;
 			$_SESSION["role"]=$user->role;
 			$_SESSION["userid"]=$user->id;
-			$u->successfulLogin($email,$db);
-			if($user->role==1)
+			$u->successfulLogin($email,$db);   // To update last login fields in user table
+			
+			if(!empty($_POST["redirect"]))
 			{
-				header("location:admindashboard.php");
+				header("location:".$_POST["redirect"]);
 			}
-			else
-			{
-				header("location:userdash.php");
+			else{
+				if($user->role==1)
+				{
+					header("location:admindashboard.php");
+				}
+				else
+				{
+					header("location:userdash.php");
+				}
 			}
 		}
 		else
@@ -58,6 +65,7 @@
 						<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
 					</div>
 				</div>
+				<input type="hidden" name="redirect" value="<?php echo $_GET["redirect"]; ?>">
 				<input type="submit" name="loginBtn" value="Log In" class="btn btn-danger">
 				<input type="button" value="Forgot Password" class="btn btn-primary">
 				<div>
