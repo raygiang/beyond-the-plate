@@ -1,12 +1,12 @@
 <?php
 	require_once('lib/classes/Recipe.php');
   	require_once('lib/classes/database.php');
+  	require_once('lib/classes/UserMessages.php');
 	$db = Database::getDb();
   	$r=new Recipe();
   	$id = $_GET["id"];
 	$recipe=$r->getRecipe($id,$db);
 	$images=glob("recipeimages/$id*");
-	//var_dump($images);
 	
 	//Favourite
 	//null = not logged in
@@ -17,16 +17,7 @@
 	if(isset($_SESSION['userid']))
 		{
 			$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
-			/* if($fav == false)
-			{
-				$fav = false;
-			}
-			else
-			{
-				$fav = true;
-			} */
 		}
-	//var_dump($fav);
 ?>
 <div class="page-wrapper">
 	<div class="row">
@@ -155,6 +146,7 @@
 					echo $instructionStr;
 				?>
 			</div>
+			
 		</div>
 	</div>
 </div>
