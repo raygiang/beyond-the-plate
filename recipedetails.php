@@ -1,6 +1,24 @@
 <?php
   require_once 'vendor/autoload.php';
   $page = new Homepage('Recipes');
+  $db = Database::getDb();  
+  session_start();
+
+  if(isset($_POST["comment"]))
+  {
+    $rating = $_POST["rating"];
+    $comment = $_POST["comment"];
+    $recipeid = $_POST["recipeid"];
+    $userid = $_SESSION["userid"];
+    
+    $c = new Comment();
+    $count=$c->addComments($recipeid,$userid,$comment,$db);
+
+    $r = new Rating();
+    $count=$r->addRatings($recipeid,$userid,$rating,$db);
+  }
+
+
 ?>
 
 <html lang="en">

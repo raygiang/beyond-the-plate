@@ -8,14 +8,17 @@ class ComposerStaticInit37f51007dd2bb461a3a4c581a99a5e40
 {
     public static $classMap = array (
         'Admin' => __DIR__ . '/../..' . '/lib/Classes/Admin.php',
+        'Comment' => __DIR__ . '/../..' . '/lib/Classes/Comments.php',
         'Database' => __DIR__ . '/../..' . '/lib/Classes/Database.php',
         'Homepage' => __DIR__ . '/../..' . '/lib/Classes/Homepage.php',
         'Mealplan' => __DIR__ . '/../..' . '/lib/Classes/Mealplan.php',
         'Page' => __DIR__ . '/../..' . '/lib/Classes/Page.php',
+        'Rating' => __DIR__ . '/../..' . '/lib/Classes/Ratings.php',
         'Recipe' => __DIR__ . '/../..' . '/lib/Classes/Recipe.php',
         'Requestrecipe' => __DIR__ . '/../..' . '/lib/Classes/Requestrecipe.php',
         'Result' => __DIR__ . '/../..' . '/lib/Classes/Result.php',
         'ShoppingList' => __DIR__ . '/../..' . '/lib/Classes/ShoppingList.php',
+        'Timer' => __DIR__ . '/../..' . '/lib/Classes/Timer.php',
         'User' => __DIR__ . '/../..' . '/lib/Classes/User.php',
     );
 
