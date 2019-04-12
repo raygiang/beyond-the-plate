@@ -59,19 +59,19 @@ function pageReady(){
 
 
 	var ms = $('#ms').magicSuggest({
-        data: 'get_countries.php',
-        valueField: 'idCountry',
-        displayField: 'countryName',
+        data: 'get_ingredients.php',
+        valueField: 'id',
+        displayField: 'name',
         mode: 'remote',
         renderer: function(data){
-            return '<div>'+data.countryName+'</div>';
+            return '<div>'+data.name+'</div>';
         },
         resultAsString: true,
         selectionRenderer: function(data){
         	//alert(data.countryName);
         	$("#ms").val("");
-            $('input[name^=ingredient_text').last().val(data.countryName);
-            return '<div class="name">' + data.countryName + '</div>';
+            $('input[name^=ingredient_text').last().val(data.name);
+            return '<div class="name">' + data.name + '</div>';
         }
     });
 
