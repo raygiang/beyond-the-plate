@@ -91,7 +91,7 @@
 
 						$image=$i<=$userRating?"greenstar":"greystar";
 
-						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);	'></div>
+						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);'></div>
 						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
 							<div class='modal-dialog' role='document'>
                         		<div class='modal-content'>

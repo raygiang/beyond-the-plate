@@ -31,11 +31,14 @@
 
 		public function getAverageRatings($rid,$db)
 		{
-			$sql = "SELECT sum(rating) as sum,count(rating) as cnt FROM ratings where is_deleted=0 and recipe_id=:rid";
-			$pdostm = $db->prepare($sql);
-			$pdpstm->bindParam(':rid',$rid);
-			$pdostm->execute();
-			$recipeRating=$pdostm->fetch(PDO::FETCH_OBJ);
+			$sql = "SELECT sum(rating) as sumtotal,count(rating) as cnt FROM ratings where is_deleted=0 and recipe_id=:rid";
+			$pst = $db->prepare($sql);
+			//var_dump($pst);
+			
+			$pst->bindParam(':rid',$rid);
+			
+			$pst->execute();
+			$recipeRating=$pst->fetch(PDO::FETCH_OBJ);
 			$averageRating=$recipeRating->sum/$recipeRating->cnt;
 			return $averageRating;
 		}
