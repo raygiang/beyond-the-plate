@@ -9,36 +9,38 @@
 		if($email ==='' || $password === '')
 		{
 			header("location:login.php?e=1");
+			exit();
 		}
-		$db = Database::getDb();
-		
-		$u = new User();
-		if($user=$u->verifyUser($email,$password,$db))
-		{
-			session_start();
-			$_SESSION["user"]=$user->email;
-			$_SESSION["role"]=$user->role;
-			$_SESSION["userid"]=$user->id;
-			$u->successfulLogin($email,$db);   // To update last login fields in user table
-			
-			if(!empty($_POST["redirect"]))
+		else{
+			$db = Database::getDb();
+			$u = new User();
+			if($user=$u->verifyUser($email,$password,$db))
 			{
-				header("location:".$_POST["redirect"]);
-			}
-			else{
-				if($user->role==1)
+				//session_start();
+				$_SESSION["user"]=$user->email;
+				$_SESSION["role"]=$user->role;
+				$_SESSION["userid"]=$user->id;
+				$u->successfulLogin($email,$db);   // To update last login fields in user table
+				var_dump($_POST);
+				if(!empty($_POST["redirect"]))
 				{
-					header("location:admindashboard.php");
+					header("location:".$_POST["redirect"]);
 				}
-				else
-				{
-					header("location:userdash.php");
+				else{
+					if($user->role==1)
+					{
+						header("location:admindashboard.php");
+					}
+					else
+					{
+						header("location:userdash.php");
+					}
 				}
 			}
-		}
-		else
-		{
-			header("location:login.php?e=2");
+			else
+			{
+				header("location:login.php?e=2");
+			}
 		}
 	}
 ?>
@@ -65,7 +67,7 @@
 						<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
 					</div>
 				</div>
-				<input type="hidden" name="redirect" value="<?php echo $_GET["redirect"]; ?>">
+				<input type="hidden" name="redirect" value="<?php if(isset($_GET["redirect"])){echo $_GET["redirect"];} ?>">
 				<input type="submit" name="loginBtn" value="Log In" class="btn btn-danger">
 				<input type="button" value="Forgot Password" class="btn btn-primary">
 				<div>
