@@ -77,7 +77,7 @@
 						$userRating = $rt->getUserRating($id,$_SESSION["userid"],$db);
 					}
 					else{
-						$userRating = $rt->getAverageRatings($id,$db);	
+						$userRating = $rt->getAverageRatings($id,$db);
 					}
 
 
@@ -86,7 +86,7 @@
 
 						$image=$i<=$userRating?"greenstar":"greystar";
 
-						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);'></div>
+						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);' onMouseOut='render($userRating);';></div>
 						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
 							<div class='modal-dialog' role='document'>
                         		<div class='modal-content'>
@@ -109,8 +109,8 @@
 										$str.="<br><br>
 		                            	Tell us why do feel this way for <b></b>
 		                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
-		                            	<input type='text' id='rating' name='rating' value='$i' class='form-control'>
-		                            	<input type='text' id='recipeid' name='recipeid' value='$id' class='form-control'>
+		                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
+		                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
 		      
 									</div>
                         			<div class='modal-footer'>
