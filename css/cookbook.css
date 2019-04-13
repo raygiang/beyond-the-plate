@@ -459,6 +459,12 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
 		cursor:pointer;
     }	
 	
+/***** Contact Author *****/
+#modelContact{
+		width: 50em;
+	}
+
+	
 /* Auto Suggest */
 .container{
     max-width: 500px;

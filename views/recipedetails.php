@@ -17,6 +17,10 @@
 	if(isset($_SESSION['userid']))
 		{
 			$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
+		}	
+	if(isset($_POST['contactAuthorSubmit']))
+		{
+			echo "aman";
 		}
 ?>
 <div class="page-wrapper">
@@ -147,6 +151,44 @@
 				?>
 			</div>
 			
+			<div>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
+				
+				<div id="contactAuthorModal" class="modal fade" role="dialog">
+					<div class="modal-dialog" id="modelContact">
+
+					<!-- Modal content-->
+						<div class="modal-content">
+							<form action = "sendmessage.php" method = "POST" enctype="multipart/form-data">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Contact Author</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<h5>Write your message</h5>
+									<br>
+									<input type="hidden" name="authoruserid" id="authoruserid"
+									value="<?php
+											echo $recipe->user_id ;
+										?>">
+									<input type="hidden" name="recipeid" id="recipeid"
+									value="<?php
+											echo $recipe->id ;
+										?>">
+									<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>
+									<br>
+								</div>
+								<div class="modal-footer">
+									<input type = "submit" value = "contactAuthorSubmit" />
+									<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
