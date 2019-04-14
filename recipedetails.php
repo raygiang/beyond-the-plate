@@ -4,13 +4,17 @@
   $db = Database::getDb();  
   session_start();
 
-  if(isset($_POST["comment"]))
+  if(isset($_POST["sbmtBtn"]))
   {
     $rating = $_POST["rating"];
     $comment = $_POST["comment"];
     $recipeid = $_POST["recipeid"];
     $userid = $_SESSION["userid"];
     
+    if(!$userid){
+      header("location:login.php?redirect=recipedetails.php?id=$recipeid");
+    }
+
     $c = new Comment();
     $count=$c->addComments($recipeid,$userid,$comment,$db);
 

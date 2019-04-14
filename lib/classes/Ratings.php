@@ -16,6 +16,12 @@
 
 		public function addRatings($rid,$userid,$rating,$db)
 		{
+			$sql = "DELETE FROM ratings where recipe_id=:rid and user_id=:uid";
+			$pst = $db->prepare($sql);
+			$pst->bindParam(':rid',$rid);
+			$pst->bindParam(':uid',$userid);
+			$count = $pst->execute();
+
 			$sql = "INSERT IGNORE INTO ratings(recipe_id,rating,user_id,is_deleted,created_date,modified_date) 
 			VALUES(:recipe_id,:rating,:user_id,0,:created_date,:modified_date)";
 			$time=time();
@@ -31,12 +37,15 @@
 
 		public function getAverageRatings($rid,$db)
 		{
-			$sql = "SELECT sum(rating) as sum,count(rating) as cnt FROM ratings where is_deleted=0 and recipe_id=:rid";
-			$pdostm = $db->prepare($sql);
+			$sql = "SELECT sum(rating) as sumtotal,count(rating) as cnt FROM ratings where is_deleted=0 and recipe_id=:rid";
+			$pst = $db->prepare($sql);
+			//var_dump($pst);
+			
 			$pst->bindParam(':rid',$rid);
-			$pdostm->execute();
-			$recipeRating=$pdostm->fetch(PDO::FETCH_OBJ);
-			$averageRating=$recipeRating->sum/$recipeRating->cnt;
+			
+			$pst->execute();
+			$recipeRating=$pst->fetch(PDO::FETCH_OBJ);
+			$averageRating=$recipeRating->cnt==0?0:$recipeRating->sumtotal/$recipeRating->cnt;
 			return $averageRating;
 		}
 
@@ -44,8 +53,8 @@
 		{
 			$sql = "SELECT rating FROM ratings WHERE recipe_id = :rid and user_id=:uid and is_deleted=0";
 			$pdostm = $db->prepare($sql);
-			$pst->bindParam(':rid',$rid);
-			$pst->bindParam(':uid',$userid);
+			$pdostm->bindParam(':rid',$rid);
+			$pdostm->bindParam(':uid',$userid);
 			$pdostm->execute();
 			$recipeRating=$pdostm->fetch(PDO::FETCH_OBJ);
 			if($recipeRating->rating){

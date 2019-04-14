@@ -1,7 +1,7 @@
 <?php
     class Database {
         private static $user = 'root';
-        private static $pass = 'root'; // removed root
+        private static $pass = ''; // removed root
         private static $dsn = 'mysql:host=localhost;dbname=cookbook';
 
         private static $dbh;

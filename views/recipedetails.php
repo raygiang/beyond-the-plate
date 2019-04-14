@@ -1,12 +1,12 @@
 <?php
 	require_once('lib/classes/Recipe.php');
   	require_once('lib/classes/database.php');
+  	require_once('lib/classes/UserMessages.php');
 	$db = Database::getDb();
   	$r=new Recipe();
   	$id = $_GET["id"];
 	$recipe=$r->getRecipe($id,$db);
 	$images=glob("recipeimages/$id*");
-	//var_dump($images);
 	
 	//Favourite
 	//null = not logged in
@@ -17,16 +17,11 @@
 	if(isset($_SESSION['userid']))
 		{
 			$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
-			/* if($fav == false)
-			{
-				$fav = false;
-			}
-			else
-			{
-				$fav = true;
-			} */
+		}	
+	if(isset($_POST['contactAuthorSubmit']))
+		{
+			echo "aman";
 		}
-	//var_dump($fav);
 ?>
 <div class="page-wrapper">
 	<div class="row">
@@ -44,8 +39,7 @@
 					{
 						echo "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6'>
 							<img src='$image'/ class='secondaryImage'>
-						</div>";
-					}
+						</div>";					}
 				?>
 			</div>
 			
@@ -78,15 +72,21 @@
 				<div class='rating'>					
 					<?php 
 					$str="";
-					$r = new Rating();
-					$userRating = $r->getUserRating($id,$_SESSION["userid"],$db);
+					$rt = new Rating();
+					if(isset($_SESSION["userid"])){
+						$userRating = $rt->getUserRating($id,$_SESSION["userid"],$db);
+					}
+					else{
+						$userRating = $rt->getAverageRatings($id,$db);
+					}
 
-					getUserRating($rid,$userid,$db)
+
 					for($i=1;$i<=5;$i++)
 					{
 
+						$image=$i<=$userRating?"greenstar":"greystar";
 
-						$str.="<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);'></div>
+						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);' onMouseOut='render($userRating);';></div>
 						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
 							<div class='modal-dialog' role='document'>
                         		<div class='modal-content'>
@@ -97,7 +97,7 @@
                                 		</button>
                         			</div>
                         			<div class='modal-body'>
-                        			<form action='' method='POST'>";
+                        				<form action='' method='POST'>";
 										for($j=1;$j<=$i;$j++)
 		                                {
 		                                    $str.="<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\"></div>";
@@ -111,12 +111,13 @@
 		                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
 		                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
 		                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
-
+		      
 									</div>
                         			<div class='modal-footer'>
                                 		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-                                		<button type='submit' class='btn btn-success' >Post Review</button>
+                                		<button type='submit' name='sbmtBtn' class='btn btn-success' >Post Review</button>
                            	 		</div>
+                           	 		</form>
                         		</div>
                         	</div>
 						</div>";
@@ -149,6 +150,44 @@
 					echo $instructionStr;
 				?>
 			</div>
+			
+			<div>
+				<?php
+					if(isset($_SESSION['userid']))
+					{
+						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
+				
+						<div id="contactAuthorModal" class="modal fade" role="dialog">
+							<div class="modal-dialog" id="modelContact">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<form action = "sendmessage.php" method = "POST" enctype="multipart/form-data">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Contact Author</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<h5>Write your message</h5>
+											<br>
+											<input type="hidden" name="authoruserid" id="authoruserid"
+											value="'.$recipe->user_id.'">
+											<input type="hidden" name="recipeid" id="recipeid"
+											value="'.$recipe->id.'">
+											<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>
+											<br>
+										</div>
+										<div class="modal-footer">
+											<input type = "submit" value = "Send Message" />
+											<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>';
+					}
+				?>
+			</div>
 		</div>
 	</div>
 </div>
@@ -160,31 +199,17 @@
 			1 = not fav icon
 			2 = fav icon
 		*/
-		if (status === 1)
-		{
-			var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
+		var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					//document.getElementById("favstatus").innerHTML = this.responseText;	
-					//alert(this.responseText);
+					alert(this.responseText);
 					location.reload();
 				 }
 			};
-			xmlhttp.open("GET", "favouriteRecipe.php?status=1&userid="+uid+"&recipeid=" + rid, true);
+			xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
 			xmlhttp.send(); 
-		}else if (status === 2)
-			{
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						//document.getElementById("favstatus").innerHTML = this.responseText;	
-						//alert(this.responseText);
-						location.reload();
-					 }
-				};
-				xmlhttp.open("GET", "favouriteRecipe.php?status=2&userid="+uid+"&recipeid=" + rid, true);
-				xmlhttp.send(); 
-			}
+		
 	}
 	
 /* 	var auto_refresh = setInterval( 

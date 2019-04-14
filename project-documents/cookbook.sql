@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2019 at 04:23 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: Apr 13, 2019 at 07:37 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,6 +59,13 @@ CREATE TABLE `comments` (
   `created_date` int(10) NOT NULL,
   `modified_date` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `recipe_id`, `comment`, `user_id`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(3, 1554748754, '', 2, 0, 1555002846, 1555002846);
 
 -- --------------------------------------------------------
 
@@ -332,8 +339,19 @@ CREATE TABLE `favourites` (
   `user_id` int(10) NOT NULL,
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   `created_date` int(10) NOT NULL,
-  `modied_date` int(10) NOT NULL
+  `modified_date` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `favourites`
+--
+
+INSERT INTO `favourites` (`id`, `recipe_id`, `user_id`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(4, 1554742010, 2, 0, 1554917259, 1554917259),
+(5, 1554748754, 2, 0, 1554918463, 1554918463),
+(6, 1554050741, 2, 1, 1554918544, 1554918544),
+(7, 1554748807, 2, 1, 1555001449, 1555001449),
+(8, 1554742010, 1, 0, 1555132910, 1555132910);
 
 -- --------------------------------------------------------
 
@@ -463,6 +481,13 @@ CREATE TABLE `ratings` (
   `modified_date` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `recipe_id`, `user_id`, `rating`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(3, 1554748754, 2, 5, 0, 1555002846, 1555002846);
+
 -- --------------------------------------------------------
 
 --
@@ -583,6 +608,27 @@ INSERT INTO `units` (`id`, `unit_name`, `is_deleted`, `created_date`, `modified_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `usermessages`
+--
+
+CREATE TABLE `usermessages` (
+  `id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `current_userid` int(11) NOT NULL,
+  `user_message` varchar(2000) NOT NULL,
+  `sent_date` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usermessages`
+--
+
+INSERT INTO `usermessages` (`id`, `author_id`, `current_userid`, `user_message`, `sent_date`) VALUES
+(1, 1, 2, 'amann', 1555096135);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -604,7 +650,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `last_login`, `role`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'johnsmith@testmail.com', '$2y$10$7L03lvIR/dWMy2BkPxFd4OYPSNmp82MmCYIA8F7OUw8EJAavxom1q', 'John', 'Smith', 1554903987, 2, 0, 2147483647, 2147483647);
+(1, 'johnsmith@testmail.com', '$2y$10$uo3MXEaAWqGV/oMeXp0AeOtU5yAZzKiFkfb3NLjkdLNmDu24mTkmG', 'John', 'Smith', 1555132721, 2, 0, 2147483647, 2147483647),
+(2, 'test@gmail.com', '$2y$10$uo3MXEaAWqGV/oMeXp0AeOtU5yAZzKiFkfb3NLjkdLNmDu24mTkmG', 'Amandeep', 'Singh', 1555132698, 2, 0, 1554906839, 1554906874),
+(3, 'tes2@gmail.com', '$2y$10$a4desSbK2kQU18GcOLsSoOCD8MEIfkAt5yM88Z4jkOwYXLQrGgCRO', 'test2', 'test', 1554911883, 2, 0, 1554911853, 1554911853);
 
 --
 -- Indexes for dumped tables
@@ -720,6 +768,12 @@ ALTER TABLE `units`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `usermessages`
+--
+ALTER TABLE `usermessages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -739,7 +793,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -751,7 +805,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ingredients`
@@ -781,7 +835,7 @@ ALTER TABLE `plan_categories`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `recipes`
@@ -820,10 +874,16 @@ ALTER TABLE `units`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `usermessages`
+--
+ALTER TABLE `usermessages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

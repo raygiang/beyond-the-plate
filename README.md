@@ -49,6 +49,17 @@
 
 **Amandeep Singh -Profile Update**
   - User can update there profile details and password
+<<<<<<< HEAD
+
+  ## April 11
+
+**Amandeep Singh -Profile Update**
+  - User can make a recipe favorite
+
+  ## April 12
+
+**Amandeep Singh -Profile Update**
+  - User can send message to the author of the recipe
 
 ## April 14 Update
 

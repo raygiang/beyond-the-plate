@@ -2,7 +2,7 @@
     $con=mysqli_connect('localhost','root','','cookbook');
     $q = isset($_POST['query']) ? $con->real_escape_string($_POST['query']) : '';
 
-    $result = mysqli_query($con,"select * from countries where countryName like '%" . $q ."%'");
+    $result = mysqli_query($con,"select distinct name from ingredients where name like '%" . $q ."%'");
     
     $rows=array();
     while($row = mysqli_fetch_assoc($result)) 
