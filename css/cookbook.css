@@ -125,6 +125,9 @@ a {
   text-align: right;
 }
 
+#main-nav a {
+  color: #ed1c24;
+}
 #main-nav li {
   display: inline-block;
   margin-left: 1em;
@@ -153,6 +156,7 @@ a {
   left: 25vw;
   margin: 1.4em 0;
   text-shadow: 1.5px 1.5px 1px #656565;
+  color: #ed1c24;
 }
 
 
@@ -414,7 +418,7 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
 #profile-general{
 	display:block;
   }
-  
+
 #profile-password{
 	display:none;
   }
@@ -457,14 +461,14 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
     .favouriteRecipe:hover .img-top {
         display: inline;
 		cursor:pointer;
-    }	
-	
+    }
+
 /***** Contact Author *****/
 #modelContact{
 		width: 50em;
 	}
 
-	
+
 /* Auto Suggest */
 .container{
     max-width: 500px;
@@ -792,8 +796,8 @@ a:hover{
 }
 .recipeOuter:hover{
   opacity:.7;
-  font-size:1.4em; 
-  padding: .2em; 
+  font-size:1.4em;
+  padding: .2em;
   text-align: justify;
   text-decoration: none;
 }
