@@ -52,12 +52,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="mealplan.php">
-              <i class="far fa-calendar-alt"></i>
-              Meal Plan
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#" id="recipes" >
               <i class="far fa-clock"></i>
               Recently Posted Recipies
@@ -70,7 +64,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" id="listrequest">
               <i class="far fa-question-circle"></i>
               Requests
             </a>
@@ -79,9 +73,22 @@
       </div>
     </nav>
     <div class="col-md-9 d-none d-md-block">
-    	<span id="chart"></span>
+      <table class="columns">
+      <tr>
+        <td><div id="piechart_div"></div></td>
+        <td><div id="barchart_div"></div></td>
+      </tr>
+    </table>
       <span id="table"></span>
-    <table class="table" id="request-tbl">
+      <div id="request" class="row">
+        <h6>List of Requests</h6>
+        <div class="col-3">
+      <ul class='list-group list-group-flush' id="test"><?php require_once 'admin/charts/request-table.php';
+      printRequest($request)?>
+      </ul>
+        </div>
+      </div>
+    <table class="table">
       <thead>
         <tr>
           <th>User Name</th>

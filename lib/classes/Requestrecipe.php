@@ -18,9 +18,11 @@ class Requestrecipe extends Page
 
     public function getAllRequests(){
 
-		$sql = "SELECT first_name, last_name, role, recipe_requests.user_id, recipe_requests.id, title, description, recipe_requests.is_deleted FROM users
-		INNER JOIN recipe_requests ON users.id = recipe_requests.user_id
-		WHERE recipe_requests.is_deleted = 0";
+		$sql = "SELECT first_name, last_name, role, recipe_requests.user_id, recipe_requests.id, title, description, recipe_requests.is_deleted
+						FROM users
+						INNER JOIN recipe_requests
+						ON users.id = recipe_requests.user_id
+						WHERE recipe_requests.is_deleted = 0";
 
 		$pst = $this->db->prepare($sql);
 		$pst->execute();
@@ -33,7 +35,7 @@ class Requestrecipe extends Page
 		 retrieve data that needs to be changed */
 
  		public function getRequest($id) {
-      $sql = 'SELECT * FROM recipe_requests WHERE id = :requestId';
+      $sql = "SELECT * FROM recipe_requests WHERE id = :requestId";
 
       $pst = $this->db->prepare($sql);
       $pst->bindParam(':requestId', $id);
@@ -53,7 +55,7 @@ class Requestrecipe extends Page
 		$time = time();
 
 		$sql = "INSERT INTO recipe_requests (user_id, title, description, created_date, modified_date)
-		VALUES (:userId, :title, :description, :created_date, :modified_date)";
+						VALUES (:userId, :title, :description, :created_date, :modified_date)";
 
 		$pst = $this->db->prepare($sql);
 
@@ -76,14 +78,14 @@ class Requestrecipe extends Page
 
 	public function editRequest($requestId, $title, $description){
 
-		$sql = "UPDATE recipe_requests SET title = :title, description = :description WHERE id = :requestId";
+		$sql = "UPDATE recipe_requests SET title = :title, description = :description
+						WHERE id = :requestId";
 
 		$pst = $this->db->prepare($sql);
 
-		$pst->bindParam(':requestId', $requestId);
 		$pst->bindParam(':title', $title);
 		$pst->bindParam(':description', $description);
-
+		$pst->bindParam(':requestId', $requestId);
 
 		$count = $pst->execute();
 		return $count;
@@ -96,7 +98,8 @@ class Requestrecipe extends Page
 	public function deleteRequest($requestId){
 
 		$sql = "UPDATE recipe_requests
-		SET is_deleted = 1		WHERE id = :requestId";
+						SET is_deleted = 1
+						WHERE id = :requestId";
 
 		$pst = $this->db->prepare($sql);
 		$pst->bindParam(':requestId', $requestId);

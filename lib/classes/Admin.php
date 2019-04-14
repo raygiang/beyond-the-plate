@@ -16,9 +16,9 @@ class Admin
 	public function getAllUsers(){
 
 		$sql = "SELECT users.id, first_name, last_name, email, last_login, users.is_deleted, COUNT(recipes.user_id) AS number FROM users
-		LEFT JOIN recipes ON users.id = recipes.user_id
-		WHERE users.is_deleted = 0 AND users.role = 2
-		GROUP BY recipes.user_id";
+						LEFT JOIN recipes ON users.id = recipes.user_id
+						WHERE users.is_deleted = 0 AND users.role = 2
+						GROUP BY recipes.user_id";
 
 		$pst = $this->db->prepare($sql);
 		$pst->execute();
@@ -75,8 +75,8 @@ class Admin
 	users.role = 2 -means not admin*/
 	public function getAllPostedRecipes(){
 		$sql = "SELECT recipes.name, description, recipes.created_date, first_name, last_name FROM recipes
-		JOIN users ON  recipes.user_id = users.id
-		WHERE users.role = 2";
+						JOIN users ON  recipes.user_id = users.id
+						WHERE users.role = 2";
 
 
 		$pst = $this->db->prepare($sql);
@@ -87,15 +87,18 @@ class Admin
 	}
 
 
-
+	/*Method that gets the number of posted recipes in the category
+	from recipes table and categories table,
+	recipes.is_deleted = 0 -means not deleted*/
 	public function numberOfCategories(){
 		$sql = "SELECT categories.name, COUNT(recipes.category) AS number FROM categories
-		JOIN recipes ON categories.id = recipes.category
-		WHERE recipes.is_deleted = 0
-		GROUP BY name";
+						JOIN recipes ON categories.id = recipes.category
+						WHERE recipes.is_deleted = 0
+						GROUP BY name";
 
 		$pst = $this->db->prepare($sql);
 		$pst->execute();
+
 		$categories = $pst->fetchAll(PDO::FETCH_OBJ);
 		return $categories;
 		}
