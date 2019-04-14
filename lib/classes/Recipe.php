@@ -15,6 +15,14 @@
 		{
 
 		}
+		public function getCategory($cid,$db){
+			$sql = "SELECT name FROM categories WHERE id=:cid";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':cid',$cid);
+			$pdostm->execute();
+			$category = $pdostm->fetch(PDO::FETCH_OBJ);
+			return $category->name;
+		}
 		public function getRecipe($id,$db)
 		{
 			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 

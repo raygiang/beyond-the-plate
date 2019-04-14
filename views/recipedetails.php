@@ -6,7 +6,6 @@
   	$id = $_GET["id"];
 	$recipe=$r->getRecipe($id,$db);
 	$images=glob("recipeimages/$id*");
-	//var_dump($images);
 	
 	//Favourite
 	//null = not logged in
@@ -15,18 +14,9 @@
 	
 	$fav =null;
 	if(isset($_SESSION['userid']))
-		{
-			$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
-			/* if($fav == false)
-			{
-				$fav = false;
-			}
-			else
-			{
-				$fav = true;
-			} */
-		}
-	//var_dump($fav);
+	{
+		$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
+	}
 ?>
 <div class="page-wrapper">
 	<div class="row">
@@ -44,17 +34,13 @@
 					{
 						echo "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6'>
 							<img src='$image'/ class='secondaryImage'>
-						</div>";					}
+						</div>";					
+					}
 				?>
 			</div>
-			
-
-			
-			
 		</div>
 		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
 			<div class='recipeName'><span class='h2'><?php echo $recipe->name; ?></span>
-				
 				<!-- To display or hide favourite icon -->
 				<?php 
 					
@@ -76,114 +62,107 @@
 			<div class='recipeDetails'>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?>
 				<div class='rating'>					
 					<?php 
-					$str="";
-					$rt = new Rating();
-					if(isset($_SESSION["userid"])){
-						$userRating = $rt->getUserRating($id,$_SESSION["userid"],$db);
-					}
-					else{
-						$userRating = $rt->getAverageRatings($id,$db);
-					}
+						$str="";
+						$rt = new Rating();
+						if(isset($_SESSION["userid"])){
+							$userRating = $rt->getUserRating($id,$_SESSION["userid"],$db);
+						}
+						else{
+							$userRating = $rt->getAverageRatings($id,$db);
+						}
 
 
-					for($i=1;$i<=5;$i++)
-					{
+						for($i=1;$i<=5;$i++)
+						{
 
-						$image=$i<=$userRating?"greenstar":"greystar";
+							$image=$i<=$userRating?"greenstar":"greystar";
 
-						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);' onMouseOut='render($userRating);';></div>
-						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-							<div class='modal-dialog' role='document'>
-                        		<div class='modal-content'>
-                        			<div class='modal-header'>
-										<h3 class='modal-title' id='exampleModalLabel'>Rate $recipe->name</h3>
-                                		<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                    		<span aria-hidden='true'>&times;</span>
-                                		</button>
-                        			</div>
-                        			<div class='modal-body'>
-                        				<form action='' method='POST'>";
-										for($j=1;$j<=$i;$j++)
-		                                {
-		                                    $str.="<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\"></div>";
-		                               	}
-		                                for($j=1;$j<=5-$i;$j++)
-		                                {
-		                                	$str.="<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\"></div>";
-		                                }
-										$str.="<br><br>
-		                            	Tell us why do feel this way for <b></b>
-		                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
-		                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
-		                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
-		      
-									</div>
-                        			<div class='modal-footer'>
-                                		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-                                		<button type='submit' name='sbmtBtn' class='btn btn-success' >Post Review</button>
-                           	 		</div>
-                           	 		</form>
-                        		</div>
-                        	</div>
-						</div>";
-					}
-					echo $str;
-					
+							$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);' onMouseOut='render($userRating);';></div>
+							<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+								<div class='modal-dialog' role='document'>
+	                        		<div class='modal-content'>
+	                        			<div class='modal-header'>
+											<h3 class='modal-title' id='exampleModalLabel'>Rate $recipe->name</h3>
+	                                		<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+	                                    		<span aria-hidden='true'>&times;</span>
+	                                		</button>
+	                        			</div>
+	                        			<div class='modal-body'>
+	                        				<form action='' method='POST'>";
+											for($j=1;$j<=$i;$j++)
+			                                {
+			                                    $str.="<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\"></div>";
+			                               	}
+			                                for($j=1;$j<=5-$i;$j++)
+			                                {
+			                                	$str.="<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\"></div>";
+			                                }
+											$str.="<br><br>
+			                            	Tell us why do feel this way for <b></b>
+			                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
+			                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
+			                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
+			      
+										</div>
+	                        			<div class='modal-footer'>
+	                                		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+	                                		<button type='submit' name='sbmtBtn' class='btn btn-success' >Post Review</button>
+	                           	 		</div>
+	                           	 		</form>
+	                        		</div>
+	                        	</div>
+							</div>";
+						}
+						echo $str;
 					?>
 				</div>
-			<hr/>
-			<div class='recipeIngredients'><span class='h3'>Ingredients</span><br> 
-				<?php
-					$ingredientStr="<ol>";
-					$ingredients = $r->getIngredients($id,$db);
-					foreach ($ingredients as $ingredient) {
-						$ingredientStr.="<li>$ingredient->name, $ingredient->quantity $ingredient->unit</li>";
-					}
-					$ingredientStr.="</ol>";
-					echo $ingredientStr;
-				?>
-			</div>
-			<hr/>
-			<div class='recipeInstructions'><span class='h3'>Instructions</span><br/> 
-				<?php
-					$instructionStr="<ol>";
-					$instructions = $r->getInstructions($id,$db);
-					foreach ($instructions as $instruction) {
-						$instructionStr.="<li>$instruction->details</li>";
-					}
-					$instructionStr.="</ol>";
-					echo $instructionStr;
-				?>
+				<hr/>
+				<div class='recipeIngredients'><span class='h3'>Ingredients</span><br> 
+					<?php
+						$ingredientStr="<ol>";
+						$ingredients = $r->getIngredients($id,$db);
+						foreach ($ingredients as $ingredient) {
+							$ingredientStr.="<li>$ingredient->name, $ingredient->quantity $ingredient->unit</li>";
+						}
+						$ingredientStr.="</ol>";
+						echo $ingredientStr;
+					?>
+				</div>
+				<hr/>
+				<div class='recipeInstructions'><span class='h3'>Instructions</span><br/> 
+					<?php
+						$instructionStr="<ol>";
+						$instructions = $r->getInstructions($id,$db);
+						foreach ($instructions as $instruction) {
+							$instructionStr.="<li>$instruction->details</li>";
+						}
+						$instructionStr.="</ol>";
+						echo $instructionStr;
+					?>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+	<div class="row">
+		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+			Recent Comments
+		</div>
+	</div>
 
+</div>
 <script>
-	 function updateFavourite(status,uid,rid) {
-		 
-		/* status 
-			1 = not fav icon
-			2 = fav icon
-		*/
+	 function updateFavourite(status,uid,rid) 
+	 {
 		var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					//document.getElementById("favstatus").innerHTML = this.responseText;	
-					alert(this.responseText);
-					location.reload();
-				 }
-			};
-			xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
-			xmlhttp.send(); 
-		
+        xmlhttp.onreadystatechange = function() 
+        {
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				alert(this.responseText);
+				location.reload();
+			 }
+		};
+		xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
+		xmlhttp.send(); 	
 	}
-	
-/* 	var auto_refresh = setInterval( 
-				function() 
-					{
-						//alert("aman1");
-						$('#makefavouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");
-						$('#favouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");
-					}, 1000); */
 </script>
