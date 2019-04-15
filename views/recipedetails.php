@@ -7,17 +7,17 @@
   	$id = $_GET["id"];
 	$recipe=$r->getRecipe($id,$db);
 	$images=glob("recipeimages/$id*");
-	
+
 	//Favourite
 	//null = not logged in
 	//true = logged in and favourite
 	//false = logged in but not favourite
-	
+
 	$fav =null;
 	if(isset($_SESSION['userid']))
 		{
 			$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
-		}	
+		}
 	if(isset($_POST['contactAuthorSubmit']))
 		{
 			echo "aman";
@@ -42,17 +42,17 @@
 						</div>";					}
 				?>
 			</div>
-			
 
-			
-			
+
+
+
 		</div>
 		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
 			<div class='recipeName'><span class='h2'><?php echo $recipe->name; ?></span>
-				
+
 				<!-- To display or hide favourite icon -->
-				<?php 
-					
+				<?php
+
 					if($fav === false)
 					{
 						echo "<div class='makefavouriteRecipe'>
@@ -69,8 +69,8 @@
 				?>
 			</div>
 			<div class='recipeDetails'>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?>
-				<div class='rating'>					
-					<?php 
+				<div class='rating'>
+					<?php
 					$str="";
 					$rt = new Rating();
 					if(isset($_SESSION["userid"])){
@@ -111,7 +111,7 @@
 		                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
 		                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
 		                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
-		      
+
 									</div>
                         			<div class='modal-footer'>
                                 		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
@@ -123,11 +123,11 @@
 						</div>";
 					}
 					echo $str;
-					
+
 					?>
 				</div>
 			<hr/>
-			<div class='recipeIngredients'><span class='h3'>Ingredients</span><br> 
+			<div class='recipeIngredients'><span class='h3'>Ingredients</span><br>
 				<?php
 					$ingredientStr="<ol>";
 					$ingredients = $r->getIngredients($id,$db);
@@ -139,7 +139,7 @@
 				?>
 			</div>
 			<hr/>
-			<div class='recipeInstructions'><span class='h3'>Instructions</span><br/> 
+			<div class='recipeInstructions'><span class='h3'>Instructions</span><br/>
 				<?php
 					$instructionStr="<ol>";
 					$instructions = $r->getInstructions($id,$db);
@@ -150,13 +150,13 @@
 					echo $instructionStr;
 				?>
 			</div>
-			
+
 			<div>
 				<?php
 					if(isset($_SESSION['userid']))
 					{
 						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
-				
+
 						<div id="contactAuthorModal" class="modal fade" role="dialog">
 							<div class="modal-dialog" id="modelContact">
 								<!-- Modal content-->
@@ -194,26 +194,26 @@
 
 <script>
 	 function updateFavourite(status,uid,rid) {
-		 
-		/* status 
+
+		/* status
 			1 = not fav icon
 			2 = fav icon
 		*/
 		var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					//document.getElementById("favstatus").innerHTML = this.responseText;	
+					//document.getElementById("favstatus").innerHTML = this.responseText;
 					alert(this.responseText);
 					location.reload();
 				 }
 			};
 			xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
-			xmlhttp.send(); 
-		
+			xmlhttp.send();
+
 	}
-	
-/* 	var auto_refresh = setInterval( 
-				function() 
+
+/* 	var auto_refresh = setInterval(
+				function()
 					{
 						//alert("aman1");
 						$('#makefavouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");

@@ -262,6 +262,12 @@ a {
   flex: 50%;
   text-align: right;
 }
+/* ***********************************************************************/
+ @media (max-width: 599px) {
+  #main-nav nav{
+    display: none;
+  }
+}
 
 /*********Meal Plan******************/
 .table-container {
@@ -818,3 +824,4 @@ a:hover{
   width:1rem;
   background-size:contain;
 }
+
