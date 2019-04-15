@@ -19,4 +19,5 @@ return array(
     'ShoppingList' => $baseDir . '/lib/Classes/ShoppingList.php',
     'Timer' => $baseDir . '/lib/Classes/Timer.php',
     'User' => $baseDir . '/lib/Classes/User.php',
+    'UserMessages' => $baseDir . '/lib/Classes/UserMessages.php',
 );

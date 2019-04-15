@@ -20,6 +20,7 @@ class ComposerStaticInit37f51007dd2bb461a3a4c581a99a5e40
         'ShoppingList' => __DIR__ . '/../..' . '/lib/Classes/ShoppingList.php',
         'Timer' => __DIR__ . '/../..' . '/lib/Classes/Timer.php',
         'User' => __DIR__ . '/../..' . '/lib/Classes/User.php',
+        'UserMessages' => __DIR__ . '/../..' . '/lib/Classes/UserMessages.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

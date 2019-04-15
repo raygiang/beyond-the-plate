@@ -276,6 +276,8 @@ a {
 
 #meal-plan-cal th,#meal-plan-cal td {
   border: 1px solid #000;
+  height: 5em;
+  width: 10%;
 }
 
 #meal-plan-cal th {
@@ -304,6 +306,12 @@ a {
 
 #plan-info a {
   color: darkblue;
+}
+
+/*********Recipe Results******************/
+
+.result-image {
+  width: 20%;
 }
 
 /*********Shopping List*******************/

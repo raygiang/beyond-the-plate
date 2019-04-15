@@ -151,6 +151,12 @@
 				?>
 			</div>
 			
+			<?php
+				if(isset($_SESSION['userid'])) {
+					require_once('views/results/details.php');
+				}
+			?>
+
 			<div>
 				<?php
 					if(isset($_SESSION['userid']))
