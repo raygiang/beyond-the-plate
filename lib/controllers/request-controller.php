@@ -16,11 +16,11 @@
 
         $count = $request->addRequest($_SESSION['userid'], $title, $content);
 
-            if($count) {
-                echo "Request has been added.";
-            } else {
-                echo "Problem adding the request.";
-            }
+        if($count) {
+            echo "Request has been added.";
+        } else {
+            echo "Problem adding the request.";
+        }
     }
 
 
@@ -40,7 +40,7 @@
         } else {
             echo "Problem updating the request.";
         }
-}
+    }
 
 
     /* When a user wants to delete a result they've posted */
@@ -68,7 +68,8 @@
                 $returnRequest .= "<td>" . $request->first_name . " " . $request->last_name . "</td>";
                 $returnRequest .= "<td>" . $request->title . "</td>";
                 $returnRequest .= "<td>" . $request->description . "</td>";
-                if(!$_SESSION['userid'] || $_SESSION['role'] == 1){
+                if(!$_SESSION['user_id'] || !$_SESSION['role'] == 1){
+                $returnRequest .= "<td>" .
                     "<form action='userdash.php' method='post'>" .
                         "<input type='submit' name='reply' value='Reply' class='btn btn-secondary' />" .
                     "</form>" .

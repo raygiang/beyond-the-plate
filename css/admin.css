@@ -71,6 +71,17 @@ i{
  padding: 2em 0;
  height: 100%;
 }
+#table, #request{
+  display: none;
+}
+#test li{
+  font-size: 0.8rem;
+  line-height: 1;
+  padding:0.5em;
+}
+h6{
+  margin-left: 1.3em;
+}
 /************************************************************************************/
 #login{
 	text-align: center;

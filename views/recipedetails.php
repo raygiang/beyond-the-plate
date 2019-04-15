@@ -7,17 +7,18 @@
   	$id = $_GET["id"];
 	$recipe=$r->getRecipe($id,$db);
 	$images=glob("recipeimages/$id*");
-	
+
 	//Favourite
 	//null = not logged in
 	//true = logged in and favourite
 	//false = logged in but not favourite
-	
+
 	$fav =null;
 	if(isset($_SESSION['userid']))
 	{
 		$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
 	}	
+
 	if(isset($_POST['contactAuthorSubmit']))
 	{
 		echo "aman";
@@ -64,8 +65,8 @@
 		<div class='col-lg-7 col-md-7 col-sm-12 col-xs-12'>
 			<div class='recipeName'><span class='h2'><?php echo $recipe->name; ?></span>
 				<!-- To display or hide favourite icon -->
-				<?php 
-					
+				<?php
+
 					if($fav === false)
 					{
 						echo "<div class='makefavouriteRecipe'>
@@ -100,7 +101,6 @@
 						{
 
 							$image=$i<=$userRating?"greenstar":"greystar";
-
 							$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);' onMouseOut='render($userRating);';></div>
 							<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
 								<div class='modal-dialog' role='document'>
@@ -171,14 +171,15 @@
 						echo $instructionStr;
 					?>
 				</div>
+
 			</div>
-			
+
 			<div>
 				<?php
 					if(isset($_SESSION['userid']))
 					{
 						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
-				
+
 						<div id="contactAuthorModal" class="modal fade" role="dialog">
 							<div class="modal-dialog" id="modelContact">
 								<!-- Modal content-->
@@ -228,18 +229,30 @@
 
 </div>
 <script>
-	 function updateFavourite(status,uid,rid) 
-	 {
+	 function updateFavourite(status,uid,rid) {
+
+		/* status
+			1 = not fav icon
+			2 = fav icon
+		*/
 		var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() 
-        {
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				alert(this.responseText);
-				location.reload();
-			 }
-		};
-		xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
-		xmlhttp.send(); 	
+        xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					//document.getElementById("favstatus").innerHTML = this.responseText;
+					alert(this.responseText);
+					location.reload();
+				 }
+			};
+			xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
+			xmlhttp.send();
+
 	}
+
+/* 	var auto_refresh = setInterval(
+				function()
+					{
+						//alert("aman1");
+						$('#makefavouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");
+						$('#favouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");
+					}, 1000); */
 </script>
