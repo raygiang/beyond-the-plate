@@ -2,6 +2,7 @@
 	require_once('lib/classes/User.php');
 	require_once('lib/classes/Database.php');
 	require_once('lib/classes/Recipe.php');
+	require_once('lib/classes/Ratings.php');
 	require_once('lib/classes/UserMessages.php');
   	
 	
@@ -138,6 +139,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<?php
 					$r=new Recipe();
+					$rt=new Rating();
 					$recipes=$r->getAllRecipes($db);
 					$str="<table class='table table-striped'><tr>
 						<td>Name</td>
@@ -148,11 +150,19 @@
 					</tr>";
 					foreach($recipes as $recipe)
 					{
+						$userRatingHtml="";
+						$userRating = $rt->getAverageRatings($recipe->id,$db);
+						for($i=1;$i<=5;$i++)
+						{
+							$image=$i<=$userRating?"greenstar":"greystar";
+							$userRatingHtml.="<div class='star' style=\"background-image:url('images/$image.png');\"></div>";
+						}
+
 						$str.="<tr>
 							<td>".$recipe->name."</td>
 							<td>".$recipe->description."</td>
 							<td>".$recipe->authorfname." ".$recipe->authorlname."</td>
-							<td></td>
+							<td>".$userRatingHtml."</td>
 							<td><button class='btn btn-success'>Edit</button><button class='btn btn-danger'>Delete</button></td>
 						</tr>";
 					}
@@ -266,12 +276,21 @@
 				$n=0;
 				foreach($favrecipes as $frecipe)
 				{
+					$images=glob("recipeimages/".$frecipe->recipe_id."*");
 					$n++;
+					$str="";
+					$userRating = $rt->getAverageRatings($recipe->id,$db);
+					$category = $r->getCategory($recipe->category,$db);
+					for($i=1;$i<=5;$i++)
+					{
+						$image=$i<=$userRating?"greenstar":"greystar";
+						$str.="<div class='star' style=\"background-image:url('images/$image.png');\"></div>";
+					}
 					echo "	<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>
 								<a href='recipedetails.php?id=$frecipe->recipe_id'>
-									<div class='recipe' style=background-image:url('recipeimages/$frecipe->recipe_id"."_1.jpg"."');>
+									<div class='recipe' style=background-image:url('$images[0]');>
 										<div class='recipeOuter'>
-											$frecipe->name
+											$recipe->name<br><em>$category</em><br>$str
 										</div>
 									</div>
 								</a>
@@ -293,7 +312,7 @@
 	</div>
   
 	<!-- Messages -->
-	<div class="tab-pane fade show active" id="pills-messages" role="tabpanel" aria-labelledby="pills-messages-tab">
+	<div class="tab-pane fade" id="pills-messages" role="tabpanel" aria-labelledby="pills-messages-tab">
 		<hr/>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

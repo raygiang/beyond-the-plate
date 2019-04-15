@@ -44,19 +44,26 @@
 **Raymond - Shopping List Feature**
   - Allows users to search through recipes and add them to their selected recipes
   - Using the selected recipes, a shopping list will be generated for them
-  
-  ## April 9
+
+## April 9
 
 **Amandeep Singh -Profile Update**
   - User can update there profile details and password
-  
+<<<<<<< HEAD
+
   ## April 11
 
 **Amandeep Singh -Profile Update**
   - User can make a recipe favorite
-  
+
   ## April 12
 
 **Amandeep Singh -Profile Update**
   - User can send message to the author of the recipe
-  
+
+## April 14 Update
+
+**Mariya - Timer Feature**
+- added Timer class, timer-controller
+- can see the list of instructions
+- can start/stop timer

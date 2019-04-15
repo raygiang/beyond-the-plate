@@ -15,6 +15,24 @@
 		{
 
 		}
+		public function getRatingAndComments($rid,$db){
+			$sql = "SELECT ratings.comment,ratings.rating,users.first_name,users.last_name 
+			FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.recipe_id=:rid 
+			ORDER BY ratings.modified_date DESC limit 0,10";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':rid',$rid);
+			$pdostm->execute();
+			$commentsAndRatings = $pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $commentsAndRatings;
+		}
+		public function getCategory($cid,$db){
+			$sql = "SELECT name FROM categories WHERE id=:cid";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':cid',$cid);
+			$pdostm->execute();
+			$category = $pdostm->fetch(PDO::FETCH_OBJ);
+			return $category->name;
+		}
 		public function getRecipe($id,$db)
 		{
 			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
@@ -94,19 +112,20 @@
 			$count = $pst->execute();
 			return $count;
 		}
-		public function addRecipeInstructions($id,$instructions,$db)
+		public function addRecipeInstructions($id,$instructions,$instruction_times,$db)
 		{
 			$i=0;
 			foreach($instructions as $instruction)
 			{
-				$sql = "INSERT INTO instructions(recipe_id,details,step,is_deleted,created_date,modified_date) 
-				VALUES(:id,:details,:step,0,:created_date,:modified_date)";
+				$sql = "INSERT INTO instructions(recipe_id,details,step,minutes,is_deleted,created_date,modified_date) 
+				VALUES(:id,:details,:step,:minutes,0,:created_date,:modified_date)";
 				$time=time();
 				$step=$i+1;
 				$pst = $db->prepare($sql);
 				$pst->bindParam(':id',$id);
 				$pst->bindParam(':details',$instructions[$i]);
 				$pst->bindParam(':step',$step);
+				$pst->bindParam(':minutes',$instruction_times[$i]);
 				$pst->bindParam(':created_date',$time);
 				$pst->bindParam(':modified_date',$time);
 				$count = $pst->execute();

@@ -66,7 +66,7 @@
           </div>
           <div class="form-group">
             <label for="request-content">Meal description:</label>
-            <textarea class="form-control" name="requestContent" id="request-content" rows="max" data-error="Please enter title." required></textarea>
+            <textarea class="form-control" name="requestContent" id="request-content" rows="max" data-error="Please enter description." required></textarea>
             <div class="help-block with-errors"></div>
           </div>
           <button type="submit" class="btn btn-secondary" name="add" id="btn">Add Request</button>

@@ -1,36 +1,37 @@
 <?php
-require_once '../../lib/classes/Database.php';
-require_once '../../lib/classes/Admin.php';
+	require_once '../../lib/classes/Database.php';
+	require_once '../../lib/classes/Admin.php';
 
 
-$admin = new Admin(Database::getDb());
-$recipes = $admin->getAllPostedRecipes();
-$categories = $admin->numberOfCategories();
+	$admin = new Admin(Database::getDb());
+	$recipes = $admin->getAllPostedRecipes();
+	$categories = $admin->numberOfCategories();
 
-$data1 = array();
-$data2 = array();
-$string1 = array();
-$string2 = array();
+	$string1 = array();
+	$data1 = array();
 
-foreach($recipes as $recipe){
-$data1['UserName'] = $recipe->first_name." ".$recipe->last_name;
-$data1['RecipeName'] = $recipe->name;
-$data1['RecipeDescription'] = $recipe->description;
-$data1['PostedDate'] =  date('m/d/Y H:i:s', $recipe->created_date);
+	$string2 = array();
+	$data2 = array();
 
-$string1[]=$data1;
-}
+	foreach($recipes as $recipe){
+	$data1['UserName'] = $recipe->first_name." ".$recipe->last_name;
+	$data1['RecipeName'] = $recipe->name;
+	$data1['RecipeDescription'] = $recipe->description;
+	$data1['PostedDate'] =  date('m/d/Y H:i:s', $recipe->created_date);
 
-foreach($categories as $category){
-$data2['CategoryName'] = $category->name;
-$data2['CategoryNumber'] = $category->number;
+	$string1[]=$data1;
+	}
 
-$string2[]=$data2;
-}
+	foreach($categories as $category){
+	$data2['CategoryName'] = $category->name;
+	$data2['CategoryNumber'] = $category->number;
 
-$string1 = json_encode($string1);
-$string2 = json_encode($string2);
-header('Content-Type: application/json');
-echo $string1."|". $string2;
+	$string2[]=$data2;
+	}
+
+	$string1 = json_encode($string1);
+	$string2 = json_encode($string2);
+	header('Content-Type: application/json');
+	echo $string1."|". $string2;
 
 ?>

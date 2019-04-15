@@ -7,25 +7,43 @@
   	$id = $_GET["id"];
 	$recipe=$r->getRecipe($id,$db);
 	$images=glob("recipeimages/$id*");
-	
+
 	//Favourite
 	//null = not logged in
 	//true = logged in and favourite
 	//false = logged in but not favourite
-	
+
 	$fav =null;
 	if(isset($_SESSION['userid']))
-		{
-			$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
-		}	
+	{
+		$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
+	}	
+
 	if(isset($_POST['contactAuthorSubmit']))
-		{
-			echo "aman";
-		}
+	{
+		echo "aman";
+	}
+
+	$ratingAndCommentsHtml="";
+	$ratingAndComments=$r->getRatingAndComments($id,$db);
+	foreach ($ratingAndComments as $ratingAndComment) {
+		$ratingAndCommentsHtml.="<div class='ratingAndComments'>
+			<div>$ratingAndComment->first_name $ratingAndComment->last_name</div>
+			<div>";
+			for($i=1;$i<=5;$i++)
+			{
+				$image=$i<=$ratingAndComment->rating?"greenstar":"greystar";
+				$ratingAndCommentsHtml.="<div class='star' style=\"background-image:url('images/$image.png');\"></div>";
+			}
+			$ratingAndCommentsHtml.="</div>
+			<br>
+			<div class='commentBlock'>$ratingAndComment->comment</div>
+		</div>";
+	}
 ?>
 <div class="page-wrapper">
 	<div class="row">
-		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+		<div class='col-lg-5 col-md-5 col-sm-12 col-xs-12'>
 			<div class='row'>
 				<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
 					<?php
@@ -39,20 +57,16 @@
 					{
 						echo "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6'>
 							<img src='$image'/ class='secondaryImage'>
-						</div>";					}
+						</div>";					
+					}
 				?>
 			</div>
-			
-
-			
-			
 		</div>
-		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+		<div class='col-lg-7 col-md-7 col-sm-12 col-xs-12'>
 			<div class='recipeName'><span class='h2'><?php echo $recipe->name; ?></span>
-				
 				<!-- To display or hide favourite icon -->
-				<?php 
-					
+				<?php
+
 					if($fav === false)
 					{
 						echo "<div class='makefavouriteRecipe'>
@@ -68,101 +82,110 @@
 					}
 				?>
 			</div>
-			<div class='recipeDetails'>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?>
+			<div class='recipeDetails'>
+				<div><?php echo $recipe->description; ?></div>
+				<div>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?></div>
 				<div class='rating'>					
 					<?php 
-					$str="";
-					$rt = new Rating();
-					if(isset($_SESSION["userid"])){
-						$userRating = $rt->getUserRating($id,$_SESSION["userid"],$db);
-					}
-					else{
-						$userRating = $rt->getAverageRatings($id,$db);
-					}
+						$str="";
+						$rt = new Rating();
+						if(isset($_SESSION["userid"])){
+							$userRating = $rt->getUserRating($id,$_SESSION["userid"],$db);
+						}
+						else{
+							$userRating = $rt->getAverageRatings($id,$db);
+						}
 
 
-					for($i=1;$i<=5;$i++)
-					{
+						for($i=1;$i<=5;$i++)
+						{
 
-						$image=$i<=$userRating?"greenstar":"greystar";
-
-						$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);' onMouseOut='render($userRating);';></div>
-						<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-							<div class='modal-dialog' role='document'>
-                        		<div class='modal-content'>
-                        			<div class='modal-header'>
-										<h3 class='modal-title' id='exampleModalLabel'>Rate $recipe->name</h3>
-                                		<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                    		<span aria-hidden='true'>&times;</span>
-                                		</button>
-                        			</div>
-                        			<div class='modal-body'>
-                        				<form action='' method='POST'>";
-										for($j=1;$j<=$i;$j++)
-		                                {
-		                                    $str.="<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\"></div>";
-		                               	}
-		                                for($j=1;$j<=5-$i;$j++)
-		                                {
-		                                	$str.="<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\"></div>";
-		                                }
-										$str.="<br><br>
-		                            	Tell us why do feel this way for <b></b>
-		                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
-		                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
-		                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
-		      
-									</div>
-                        			<div class='modal-footer'>
-                                		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-                                		<button type='submit' name='sbmtBtn' class='btn btn-success' >Post Review</button>
-                           	 		</div>
-                           	 		</form>
-                        		</div>
-                        	</div>
-						</div>";
-					}
-					echo $str;
-					
+							$image=$i<=$userRating?"greenstar":"greystar";
+							$str.="<div id='star$i' class='star' style=\"background-image:url('images/$image.png');\" data-toggle='modal' data-target='#exampleModal$i' onMouseOver='render($i);' onMouseOut='render($userRating);';></div>
+							<div class='modal fade' id='exampleModal$i' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+								<div class='modal-dialog' role='document'>
+	                        		<div class='modal-content'>
+	                        			<div class='modal-header'>
+											<h3 class='modal-title' id='exampleModalLabel'>Rate $recipe->name</h3>
+	                                		<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+	                                    		<span aria-hidden='true'>&times;</span>
+	                                		</button>
+	                        			</div>
+	                        			<div class='modal-body'>
+	                        				<form action='' method='POST'>";
+											for($j=1;$j<=$i;$j++)
+			                                {
+			                                    $str.="<div id='star$i' class='star' style=\"background-image:url('images/greenstar.png');\"></div>";
+			                               	}
+			                                for($j=1;$j<=5-$i;$j++)
+			                                {
+			                                	$str.="<div id='star$i' class='star' style=\"background-image:url('images/greystar.png');\"></div>";
+			                                }
+											$str.="<br><br>
+			                            	Tell us why do feel this way for <b></b>
+			                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
+			                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
+			                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
+			      
+										</div>
+	                        			<div class='modal-footer'>
+	                                		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+	                                		<button type='submit' name='sbmtBtn' class='btn btn-success' >Post Review</button>
+	                           	 		</div>
+	                           	 		</form>
+	                        		</div>
+	                        	</div>
+							</div>";
+						}
+						echo $str;
 					?>
 				</div>
-			<hr/>
-			<div class='recipeIngredients'><span class='h3'>Ingredients</span><br> 
+				<hr/>
+				<div class='recipeIngredients'><span class='h3'>Ingredients</span><br> 
+					<?php
+						$ingredientStr="<ol>";
+						$ingredients = $r->getIngredients($id,$db);
+						foreach ($ingredients as $ingredient) {
+							$ingredientStr.="<li>$ingredient->name, $ingredient->quantity $ingredient->unit</li>";
+						}
+						$ingredientStr.="</ol>";
+						echo $ingredientStr;
+					?>
+				</div>
+				<hr/>
+				<div class='recipeInstructions'><span class='h3'>Instructions</span><br/> 
+					<?php
+						$instructionStr="<ol>";
+						$instructions = $r->getInstructions($id,$db);
+						foreach ($instructions as $instruction) {
+							$instructionStr.="<li>$instruction->details";
+							if($instruction->minutes!=0)
+							{
+								$instructionStr.=" for ".$instruction->minutes." minutes.</li>";
+							}
+							else{
+								$instructionStr.="</li>";	
+							}
+						}
+						$instructionStr.="</ol>";
+						echo $instructionStr;
+					?>
+				</div>
+
+			</div>			
 				<?php
-					$ingredientStr="<ol>";
-					$ingredients = $r->getIngredients($id,$db);
-					foreach ($ingredients as $ingredient) {
-						$ingredientStr.="<li>$ingredient->name, $ingredient->quantity $ingredient->unit</li>";
+					if(isset($_SESSION['userid'])) {
+						require_once('views/results/details.php');
 					}
-					$ingredientStr.="</ol>";
-					echo $ingredientStr;
 				?>
 			</div>
-			<hr/>
-			<div class='recipeInstructions'><span class='h3'>Instructions</span><br/> 
-				<?php
-					$instructionStr="<ol>";
-					$instructions = $r->getInstructions($id,$db);
-					foreach ($instructions as $instruction) {
-						$instructionStr.="<li>$instruction->details</li>";
-					}
-					$instructionStr.="</ol>";
-					echo $instructionStr;
-				?>
-			</div>
-			
-			<?php
-				if(isset($_SESSION['userid'])) {
-					require_once('views/results/details.php');
-				}
-			?>
 
 			<div>
 				<?php
 					if(isset($_SESSION['userid']))
 					{
 						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
-				
+
 						<div id="contactAuthorModal" class="modal fade" role="dialog">
 							<div class="modal-dialog" id="modelContact">
 								<!-- Modal content-->
@@ -196,30 +219,43 @@
 			</div>
 		</div>
 	</div>
-</div>
+	<div class="row">
+		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+			<hr/>
+		</div>
+	</div>
+	<div class="row">
+		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+			<span class='h2'>Recent Comments</span>
+			<?php
+				echo $ratingAndCommentsHtml;
+			?>
+		</div>
+	</div>
 
+</div>
 <script>
 	 function updateFavourite(status,uid,rid) {
-		 
-		/* status 
+
+		/* status
 			1 = not fav icon
 			2 = fav icon
 		*/
 		var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					//document.getElementById("favstatus").innerHTML = this.responseText;	
+					//document.getElementById("favstatus").innerHTML = this.responseText;
 					alert(this.responseText);
 					location.reload();
 				 }
 			};
 			xmlhttp.open("GET", "favouriteRecipe.php?status="+status+"&userid="+uid+"&recipeid=" + rid, true);
-			xmlhttp.send(); 
-		
+			xmlhttp.send();
+
 	}
-	
-/* 	var auto_refresh = setInterval( 
-				function() 
+
+/* 	var auto_refresh = setInterval(
+				function()
 					{
 						//alert("aman1");
 						$('#makefavouriteRecipe').load("recipeDetails.php?cid=<?php echo $id; ?>");

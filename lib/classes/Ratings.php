@@ -5,6 +5,7 @@
 		private $recipe_id;
 		private	$user_id;
 		private	$rating;
+		private $comment;
 		private $is_deleted;
 		private $created_date;	
 		private $modified_date;
@@ -14,7 +15,7 @@
 			
 		}
 
-		public function addRatings($rid,$userid,$rating,$db)
+		public function addRatings($rid,$userid,$rating,$comment,$db)
 		{
 			$sql = "DELETE FROM ratings where recipe_id=:rid and user_id=:uid";
 			$pst = $db->prepare($sql);
@@ -22,12 +23,13 @@
 			$pst->bindParam(':uid',$userid);
 			$count = $pst->execute();
 
-			$sql = "INSERT IGNORE INTO ratings(recipe_id,rating,user_id,is_deleted,created_date,modified_date) 
-			VALUES(:recipe_id,:rating,:user_id,0,:created_date,:modified_date)";
+			$sql = "INSERT IGNORE INTO ratings(recipe_id,rating,comment,user_id,is_deleted,created_date,modified_date) 
+			VALUES(:recipe_id,:rating,:comment,:user_id,0,:created_date,:modified_date)";
 			$time=time();
 			$pst = $db->prepare($sql);
 			$pst->bindParam(':recipe_id',$rid);
 			$pst->bindParam(':rating',$rating);
+			$pst->bindParam(':comment',$comment);
 			$pst->bindParam(':user_id',$userid);
 			$pst->bindParam(':created_date',$time);
 			$pst->bindParam(':modified_date',$time);

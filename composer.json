@@ -5,6 +5,7 @@
     ]
   },
   "require": {
-    "nicolasbize/magicsuggest": "^2.1"
+    "nicolasbize/magicsuggest": "^2.1",
+    "phpmailer/phpmailer": "^6.0"
   }
 }

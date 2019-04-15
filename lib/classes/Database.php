@@ -1,12 +1,12 @@
 <?php
     class Database {
-        private static $user = 'raygiang';
-        private static $pass = 'cooking888'; // removed root
-        private static $dsn = 'mysql:host=project-cookbook.caablfu69mfx.us-east-2.rds.amazonaws.com:3306;dbname=cookbook';
+        // private static $user = 'raygiang';
+        // private static $pass = 'cooking888'; // removed root
+        // private static $dsn = 'mysql:host=project-cookbook.caablfu69mfx.us-east-2.rds.amazonaws.com:3306;dbname=cookbook';
 
-        // private static $user = 'raymkokm_cookbook';
-        // private static $pass = 'cooking'; // removed root
-        // private static $dsn = 'mysql:host=localhost;dbname=raymkokm_cookbook';
+        private static $user = 'root';
+        private static $pass = 'root'; // removed root
+        private static $dsn = 'mysql:host=localhost;dbname=cookbook';
 
         private static $dbh;
 
