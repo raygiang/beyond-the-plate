@@ -4,9 +4,9 @@
 	require_once('lib/classes/Recipe.php');
 	require_once('lib/classes/Ratings.php');
 	require_once('lib/classes/UserMessages.php');
-  	
-	
-	
+
+
+
 	$db = Database::getDb();
 	$userid = $_SESSION['userid'];
 
@@ -15,7 +15,7 @@
 
 	$fname = $user->first_name;
 	$lname = $user->last_name;
-	
+
 	//get all favourite recipes for this user
 	$r=new Recipe();
 	$favrecipes=$r->getAllFavRecipes($userid,$db);
@@ -263,14 +263,14 @@
 	//require_once("requestrecipe.php");
 	?>
 	Request
-	</div> 
+	</div>
 	-->
 
 	<!-- Favourite Recipe -->
 	<div class="tab-pane fade" id="pills-favourite" role="tabpanel" aria-labelledby="pills-favourite-tab">
 	<hr/>
 		<!--  Display list of favourite recipes -->
-		
+
 		<div class="row">
 			<?php
 				$n=0;
@@ -294,7 +294,7 @@
 										</div>
 									</div>
 								</a>
-							</div>";		
+							</div>";
 					if($n==4)
 					{
 						echo "	</div>
@@ -310,7 +310,7 @@
 			?>
 		</div>
 	</div>
-  
+
 	<!-- Messages -->
 	<div class="tab-pane fade" id="pills-messages" role="tabpanel" aria-labelledby="pills-messages-tab">
 		<hr/>
