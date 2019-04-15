@@ -3,8 +3,7 @@ require_once 'vendor/autoload.php';
 require_once 'config.php';
 require_once 'lib/classes/Timer.php';
 
-
-$timer = new Timer(Database::getDb(), $_SESSION['recipe_id']);
+$timer = new Timer(Database::getDb(), $id);
 
 /* Function that will print name and description of the meal
        Parameters: $timer, a Timer object */

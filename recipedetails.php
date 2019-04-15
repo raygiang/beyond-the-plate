@@ -48,6 +48,6 @@
         $("#primaryImage").attr("src",$(this).attr("src"));
       });
     });
-  </script>>
+  </script>
 </body>
 </html>

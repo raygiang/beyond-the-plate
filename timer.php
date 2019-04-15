@@ -1,9 +1,6 @@
 <?php
 session_start();
-  $_SESSION['recipe_id'] = 1;
-
 	require_once('lib/controllers/timer-controller.php');
-
 
 	// $timer = new Timer(Database::getDb(), $_SESSION['recipe_id']);
 	// $getTimer = $timer->getTime();

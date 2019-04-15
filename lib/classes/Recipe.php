@@ -16,7 +16,7 @@
 
 		}
 		public function getRatingAndComments($rid,$db){
-			$sql = "SELECT ratings.comment,ratings.rating,users.first_name,users.last_name 
+			$sql = "SELECT ratings.rating,users.first_name,users.last_name 
 			FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.recipe_id=:rid 
 			ORDER BY ratings.modified_date DESC limit 0,10";
 			$pdostm = $db->prepare($sql);

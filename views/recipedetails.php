@@ -172,14 +172,6 @@
 					?>
 				</div>
 
-			</div>			
-				<?php
-					if(isset($_SESSION['userid'])) {
-						require_once('views/results/details.php');
-					}
-				?>
-			</div>
-
 			<div>
 				<?php
 					if(isset($_SESSION['userid']))
@@ -219,20 +211,26 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-			<hr/>
-		</div>
+	<div>
+		<?php
+			if(isset($_SESSION['userid'])) {
+				require_once('views/results/details.php');
+			}
+		?>
 	</div>
-	<div class="row">
-		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-			<span class='h2'>Recent Comments</span>
-			<?php
-				echo $ratingAndCommentsHtml;
-			?>
-		</div>
+	<div>
+		<span class='h2'>Recent Comments</span>
+		<?php
+			echo $ratingAndCommentsHtml;
+		?>
 	</div>
-
+	<div>
+		<span class='h2'>Timer</span>
+		<?php
+			require_once('timer.php');
+		?>
+	</div>
+</div>
 </div>
 <script>
 	 function updateFavourite(status,uid,rid) {
