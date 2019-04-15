@@ -6,7 +6,7 @@
 		private $user_id;
 		private $description;
 		private $category;
-		
+
 		public function __construct()
 		{
 
@@ -16,8 +16,8 @@
 
 		}
 		public function getRatingAndComments($rid,$db){
-			$sql = "SELECT ratings.comment,ratings.rating,users.first_name,users.last_name 
-			FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.recipe_id=:rid 
+			$sql = "SELECT ratings.rating,users.first_name,users.last_name
+			FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.recipe_id=:rid
 			ORDER BY ratings.modified_date DESC limit 0,10";
 			$pdostm = $db->prepare($sql);
 			$pdostm->bindParam(':rid',$rid);
@@ -35,9 +35,9 @@
 		}
 		public function getRecipe($id,$db)
 		{
-			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname'
 			FROM recipes
-			INNER JOIN users 
+			INNER JOIN users
 			ON recipes.user_id=users.id  where recipes.is_deleted=0 and recipes.id=:id";
 			$pdostm = $db->prepare($sql);
 			$pdostm->bindParam(':id',$id);
@@ -47,9 +47,9 @@
 		}
 		public function getIngredients($id,$db)
 		{
-			$sql = "SELECT ingredients.*,units.name AS unit 
+			$sql = "SELECT ingredients.*,units.name AS unit
 			FROM ingredients INNER JOIN units
-			ON ingredients.unit_id = units.id 
+			ON ingredients.unit_id = units.id
 			WHERE ingredients.is_deleted=0 and recipe_id=:id";
 			$pdostm = $db->prepare($sql);
 			$pdostm->bindParam(':id',$id);
@@ -59,8 +59,8 @@
 		}
 		public function getInstructions($id,$db)
 		{
-			$sql = "SELECT * 
-			FROM instructions  
+			$sql = "SELECT *
+			FROM instructions
 			WHERE is_deleted=0 and recipe_id=:id
 			ORDER BY step ASC";
 			$pdostm = $db->prepare($sql);
@@ -71,9 +71,9 @@
 		}
 		public function getAllRecipes($db)
 		{
-			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname'
 			FROM recipes
-			INNER JOIN users 
+			INNER JOIN users
 			ON recipes.user_id=users.id  where recipes.is_deleted=0";
 			$pdostm = $db->prepare($sql);
 			$pdostm->execute();
@@ -98,7 +98,7 @@
 		}
 		public function addRecipe($id,$name,$user_id,$description,$category,$is_deleted,$db)
 		{
-			$sql = "INSERT INTO recipes(id,name,user_id,description,category,is_deleted,created_date,modified_date) 
+			$sql = "INSERT INTO recipes(id,name,user_id,description,category,is_deleted,created_date,modified_date)
 			VALUES(:id,:name,:user_id,:description,:category,0,:created_date,:modified_date)";
 			$time=time();
 			$pst = $db->prepare($sql);
@@ -117,7 +117,7 @@
 			$i=0;
 			foreach($instructions as $instruction)
 			{
-				$sql = "INSERT INTO instructions(recipe_id,details,step,minutes,is_deleted,created_date,modified_date) 
+				$sql = "INSERT INTO instructions(recipe_id,details,step,minutes,is_deleted,created_date,modified_date)
 				VALUES(:id,:details,:step,:minutes,0,:created_date,:modified_date)";
 				$time=time();
 				$step=$i+1;
@@ -133,13 +133,13 @@
 			}
 			return $count;
 		}
-		
+
 		public function addRecipeIngredients($id,$ingredients,$ingredients_qty,$ingredients_unit,$db)
 		{
 			$i=0;
 			foreach($ingredients as $ingredient)
 			{
-				$sql = "INSERT INTO ingredients(name,recipe_id,quantity,unit_id,is_deleted,created_date,modified_date) 
+				$sql = "INSERT INTO ingredients(name,recipe_id,quantity,unit_id,is_deleted,created_date,modified_date)
 				VALUES(:name,:id,:quantity,:unit_id,0,:created_date,:modified_date)";
 				$time=time();
 				$pst = $db->prepare($sql);
@@ -167,8 +167,8 @@
 
 		public function updateRecipe($id,$name,$description,$category,$db)
 		{
-			$sql = "UPDATE recipes SET name=:name,$description=:description,category=:category 
-			WHERE id=:id"; 
+			$sql = "UPDATE recipes SET name=:name,$description=:description,category=:category
+			WHERE id=:id";
 			$pst = $db->prepare($sql);
 			$pst->bindParam(':name',$name);
 			$pst->bindParam(':description',$description);
@@ -188,8 +188,8 @@
 			$pdostm->bindParam(':userid',$userid);
 			$pdostm->bindParam(':recipeid',$recipeid);
 			$pdostm->execute();
-			
-			
+
+
 			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
 			{
 				return true;
@@ -199,7 +199,7 @@
 				return false;
 			}
 		}
-		
+
 		public function addFavouriteRecipe($recipeid,$userid,$db)
 		{
 			$sql = "SELECT * FROM favourites where user_id=:userid and recipe_id = :recipeid";
@@ -207,11 +207,11 @@
 			$pdostm->bindParam(':userid',$userid);
 			$pdostm->bindParam(':recipeid',$recipeid);
 			$pdostm->execute();
-			
-			
+
+
 			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
 			{
-				//if record already exist update the status 				
+				//if record already exist update the status
 				$sql = "UPDATE favourites SET is_deleted=0 WHERE user_id=:userid and recipe_id = :recipeid";
 				$pst = $db->prepare($sql);
 				$pst->bindParam(':userid',$userid);
@@ -225,7 +225,7 @@
 				imp: change column modified_date in favourites
 				*/
 				//if record doesn't exist create a new record
-				$sql = "INSERT INTO favourites(recipe_id,user_id,is_deleted,created_date,modified_date) 
+				$sql = "INSERT INTO favourites(recipe_id,user_id,is_deleted,created_date,modified_date)
 				VALUES(:recipe_id,:user_id,0,:created_date,:modified_date)";
 				$time=time();
 				$pst = $db->prepare($sql);
@@ -237,7 +237,7 @@
 				return "new inserted";
 			}
 		}
-		
+
 		public function removeFavouriteRecipe($recipeid,$userid,$db)
 		{
 			$sql = "SELECT * FROM favourites where user_id=:userid and recipe_id = :recipeid";
@@ -245,10 +245,10 @@
 			$pdostm->bindParam(':userid',$userid);
 			$pdostm->bindParam(':recipeid',$recipeid);
 			$pdostm->execute();
-			
+
 			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
 			{
-				//if record already exist update the status 				
+				//if record already exist update the status
 				$sql = "UPDATE favourites SET is_deleted=1 WHERE user_id=:userid and recipe_id = :recipeid";
 				$pst = $db->prepare($sql);
 				$pst->bindParam(':userid',$userid);
@@ -258,16 +258,16 @@
 			}
 			else
 			{
-				// record does not exist				
+				// record does not exist
 				return "record does not exist";
 			}
 		}
-	
+
 		public function getAllFavRecipes($uid,$db)
 		{
-			$sql = "SELECT favourites.*,recipes.name 
-					FROM favourites 
-					INNER JOIN recipes 
+			$sql = "SELECT favourites.*,recipes.name
+					FROM favourites
+					INNER JOIN recipes
 					ON favourites.recipe_id=recipes.id
 					where favourites.user_id=:uid and favourites.is_deleted=0";
 			$pdostm = $db->prepare($sql);
