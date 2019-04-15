@@ -15,11 +15,8 @@
       header("location:login.php?redirect=recipedetails.php?id=$recipeid");
     }
 
-    $c = new Comment();
-    $count=$c->addComments($recipeid,$userid,$comment,$db);
-
     $r = new Rating();
-    $count=$r->addRatings($recipeid,$userid,$rating,$db);
+    $count=$r->addRatings($recipeid,$userid,$rating,$comment,$db);
   }
 
 

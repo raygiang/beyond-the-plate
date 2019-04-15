@@ -1,6 +1,7 @@
 <?php
 	require_once('lib/classes/Recipe.php');
   	require_once('lib/classes/database.php');
+  	require_once('lib/classes/UserMessages.php');
 	$db = Database::getDb();
   	$r=new Recipe();
   	$id = $_GET["id"];
@@ -16,11 +17,32 @@
 	if(isset($_SESSION['userid']))
 	{
 		$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
+	}	
+	if(isset($_POST['contactAuthorSubmit']))
+	{
+		echo "aman";
+	}
+
+	$ratingAndCommentsHtml="";
+	$ratingAndComments=$r->getRatingAndComments($id,$db);
+	foreach ($ratingAndComments as $ratingAndComment) {
+		$ratingAndCommentsHtml.="<div class='ratingAndComments'>
+			<div>$ratingAndComment->first_name $ratingAndComment->last_name</div>
+			<div>";
+			for($i=1;$i<=5;$i++)
+			{
+				$image=$i<=$ratingAndComment->rating?"greenstar":"greystar";
+				$ratingAndCommentsHtml.="<div class='star' style=\"background-image:url('images/$image.png');\"></div>";
+			}
+			$ratingAndCommentsHtml.="</div>
+			<br>
+			<div class='commentBlock'>$ratingAndComment->comment</div>
+		</div>";
 	}
 ?>
 <div class="page-wrapper">
 	<div class="row">
-		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+		<div class='col-lg-5 col-md-5 col-sm-12 col-xs-12'>
 			<div class='row'>
 				<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
 					<?php
@@ -39,7 +61,7 @@
 				?>
 			</div>
 		</div>
-		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+		<div class='col-lg-7 col-md-7 col-sm-12 col-xs-12'>
 			<div class='recipeName'><span class='h2'><?php echo $recipe->name; ?></span>
 				<!-- To display or hide favourite icon -->
 				<?php 
@@ -59,7 +81,9 @@
 					}
 				?>
 			</div>
-			<div class='recipeDetails'>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?>
+			<div class='recipeDetails'>
+				<div><?php echo $recipe->description; ?></div>
+				<div>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?></div>
 				<div class='rating'>					
 					<?php 
 						$str="";
@@ -134,18 +158,71 @@
 						$instructionStr="<ol>";
 						$instructions = $r->getInstructions($id,$db);
 						foreach ($instructions as $instruction) {
-							$instructionStr.="<li>$instruction->details</li>";
+							$instructionStr.="<li>$instruction->details";
+							if($instruction->minutes!=0)
+							{
+								$instructionStr.=" for ".$instruction->minutes." minutes.</li>";
+							}
+							else{
+								$instructionStr.="</li>";	
+							}
 						}
 						$instructionStr.="</ol>";
 						echo $instructionStr;
 					?>
 				</div>
 			</div>
+			
+			<div>
+				<?php
+					if(isset($_SESSION['userid']))
+					{
+						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
+				
+						<div id="contactAuthorModal" class="modal fade" role="dialog">
+							<div class="modal-dialog" id="modelContact">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<form action = "sendmessage.php" method = "POST" enctype="multipart/form-data">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Contact Author</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<h5>Write your message</h5>
+											<br>
+											<input type="hidden" name="authoruserid" id="authoruserid"
+											value="'.$recipe->user_id.'">
+											<input type="hidden" name="recipeid" id="recipeid"
+											value="'.$recipe->id.'">
+											<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>
+											<br>
+										</div>
+										<div class="modal-footer">
+											<input type = "submit" value = "Send Message" />
+											<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>';
+					}
+				?>
+			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-			Recent Comments
+			<hr/>
+		</div>
+	</div>
+	<div class="row">
+		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+			<span class='h2'>Recent Comments</span>
+			<?php
+				echo $ratingAndCommentsHtml;
+			?>
 		</div>
 	</div>
 

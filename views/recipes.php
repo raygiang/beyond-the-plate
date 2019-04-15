@@ -15,6 +15,7 @@
 	<?php
 		$n=0;
 		foreach($recipes as $recipe){
+			$images=glob("recipeimages/$recipe->id*");
 			$n++;
 			$str="";
 			$userRating = $rt->getAverageRatings($recipe->id,$db);
@@ -27,10 +28,10 @@
 
 			echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>
 					<a href='recipedetails.php?id=$recipe->id'>
-					<div class='recipe' style=background-image:url('recipeimages/$recipe->id"."_1.jpg"."');>
+					<div class='recipe' style=background-image:url('$images[0]');>
 						<div class='recipeOuter'>
-							$recipe->name<br><em>$category</em><br>$str";
-						echo "</div>
+							$recipe->name<br><em>$category</em><br>$str
+						</div>
 					</div>
 					</a>
 			</div>";		
