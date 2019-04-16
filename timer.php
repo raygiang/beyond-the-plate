@@ -17,7 +17,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="css/timer.css">
 </head>
 <body>
-	<main>
+	<main id="main">
 <!-- <div class="container">
 	<div class="row"> -->
 		<div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once 'vendor/autoload.php';
     require_once 'config.php';
     date_default_timezone_set('Canada/Eastern');
@@ -32,17 +32,14 @@
     /* Runs when the form in the update view is submitted, updates the result in question
        with the entered information */
     if(isset($_POST['update_submit'])) {
-        $recipeID = filter_var($_POST['recipe_id'], FILTER_SANITIZE_STRING);
-        $userID = filter_var($_POST['userid'], FILTER_SANITIZE_STRING);
+        $resultID = $_POST['id'];
+        $recipeID = $_POST['rec_id'];
+        $userID = $_SESSION['userid'];
         $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
 
-        $count = $result->updateResult($_POST['id'], $recipeID, $userID, $comment, time());
+        $count = $result->updateResult($resultID, $recipeID, $userID, $comment, time());
 
-        if($count) {
-            echo "Result has been updated.";
-        } else {
-            echo "Problem updating the result.";
-        }
+        header("Location: showresult.php?id=$resultID");
     }
 
     /* Runs when the user chooses to delete a result */
@@ -65,7 +62,7 @@
                 foreach($imageDir as $image) {
                     if($image->getFilename() !== '.' && $image->getFilename() !== '..') {
                         $filePath = $image->getPathname();
-                        
+
                         echo "<a href='showresult.php?id=$res->id'>";
                         echo "<img class='result-image' src='$filePath' alt='Picture of a Result' />";
                         echo "</a>";
@@ -84,17 +81,21 @@
         $lastName = $res['last_name'];
         $comment = $res['comment'];
 
-        echo "<h3>Recipe: $recipeName</h3>";
+        echo "<h3>Recipe: <a href='recipedetails.php?id=$recID'>$recipeName</a></h3>";
 
-        echo "<form action='views/results/update.php' method='post'>" .
-                "<input type='hidden' name = 'id' value='$id' />" .
-                "<input type='submit' name='edit_submit' value='Edit' />" .
-             "</form>";
-        echo "<form action='#' method='post'>" .
-                "<input type='hidden' name = 'id' value='$id' />" .
-                "<input type='hidden' name = 'rec_id' value='$recID' />" .
-                "<input type='submit' name='delete_submit' value='Delete' />" .
-             "</form>";
+        if(isset($_SESSION['userid']) && $_SESSION['userid'] === $res['user_id']) {
+            echo "<form action='views/results/update.php' method='post'>" .
+                    "<input type='hidden' name='id' value='$id' />" .
+                    "<input type='hidden' name='rec_id' value='$recID' />" .
+                    "<input type='hidden' name='comment' value='$comment' />" .
+                    "<input type='submit' name='edit_submit' value='Edit' />" .
+                 "</form>";
+            echo "<form action='#' method='post'>" .
+                    "<input type='hidden' name='id' value='$id' />" .
+                    "<input type='hidden' name='rec_id' value='$recID' />" .
+                    "<input type='submit' name='delete_submit' value='Delete' />" .
+                 "</form>";
+         }
 
         $imagePath = "resultimages/$id";
         if(file_exists($imagePath)) {

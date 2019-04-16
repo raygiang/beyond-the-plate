@@ -35,9 +35,6 @@ function render(val)
 
 //Function that keeps the header on the top
 
-
-
-
 function pageReady()
 {
 	var nav = document.getElementById("header");
@@ -47,7 +44,7 @@ function pageReady()
 
     window.onscroll = stickyMenuFunction;
 
-    function stickyMenuFunction() 
+    function stickyMenuFunction()
     {
         if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
             nav.classList.add("sticky");
@@ -59,12 +56,12 @@ function pageReady()
             main.style.marginTop = "0px";
         }
     }
-    
+
     //Function that shows timer on click "Cooking Timer" button
     $('#timer-btn').click(function(){
         $('#show').slideToggle();
     });
-    	
+
     $("#uploadFile").change(function(){
         $('#image_preview').html("");
         var total_file=document.getElementById("uploadFile").files.length;
