@@ -1,18 +1,5 @@
 //Function that runs when the page loads
 window.onload = pageReady;
-window.onscroll = stickyMenuFunction;
-function stickyMenuFunction() 
-{
-    if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
-        nav.classList.add("sticky");
-        nav.classList.remove("flex-container");
-        main.style.marginTop = mHeight+"px";
-    }
-    else {
-        nav.classList.remove("sticky");
-        main.style.marginTop = "0px";
-    }
-}
 
 function addMore(filename) {
   $("<DIV>").load('input_'+filename+'.php', function() {
@@ -57,9 +44,24 @@ $('#timer-btn').click(function(){
 function pageReady()
 {
 	var nav = document.getElementById("header");
-	var main = document.getElementById("main");
-	var height = nav.offsetTop;
-	var mHeight = nav.clientHeight;
+    var main = document.getElementById("main");
+    var height = nav.offsetTop;
+    var mHeight = nav.clientHeight;
+
+    window.onscroll = stickyMenuFunction;
+
+    function stickyMenuFunction() 
+    {
+        if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
+            nav.classList.add("sticky");
+            nav.classList.remove("flex-container");
+            main.style.marginTop = mHeight+"px";
+        }
+        else {
+            nav.classList.remove("sticky");
+            main.style.marginTop = "0px";
+        }
+    }
     	
     $("#uploadFile").change(function(){
         $('#image_preview').html("");

@@ -41,6 +41,7 @@
 		</div>";
 	}
 ?>
+<main id="main">
 <div class="page-wrapper">
 	<div class="row" style="height: : 100vh, position:relative;">
 		<div class='col-lg-5 col-md-5 col-sm-12 col-xs-12'>
@@ -235,6 +236,7 @@
 
 </div>
 </div>
+</main>
 <script>
 	 function updateFavourite(status,uid,rid) {
 
