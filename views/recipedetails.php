@@ -103,7 +103,7 @@
 											<h5>Write your message</h5>
 											<br>
 											<input type="hidden" name="authoruserid" id="authoruserid"
-											value="'.$recipe->user_id.'">
+											value="'.$_SESSION["userid"].'">
 											<input type="hidden" name="recipeid" id="recipeid"
 											value="'.$recipe->id.'">
 											<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>

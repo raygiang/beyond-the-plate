@@ -2,13 +2,7 @@
     require_once '../../vendor/autoload.php';
     require_once '../../config.php';
     $result = new Result(Database::getDb(), 'Update a Result');
-
-    // Get the information about the result being updated
-    if(isset($_POST['id'])) {
-        $resultToEdit = $result->getResult($_POST['id']);
-    }
 ?>
-
 
 <html lang="en">
     <head>
@@ -23,7 +17,8 @@
                 <h2 class="sub-head">Update a Result</h2>
                 <div class="col-12 col-md-4">
                     <form action="../../results.php" method="post">
-                        <input type="hidden" name="id" value="<?= $resultToEdit['id']; ?>" />
+                        <input type="hidden" name="id" value="<?= $_POST['id'] ?>" />
+                        <input type='hidden' name='rec_id' value='<?= $_POST['rec_id'] ?>' />
 
                         <div class="form-group">
                             <label class="col-form-label" for="recipe-id">Recipe ID: </label>
@@ -39,7 +34,7 @@
 
                         <div class="form-group">
                             <label class="col-form-label" for="comment">Comment: </label>
-                            <textarea class="form-control" id="comment" name="comment"><?= $resultToEdit['comment']; ?></textarea>
+                            <textarea class="form-control" id="comment" name="comment"><?= $_POST['comment'] ?></textarea>
                         </div>
 
                         <input class="btn btn-secondary" type="submit" name="update_submit" value="Submit">
