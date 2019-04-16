@@ -35,10 +35,7 @@ function render(val)
 
 //Function that keeps the header on the top
 
-//Function that shows timer on click "Cooking Timer" button
-$('#timer-btn').click(function(){
-    $('#show').slideToggle();
-});
+
 
 
 function pageReady()
@@ -62,6 +59,11 @@ function pageReady()
             main.style.marginTop = "0px";
         }
     }
+    
+    //Function that shows timer on click "Cooking Timer" button
+    $('#timer-btn').click(function(){
+        $('#show').slideToggle();
+    });
     	
     $("#uploadFile").change(function(){
         $('#image_preview').html("");
