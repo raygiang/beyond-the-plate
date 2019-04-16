@@ -23,16 +23,30 @@
 
         /* Method that will return a specific entry from the results table
            Parameters: $id the id of the entry in question */
-        public function getResult($id) {
-            $sqlQuery = 'SELECT * FROM results WHERE recipe_id = :resultID';
+        public function getResultList($id) {
+            $sqlQuery = 'SELECT * FROM results WHERE recipe_id = :recipeID';
 
             $pdoStatement = $this->dbh->prepare($sqlQuery);
-            $pdoStatement->bindParam(':resultID', $id);
+            $pdoStatement->bindParam(':recipeID', $id);
             $pdoStatement->execute();
 
             $resultList = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
 
             return $resultList;
+        }
+
+        /* Method that will return a specific entry from the results table
+           Parameters: $id the id of the entry in question */
+        public function getResult($id) {
+            $sqlQuery = 'SELECT * FROM results WHERE id = :resultID';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->bindParam(':resultID', $id);
+            $pdoStatement->execute();
+
+            $result = $pdoStatement->fetch();
+
+            return $result;
         }
 
         /* Method that will add a new result to the results table

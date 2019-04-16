@@ -213,9 +213,7 @@
 	</div>
 	<div>
 		<?php
-			if(isset($_SESSION['userid'])) {
-				require_once('views/results/details.php');
-			}
+			require_once('views/results/details.php');
 		?>
 	</div>
 	<div>

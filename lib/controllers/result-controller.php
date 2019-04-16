@@ -3,7 +3,7 @@
     require_once 'config.php';
     date_default_timezone_set('Canada/Eastern');
 
-    $result = new Result(Database::getDb(), 'Results');
+    $result = new Result(Database::getDb(), 'Result');
 
     /* Runs when the form in the create view is submitted, inserts the entered info
        into the results table */
@@ -61,7 +61,7 @@
     }
 
     function displayDetails($result, $id) {
-        $resultsList = $result->getResult($id);
+        $resultsList = $result->getResultList($id);
 
         foreach($resultsList as $res) {
             $imagePath = "resultimages/$res->id";
@@ -72,7 +72,7 @@
                     if($image->getFilename() !== '.' && $image->getFilename() !== '..') {
                         $filePath = $image->getPathname();
                         
-                        echo "<a href=''>";
+                        echo "<a href='showresult.php?id=$res->id'>";
                         echo "<img class='result-image' src='$filePath' alt='Picture of a Result' />";
                         echo "</a>";
                     }
@@ -80,6 +80,15 @@
             }
             $userInfo = $result->getUserInfo($res->user_id);
         }
+    }
+
+    function displayResult($result, $id) {
+        $res = $result->getResult($id);
+        $userInfo = $result->getUserInfo($res['user_id']);
+
+        var_dump($res);
+        var_dump($userInfo);
+
     }
 
     /* Function that will print a list of all the entries in the results_test table
