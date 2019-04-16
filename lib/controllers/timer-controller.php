@@ -9,8 +9,8 @@ $timer = new Timer(Database::getDb(), $id);
        Parameters: $timer, a Timer object */
 function printName($timer) {
 
-	echo "<h3>" . current($timer->getTime())['name']. "</h3>";
-	echo "<p>" . current($timer->getTime())['description']. "</p>";
+	echo "<p class='sub-head'>" . current($timer->getTime())['name']. "</p>";
+	// echo "<p>" . current($timer->getTime())['description']. "</p>";
 }
 
 /* Function that will print table of instructions: steps, details and prep_time of the meal
@@ -20,11 +20,7 @@ function printInstructions($timer) {
 	$returnInstructions = "";
   foreach ($timer->getTime() as $time) {
 
-          $returnInstructions .= "<tr>";
-          $returnInstructions .= "<td>" .$time['step'] . "</td>";
-          $returnInstructions .= "<td>" . $time['details'] . "</td>";
-          $returnInstructions .= "<td class='timer-details'>" . $time['prep_time'] . "</td>";
-          $returnInstructions .= "</tr>";
+          $returnInstructions .= "<div class='timer-details hidden'>" . $time['prep_time'] . "</div>";
       }
 
   return $returnInstructions;

@@ -62,7 +62,15 @@ a {
   flex-flow: row wrap;
   justify-content: space-between;
 }
-
+.sub-head{
+  color: #ed1c24;
+  display: block;
+  margin: 0;
+  padding: 0.5em;
+}
+.hide{
+  display: none;
+}
 /*2.HEADER, SEARCH BAR, LOGO */
 
 #header {
