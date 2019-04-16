@@ -71,6 +71,9 @@ a {
 .hide{
   display: none;
 }
+#show{
+  margin: 0 2em;
+}
 /*2.HEADER, SEARCH BAR, LOGO */
 
 #header {
@@ -238,6 +241,9 @@ a {
 #sidebar-nav a:hover{
    text-decoration: none;
 }
+#timer-btn{
+  margin: 2em;
+}
 
 /*8.FOOTER*/
 
@@ -330,6 +336,7 @@ a {
 .result-image {
   width: 20%;
 }
+
 
 /*********Shopping List*******************/
 
@@ -489,7 +496,10 @@ input[type=file]{
 		width: 50em;
 	}
 
-
+#contact-author{
+  margin: 2em;
+  display:block;
+}
 /* Auto Suggest */
 .container{
     max-width: 500px;

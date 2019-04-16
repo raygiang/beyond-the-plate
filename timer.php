@@ -17,6 +17,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="css/timer.css">
 </head>
 <body>
+	<main>
 <!-- <div class="container">
 	<div class="row"> -->
 		<div>
@@ -33,8 +34,7 @@ session_start();
 		<span>
 			<input id="btnStop" type="button" value="STOP" class="btn btn-secondary"/>
 		</span>
-	<!-- </div>
-</div> -->
+	</main>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
