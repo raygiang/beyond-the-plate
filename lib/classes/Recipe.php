@@ -13,7 +13,7 @@
 		}
 		public function getRatingAndComments($rid,$db){
 
-			$sql = "SELECT ratings.rating,users.first_name,users.last_name 
+			$sql = "SELECT ratings.rating,ratings.comment,users.first_name,users.last_name 
 			FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.recipe_id=:rid 
 
 			ORDER BY ratings.modified_date DESC limit 0,10";
@@ -30,6 +30,13 @@
 			$pdostm->execute();
 			$category = $pdostm->fetch(PDO::FETCH_OBJ);
 			return $category->name;
+		}
+		public function getAllCategories($db){
+			$sql = "SELECT categories.name FROM categories WHERE 1";
+			$pdostm = $db->prepare($sql);
+			$pdostm->execute();
+			$categories = $pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $categories;
 		}
 		public function getRecipe($id,$db)
 		{
