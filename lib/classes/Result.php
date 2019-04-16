@@ -38,7 +38,12 @@
         /* Method that will return a specific entry from the results table
            Parameters: $id the id of the entry in question */
         public function getResult($id) {
-            $sqlQuery = 'SELECT * FROM results WHERE id = :resultID';
+            $sqlQuery = 'SELECT rec.id, rec.name, res.comment, u.first_name, u.last_name FROM results res
+                        JOIN users u
+                        ON res.user_id = u.id
+                        JOIN recipes rec
+                        ON res.recipe_id = rec.id
+                        WHERE res.id = :resultID';
 
             $pdoStatement = $this->dbh->prepare($sqlQuery);
             $pdoStatement->bindParam(':resultID', $id);

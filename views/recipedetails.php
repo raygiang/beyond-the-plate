@@ -221,11 +221,6 @@
 		</div>
 	</div>
 	<div>
-		<?php
-			require_once('views/results/details.php');
-		?>
-	</div>
-	<div>
 		<h3 class="sub-head">Recent Comments</h3>
 		<?php
 			echo $ratingAndCommentsHtml;
@@ -234,6 +229,15 @@
 
 </div>
 </div>
+
+<div class="page-wrapper">
+	<div>
+		<?php
+			require_once('views/results/details.php');
+		?>
+	</div>
+</div>
+
 </main>
 <script>
 	 function updateFavourite(status,uid,rid) {
