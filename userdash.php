@@ -6,7 +6,7 @@
 
   $db = Database::getDb();
   session_start();
-  $page = new Homepage('Dashboard@'.$_SESSION["user_id"]);
+  $page = new Homepage('Dashboard@'.$_SESSION["user"]);
 ?>
 
 <html lang="en">
