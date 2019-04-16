@@ -7,8 +7,6 @@
     if(isset($_POST['id'])) {
         $requestEdit = $request->getRequest($_POST['id']);
     }
-
-
 ?>
 
 <html lang="en">
@@ -24,7 +22,7 @@
 				<h2 class="sub-head">Edit Request</h2>
 				<div class="col-12 col-md-4">
 				  <form  action="../../request.php" method="POST">
-				  	<input type="hidden" name="id" value="<?php $requestEdit['id']; ?>">
+				  	<input type="hidden" name="id" value="<?= $_POST['id']; ?>">
 				    <div class="form-group">
 				      <label class="col-form-label" for="request-title">Meal title:</label>
 				      <input type="text" class="form-control" name="title" id="request-title" value="<?php echo $requestEdit['title']; ?>">

@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once 'vendor/autoload.php';
     require_once 'config.php';
     date_default_timezone_set('Canada/Eastern');
@@ -62,7 +62,7 @@
                 foreach($imageDir as $image) {
                     if($image->getFilename() !== '.' && $image->getFilename() !== '..') {
                         $filePath = $image->getPathname();
-                        
+
                         echo "<a href='showresult.php?id=$res->id'>";
                         echo "<img class='result-image' src='$filePath' alt='Picture of a Result' />";
                         echo "</a>";
@@ -87,12 +87,12 @@
                 "<input type='hidden' name='id' value='$id' />" .
                 "<input type='hidden' name='rec_id' value='$recID' />" .
                 "<input type='hidden' name='comment' value='$comment' />" .
-                "<input type='submit' name='edit_submit' value='Edit' />" .
+                "<input class='main-button' type='submit' name='edit_submit' value='Edit' />" .
              "</form>";
         echo "<form action='#' method='post'>" .
                 "<input type='hidden' name='id' value='$id' />" .
                 "<input type='hidden' name='rec_id' value='$recID' />" .
-                "<input type='submit' name='delete_submit' value='Delete' />" .
+                "<input class='main-button' type='submit' name='delete_submit' value='Delete' />" .
              "</form>";
 
         $imagePath = "resultimages/$id";

@@ -30,6 +30,7 @@
     /* When edit form is successfully submitted, updated data inserts into the recipe_requests table */
 
     if(isset($_POST['edit'])) {
+        echo $_POST['id'];
         $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
         $content = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 
@@ -68,7 +69,7 @@
                 $returnRequest .= "<td>" . $request->first_name . " " . $request->last_name . "</td>";
                 $returnRequest .= "<td>" . $request->title . "</td>";
                 $returnRequest .= "<td>" . $request->description . "</td>";
-                if($_SESSION['userid'] == $request->user_id || $request->role == 1){
+                if(isset($_SESSION['userid']) === $request->user_id || $request->role === 1){
                 $returnRequest .= "<td>" .
                     "<form action='views/reciperequest/editrequest.php' method='post'>" .
                         "<input type='hidden' name = 'id' value='$request->id' />" .
