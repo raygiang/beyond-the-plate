@@ -140,7 +140,7 @@
 				<?php
 					$r=new Recipe();
 					$rt=new Rating();
-					$recipes=$r->getAllRecipes($db);
+					$recipes=$r->getAllUserRecipes($userid,$db);
 					$str="<table class='table table-striped'><tr>
 						<td>Name</td>
 						<td>Description</td>
@@ -279,8 +279,8 @@
 					$images=glob("recipeimages/".$frecipe->recipe_id."*");
 					$n++;
 					$str="";
-					$userRating = $rt->getAverageRatings($recipe->id,$db);
-					$category = $r->getCategory($recipe->category,$db);
+					$userRating = $rt->getAverageRatings($frecipe->recipe_id,$db);
+					$category = $r->getCategory($frecipe->recipe_id,$db);
 					for($i=1;$i<=5;$i++)
 					{
 						$image=$i<=$userRating?"greenstar":"greystar";
@@ -290,7 +290,7 @@
 								<a href='recipedetails.php?id=$frecipe->recipe_id'>
 									<div class='recipe' style=background-image:url('$images[0]');>
 										<div class='recipeOuter'>
-											$recipe->name<br><em>$category</em><br>$str
+											$frecipe->name<br><span class='category'>$category</span><br>$str
 										</div>
 									</div>
 								</a>

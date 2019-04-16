@@ -33,7 +33,7 @@ function pageReady(){
 	var main = document.getElementById("main");
 	var height = nav.offsetTop;
 	var mHeight = nav.clientHeight;
-
+    
 	function stickyMenuFunction() {
 		if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
 			nav.classList.add("sticky");

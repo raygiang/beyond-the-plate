@@ -11,10 +11,6 @@
 		{
 
 		}
-		public function displayAllRecipes($db)
-		{
-
-		}
 		public function getRatingAndComments($rid,$db){
 			$sql = "SELECT ratings.comment,ratings.rating,users.first_name,users.last_name 
 			FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.recipe_id=:rid 
@@ -25,10 +21,10 @@
 			$commentsAndRatings = $pdostm->fetchAll(PDO::FETCH_OBJ);
 			return $commentsAndRatings;
 		}
-		public function getCategory($cid,$db){
-			$sql = "SELECT name FROM categories WHERE id=:cid";
+		public function getCategory($rid,$db){
+			$sql = "SELECT categories.name FROM categories INNER JOIN recipes ON categories.id=recipes.category WHERE recipes.id=:rid";
 			$pdostm = $db->prepare($sql);
-			$pdostm->bindParam(':cid',$cid);
+			$pdostm->bindParam(':rid',$rid);
 			$pdostm->execute();
 			$category = $pdostm->fetch(PDO::FETCH_OBJ);
 			return $category->name;
@@ -76,6 +72,18 @@
 			INNER JOIN users 
 			ON recipes.user_id=users.id  where recipes.is_deleted=0";
 			$pdostm = $db->prepare($sql);
+			$pdostm->execute();
+			$recipes=$pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $recipes;
+		}
+		public function getAllUserRecipes($uid,$db)
+		{
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
+			FROM recipes
+			INNER JOIN users 
+			ON recipes.user_id=users.id  where recipes.is_deleted=0 and recipes.user_id=:uid";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':uid',$uid);
 			$pdostm->execute();
 			$recipes=$pdostm->fetchAll(PDO::FETCH_OBJ);
 			return $recipes;
