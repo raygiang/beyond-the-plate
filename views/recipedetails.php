@@ -82,6 +82,43 @@
 					}
 				?>
 			</div>
+			<div id="contact-author">
+				<?php
+					if(isset($_SESSION['userid']))
+					{
+						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
+
+						<div id="contactAuthorModal" class="modal fade" role="dialog">
+							<div class="modal-dialog" id="modelContact">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<form action = "sendmessage.php" method = "POST" enctype="multipart/form-data">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Contact Author</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<h5>Write your message</h5>
+											<br>
+											<input type="hidden" name="authoruserid" id="authoruserid"
+											value="'.$recipe->user_id.'">
+											<input type="hidden" name="recipeid" id="recipeid"
+											value="'.$recipe->id.'">
+											<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>
+											<br>
+										</div>
+										<div class="modal-footer">
+											<input type = "submit" value = "Send Message" />
+											<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>';
+					}
+				?>
+			</div>
 			<div class='recipeDetails'>
 				<div><?php echo $recipe->description; ?></div>
 				<div>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?></div>
@@ -173,51 +210,13 @@
 				</div>
 				<div>
 					<a href="#" class="main-button" id="timer-btn">Cooking Timer</a>
-					</div>
-					<div class="hide" id="show">
-						<h2 class="sub-head">Timer</h2>
-						<?php
-							require_once('timer.php');
-						?>
 				</div>
-
-			<div>
-				<?php
-					if(isset($_SESSION['userid']))
-					{
-						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contactAuthorModal">Contact Author</button>
-
-						<div id="contactAuthorModal" class="modal fade" role="dialog">
-							<div class="modal-dialog" id="modelContact">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<form action = "sendmessage.php" method = "POST" enctype="multipart/form-data">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Contact Author</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<h5>Write your message</h5>
-											<br>
-											<input type="hidden" name="authoruserid" id="authoruserid"
-											value="'.$recipe->user_id.'">
-											<input type="hidden" name="recipeid" id="recipeid"
-											value="'.$recipe->id.'">
-											<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>
-											<br>
-										</div>
-										<div class="modal-footer">
-											<input type = "submit" value = "Send Message" />
-											<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>';
-					}
-				?>
-			</div>
+				<div class="hide" id="show">
+					<h2 class="sub-head">Timer</h2>
+					<?php
+						require_once('timer.php');
+					?>
+				</div>
 		</div>
 	</div>
 	<div>
@@ -228,7 +227,7 @@
 		?>
 	</div>
 	<div>
-		<h2 class="sub-head">Recent Comments</h2>
+		<h3 class="sub-head">Recent Comments</h3>
 		<?php
 			echo $ratingAndCommentsHtml;
 		?>
