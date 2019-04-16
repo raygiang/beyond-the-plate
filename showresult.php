@@ -17,7 +17,7 @@
   <main id="main">
     <div class="page-wrapper">
       <h2>Result</h2>
-      <?php 
+      <?php
         displayResult($result, $_GET['id']);
       ?>
     </div>
