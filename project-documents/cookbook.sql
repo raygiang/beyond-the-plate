@@ -2,9 +2,9 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 13, 2019 at 07:37 AM
--- Server version: 10.1.37-MariaDB
+-- Host: project-cookbook.caablfu69mfx.us-east-2.rds.amazonaws.com:3306:3306
+-- Generation Time: Apr 16, 2019 at 06:40 PM
+-- Server version: 5.6.40-log
 -- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -41,8 +41,14 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'Salads', 0, 2147483647, 2147483647),
-(2, 'Burgers', 0, 2147483647, 2147483647);
+(5, 'Breakfast', 0, 1555353417, 1555353417),
+(6, 'Brunch', 0, 1555353425, 1555353425),
+(7, 'Lunch', 0, 1555353515, 1555353515),
+(8, 'Dinner', 0, 1555353517, 1555353517),
+(9, 'Party Snacks', 0, 1555353715, 1555353715),
+(10, 'Quick and Easy', 0, 1555353725, 1555353725),
+(11, 'Desserts', 0, 1555353726, 1555353726),
+(12, 'Drinks', 0, 1555353728, 1555353728);
 
 -- --------------------------------------------------------
 
@@ -59,13 +65,6 @@ CREATE TABLE `comments` (
   `created_date` int(10) NOT NULL,
   `modified_date` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `recipe_id`, `comment`, `user_id`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(3, 1554748754, '', 2, 0, 1555002846, 1555002846);
 
 -- --------------------------------------------------------
 
@@ -347,11 +346,9 @@ CREATE TABLE `favourites` (
 --
 
 INSERT INTO `favourites` (`id`, `recipe_id`, `user_id`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(4, 1554742010, 2, 0, 1554917259, 1554917259),
-(5, 1554748754, 2, 0, 1554918463, 1554918463),
-(6, 1554050741, 2, 1, 1554918544, 1554918544),
-(7, 1554748807, 2, 1, 1555001449, 1555001449),
-(8, 1554742010, 1, 0, 1555132910, 1555132910);
+(12, 1554816159, 4, 0, 1555419100, 1555419100),
+(13, 1554816158, 4, 0, 1555419461, 1555419461),
+(14, 1554816161, 1, 0, 1555427593, 1555427593);
 
 -- --------------------------------------------------------
 
@@ -375,21 +372,53 @@ CREATE TABLE `ingredients` (
 --
 
 INSERT INTO `ingredients` (`id`, `name`, `recipe_id`, `quantity`, `unit_id`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'India', 1554050741, 11.00, 2, 0, 1554050741, 1554050741),
-(2, 'Pakistan', 1554050741, 2.00, 1, 0, 1554050741, 1554050741),
-(3, 'Sri Lanka', 1554050741, 5.00, 3, 0, 1554050741, 1554050741),
-(4, 'United Arab Emirates', 1554050741, 3.00, 4, 0, 1554050741, 1554050741),
-(5, 'Mayotte', 1554050741, 3.00, 5, 0, 1554050741, 1554050741),
-(6, 'United States', 1554050741, 3.00, 6, 0, 1554050741, 1554050741),
-(7, 'Canada', 1554742010, 2.00, 2, 0, 1554742010, 1554742010),
-(8, 'United Arab Emirates', 1554742010, 3.00, 2, 0, 1554742010, 1554742010),
-(9, 'Central African Republic', 1554748754, 4.00, 3, 0, 1554748755, 1554748755),
-(10, 'India', 1554748807, 4.00, 4, 0, 1554748808, 1554748808),
-(11, 'Japan', 1554748807, 4.00, 4, 0, 1554748808, 1554748808),
-(12, 'British Indian Ocean Territory', 1554755892, 4.00, 1, 0, 1554755892, 1554755892),
-(13, 'Nepal', 1554755892, 4.00, 4, 0, 1554755892, 1554755892),
-(14, 'British Indian Ocean Territory', 1554816157, 4.00, 4, 0, 1554816158, 1554816158),
-(15, 'Canada', 1554816157, 4.00, 4, 0, 1554816158, 1554816158);
+(16, 'Flour', 1554816158, 2.00, 1, 0, 1555353753, 1555353753),
+(17, 'Sugar', 1554816158, 2.00, 5, 0, 1555353753, 1555353753),
+(18, 'Milk', 1554816158, 2.00, 1, 0, 1555353753, 1555353753),
+(19, 'Baking powder', 1554816158, 1.00, 6, 0, 1555353753, 1555353753),
+(20, 'New York strip steaks', 1555359154, 12.00, 2, 0, 1555359154, 1555359154),
+(21, 'Bread of choice', 1554816159, 2.00, 2, 0, 1555353758, 1555353758),
+(22, 'Cheese', 1554816159, 2.00, 2, 0, 1555353758, 1555353758),
+(23, 'Ham', 1554816159, 2.00, 2, 0, 1555353758, 1555353758),
+(24, 'Smoked Turkey', 1554816159, 2.00, 2, 0, 1555353758, 1555353758),
+(25, 'Salmon', 1554816160, 2.00, 7, 0, 1555353777, 1555353777),
+(26, ' Fresh flat-leaf parsley', 1554816160, 1.00, 1, 0, 1555353777, 1555353777),
+(27, 'Capers', 1554816160, 2.00, 5, 0, 1555353777, 1555353777),
+(28, ' Red wine vinegar', 1554816160, 1.00, 5, 0, 1555353777, 1555353777),
+(29, 'Lemon juice', 1554816160, 2.00, 5, 0, 1555353777, 1555353777),
+(30, 'Extra-virgin Olive Oil', 1554816160, 3.00, 5, 0, 1555353777, 1555353777),
+(31, 'Extra-virgin Olive Oil', 1554816161, 1.00, 5, 0, 1555355417, 1555355417),
+(32, 'Thyme chopped', 1554816161, 1.00, 6, 0, 1555355417, 1555355417),
+(33, 'Garlic', 1554816161, 3.00, 9, 0, 1555355417, 1555355417),
+(34, 'Yukon Gold Potatoes ', 1554816161, 1.00, 8, 0, 1555355417, 1555355417),
+(35, 'Rosemary', 1554816161, 1.00, 6, 0, 1555355417, 1555355417),
+(36, 'Oregano', 1554816161, 1.00, 6, 0, 1555355417, 1555355417),
+(37, 'Lean New York Steak strip steaks', 1554816161, 2.00, 7, 0, 1555355417, 1555355417),
+(38, 'Flour', 1554816162, 2.00, 1, 0, 1555355679, 1555355679),
+(39, 'Baking powder', 1554816162, 1.00, 5, 0, 1555355679, 1555355679),
+(40, 'Salt', 1554816162, 0.50, 6, 0, 1555355679, 1555355679),
+(41, 'Sugar', 1554816162, 2.00, 5, 0, 1555355679, 1555355679),
+(42, 'Eggs', 1554816162, 1.00, 7, 0, 1555355679, 1555355679),
+(43, 'Milk', 1554816162, 1.00, 1, 0, 1555355679, 1555355679),
+(44, ' Melted butter', 1554816162, 1.25, 1, 0, 1555355679, 1555355679),
+(45, 'Whole-grain bread, toasted', 1554816163, 2.00, 2, 0, 1555355680, 1555355680),
+(46, 'Mashed avocado', 1554816163, 0.50, 7, 0, 1555355680, 1555355680),
+(47, 'Egg ', 1554816163, 1.00, 7, 0, 1555355680, 1555355680),
+(48, 'Graham crackers', 1554816174, 2.00, 1, 0, 1555356153, 1555356153),
+(49, 'Butter', 1554816174, 0.50, 1, 0, 1555356153, 1555356153),
+(50, 'Cream cheese', 1554816174, 5.00, 10, 0, 1555356153, 1555356153),
+(51, 'Sugar', 1554816174, 1.00, 1, 0, 1555356153, 1555356153),
+(52, 'Eggs', 1554816174, 4.00, 7, 0, 1555356153, 1555356153),
+(53, 'Vanilla extract', 1554816174, 1.00, 5, 0, 1555356153, 1555356153),
+(54, 'Mango', 1554816175, 2.00, 7, 0, 1555356155, 1555356155),
+(55, 'Banana', 1554816175, 1.00, 7, 0, 1555356155, 1555356155),
+(56, 'Orange juice', 1554816175, 1.00, 1, 0, 1555356155, 1555356155),
+(57, ' Vanilla nonfat yogurt', 1554816175, 1.00, 1, 0, 1555356155, 1555356155),
+(58, 'Toor Dal', 1555430167, 1.00, 1, 0, 1555430168, 1555430168),
+(59, 'Turmeric Powder', 1555430167, 4.00, 5, 0, 1555430168, 1555430168),
+(60, 'Mixed Vegetables', 1555430167, 1.00, 1, 0, 1555430168, 1555430168),
+(61, 'Curry Leaves', 1555430167, 6.00, 9, 0, 1555430168, 1555430168),
+(62, 'Mustard Seeds', 1555430167, 1.00, 6, 0, 1555430168, 1555430168);
 
 -- --------------------------------------------------------
 
@@ -402,6 +431,7 @@ CREATE TABLE `instructions` (
   `recipe_id` int(10) NOT NULL,
   `details` varchar(200) NOT NULL,
   `step` int(2) NOT NULL,
+  `prep_time` int(5) NOT NULL DEFAULT '0',
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   `created_date` int(10) NOT NULL,
   `modified_date` int(10) NOT NULL
@@ -411,21 +441,42 @@ CREATE TABLE `instructions` (
 -- Dumping data for table `instructions`
 --
 
-INSERT INTO `instructions` (`id`, `recipe_id`, `details`, `step`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(5, 1554050741, '1st Instruction', 1, 0, 1554050741, 1554050741),
-(6, 1554050741, '2nd Instruction', 2, 0, 1554050741, 1554050741),
-(7, 1554050741, '3rd instruction', 3, 0, 1554050741, 1554050741),
-(8, 1554742010, '1st Instruction', 1, 0, 1554742010, 1554742010),
-(9, 1554742010, '2nd Instruction', 2, 0, 1554742010, 1554742010),
-(10, 1554742010, '3rd instruction', 3, 0, 1554742010, 1554742010),
-(11, 1554748754, '3rd instruction', 1, 0, 1554748754, 1554748754),
-(12, 1554748807, '3rd instruction', 1, 0, 1554748807, 1554748807),
-(13, 1554755892, '3rd instruction', 1, 0, 1554755892, 1554755892),
-(14, 1554755892, '1st Instruction', 2, 0, 1554755892, 1554755892),
-(15, 1554816157, '2nd Instruction', 1, 0, 1554816158, 1554816158),
-(16, 1554816157, '3rd instruction', 2, 0, 1554816158, 1554816158),
-(17, 1554816157, '2nd Instruction', 3, 0, 1554816158, 1554816158),
-(18, 1554816157, '1', 4, 0, 1554816158, 1554816158);
+INSERT INTO `instructions` (`id`, `recipe_id`, `details`, `step`, `prep_time`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(1, 1554816158, 'Take all ingredients and ..', 1, 0, 0, 1555353753, 1555353753),
+(2, 1554816158, 'Bake each waffle', 2, 10, 0, 1555353753, 1555353753),
+(3, 1555359154, 'About 20 minutes before grilling, remove the steaks from the refrigerator and let sit, covered, at room temperature.', 1, 20, 0, 1555359154, 1555359154),
+(4, 1555359154, 'Heat your grill to high. Brush the steaks on both sides with oil and season liberally with salt and pepper', 2, 0, 0, 1555359154, 1555359154),
+(5, 1555359154, 'Mince the shallot and add to a small bowl. Pour the vinegar over the shallots and add a pinch of salt.', 3, 30, 0, 1555359154, 1555359154),
+(6, 1554816159, 'Place bread on cookie sheet.', 1, 0, 0, 1555353758, 1555353758),
+(7, 1554816159, 'Spread with your desired amount of butter.Place cheese on top of butter.Add ham or turkey.', 2, 0, 0, 1555353758, 1555353758),
+(8, 1554816159, 'Broil until tops are bubbly and just beginning to toast.', 3, 7, 0, 1555353758, 1555353758),
+(9, 1554816160, 'Preheat the oven to 450 degrees F.', 1, 0, 0, 1555353777, 1555353777),
+(10, 1554816160, 'Season salmon with salt and pepper. Place salmon, skin side down, on a non-stick baking sheet or in a non-stick pan with an oven-proof handle. ', 2, 0, 0, 1555353777, 1555353777),
+(11, 1554816160, 'Bake until salmon is cooked through.', 3, 20, 0, 1555353777, 1555353777),
+(12, 1554816161, 'In a large cast iron skillet over medium high heat, add olive oil and butter, potatoes, garlic, thyme, rosemary and oregano', 1, 0, 0, 1555355417, 1555355417),
+(13, 1554816161, 'Turn the skillet to high heat. Add the steaks', 2, 0, 0, 1555355417, 1555355417),
+(15, 1554816161, 'Cook the steaks to desired doneness', 3, 20, 0, 1555355417, 1555355417),
+(16, 1554816162, 'Preheat the oven to 375 degrees F. Butter muffin pans. Mix the flour, baking powder, salt, and sugar in a large bowl. Add the egg, milk, and butter, stirring only enough to dampen the flour', 1, 0, 0, 1555355679, 1555355679),
+(17, 1554816162, ' Spoon into the muffin pans, filling each cup about two-thirds full.', 2, 0, 0, 1555355679, 1555355679),
+(18, 1554816162, 'Bake each.', 3, 25, 0, 1555355679, 1555355679),
+(21, 1554816163, 'Mash the avocado in a small bowl and season with salt and pepper.', 1, 0, 0, 1555355680, 1555355680),
+(22, 1554816163, 'Heat a small nonstick skillet over low heat, spray with oil and gently crack the egg into the skillet. Cook to your preference. ', 2, 5, 0, 1555355680, 1555355680),
+(23, 1554816163, 'Place mashed avocado over toast, top with egg, salt and pepper and hot sauce if desired!', 3, 0, 0, 1555355680, 1555355680),
+(24, 1554816174, 'Preheat oven to 325 F degrees. ', 1, 0, 0, 1555356153, 1555356153),
+(25, 1554816174, 'Add the graham crackers to a food processor and pulse a few times until crumbs form. Add the melted butter and pulse a few more times. ', 2, 0, 0, 1555356153, 1555356153),
+(26, 1554816174, 'Beat the cream cheese, sugar, flour, and vanilla in a large bowl until smooth and there are no visible clumps. Mix in the sour cream.', 3, 0, 0, 1555356153, 1555356153),
+(27, 1554816174, 'Place the springform pan into a larger roasting pan and fill the pan halfway with boiling water, make sure it doesn\'t go over the foil.', 4, 0, 0, 1555356153, 1555356153),
+(28, 1554816174, 'Transfer the big roasting pan into the oven and bake.', 5, 60, 0, 1555356153, 1555356153),
+(29, 1554816174, 'Top the cheesecake with the cherry pie filling. Slice and serve.', 6, 0, 0, 1555356153, 1555356153),
+(30, 1554816175, 'Mango - peel, seed, and cut into chunks. Peel and chop banana.', 1, 0, 0, 1555356155, 1555356155),
+(31, 1554816175, 'Place mango, banana, orange juice, and yogurt in a blender. Blend until smooth.\r\nServe in clear glasses, and drink with a bendy straw! ', 2, 5, 0, 1555356155, 1555356155),
+(32, 1555430167, 'Prepare Tamarind Juice, soak 1/2 tablespoon tamarind in 3-tablespoons of hot water for 10-15 minutes, mash it with a spoon and strain it using a sieve and discard the solids.', 1, 15, 0, 1555430167, 1555430167),
+(33, 1555430167, 'Add toor dal, turmeric powder and 1 cup water in 3-4 liters capacity steel or aluminum pressure cooker. ', 2, 0, 0, 1555430167, 1555430167),
+(34, 1555430167, 'Add mixed vegetables in a small container, place it inside the pressure cooker and close the cooker lid. Pressure cook over medium flame for 3-4 whistles. ', 3, 0, 0, 1555430167, 1555430167),
+(35, 1555430167, 'Turn off the flame and allow it to stand until pressure comes down naturally. Open the lid, remove the container of vegetables and mash the dal using spatula or immersion blender.', 4, 0, 0, 1555430167, 1555430167),
+(36, 1555430167, 'Heat 1-tablespoon oil in a pan or kadai over medium flame. Add mustard seeds. When they start to splutter, add curry leaves, dry red chilies, asafoetida, and sautÃ© for 10-15 seconds.', 5, 0, 0, 1555430168, 1555430168),
+(37, 1555430167, 'Add cooked and mashed dal, boiled vegetables, 1½ cups water and salt.', 6, 0, 0, 1555430168, 1555430168),
+(38, 1555430167, 'Turn off the flame. Transfer spicy Sambar into a serving bowl and garnish with finely chopped coriander leaves.', 7, 0, 0, 1555430168, 1555430168);
 
 -- --------------------------------------------------------
 
@@ -476,6 +527,7 @@ CREATE TABLE `ratings` (
   `recipe_id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `rating` int(1) NOT NULL,
+  `comment` varchar(2000) NOT NULL,
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   `created_date` int(10) NOT NULL,
   `modified_date` int(10) NOT NULL
@@ -485,8 +537,8 @@ CREATE TABLE `ratings` (
 -- Dumping data for table `ratings`
 --
 
-INSERT INTO `ratings` (`id`, `recipe_id`, `user_id`, `rating`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(3, 1554748754, 2, 5, 0, 1555002846, 1555002846);
+INSERT INTO `ratings` (`id`, `recipe_id`, `user_id`, `rating`, `comment`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(2, 1554816158, 5, 3, 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ', 0, 1555423128, 1555423128);
 
 -- --------------------------------------------------------
 
@@ -510,12 +562,16 @@ CREATE TABLE `recipes` (
 --
 
 INSERT INTO `recipes` (`id`, `name`, `user_id`, `description`, `category`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1554050741, 'Test Recipe Test Recipe Test Recipe Test Recipe Test Recipe Test Recipe Test Recipe Test Recipe \r\n', 1, 'Demo Test Recipe', 1, 0, 1554050741, 1554050741),
-(1554742010, 'Demo', 1, 'Demo Description', 2, 0, 1554742010, 1554742010),
-(1554748754, 'Test', 1, 'Test Description', 1, 0, 1554748754, 1554748754),
-(1554748807, 'Test', 1, 'Test Description', 2, 0, 1554748807, 1554748807),
-(1554755892, 'Test', 1, 'Test Description', 1, 0, 1554755892, 1554755892),
-(1554816157, 'Demo', 1, 'Demo', 2, 0, 1554816157, 1554816157);
+(1554816158, 'Puff Pastry Waffles', 4, 'Add puff pastry to the list of good things you can snackify in your waffle iron. Although they don\'t puff up as much as oven-baked puff pastry, they turn out crispy on the outside and tender on the inside, and they take only minutes to make. Serve hot or at room temperature with syrup, fruit, Nutella, fruit preserves, or nut butte', 5, 0, 1555353753, 1555353417),
+(1554816159, 'Italian French Toast', 4, 'Packed with Italian flavours, this savoury French toast is a nice change from the usual. It makes an excellent brunch or lunch option.', 6, 0, 1555353758, 1555353758),
+(1554816160, 'Oven-Baked Salmon', 4, 'Season salmon with salt and pepper. Place salmon, skin side down, on a non-stick baking sheet or in a non-stick pan with an oven-proof handle. Bake until salmon is cooked through, about 12 to 15 minutes. Serve with the Toasted Almond Parsley Salad and squash, if desired.', 7, 0, 1555353777, 1555353777),
+(1554816161, 'Skillet Garlic Butter Herb Steak and Potatoes', 4, 'Skillet Garlic Butter Herb Steak and Potatoes is pan seared and cooked to perfection and topped with a garlic herb butter compound.  This is the best steak that I have ever had!!', 8, 0, 1555355417, 1555355417),
+(1554816162, 'Best Ever Muffins', 4, 'Start with this basic recipe, and add one of several different ingredients for a variety of different muffins', 9, 0, 1555355679, 1555355679),
+(1554816163, 'Avocado Toast', 4, 'Try my avocado sandwich for an exciting flavor twist on grilled cheese. The avocados make them extra creamy', 10, 0, 1555355680, 1555355680),
+(1554816174, 'Perfect Cheesecake', 4, 'Perfect Cheesecake does not have to be intimidating! I have created the creamiest, smoothest, easiest cheesecake recipe from scratch that will always turn out perfect. PLUS I have some tips that will guarantee success', 11, 0, 1555356153, 1555356153),
+(1554816175, 'Mango Smoothie Recipes', 4, 'This smoothie is so bright, cheerful, and delicious, it is like a blast of sunshine on even the most rainy, windy days!', 12, 0, 1555356155, 1555356155),
+(1555359154, 'Perfectly Grilled Steak', 4, 'About 20 minutes before grilling, remove the steaks from the refrigerator and let sit, covered, at room temperature.', 8, 0, 1555359154, 1555359154),
+(1555430167, 'Idli Sambhar', 5, 'Type of savoury rice cake with curry', 5, 0, 1555430167, 1555430167);
 
 -- --------------------------------------------------------
 
@@ -548,6 +604,14 @@ CREATE TABLE `recipe_requests` (
   `modified_date` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `recipe_requests`
+--
+
+INSERT INTO `recipe_requests` (`id`, `user_id`, `title`, `description`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(1, 4, 'Apple Pie', 'I am looking for the most delicious apple pie.\r\n', 0, 1555361566, 1555361566),
+(4, 4, 'Tuna Salad', 'I&#39;m looking for the best tuna salad recipe.', 0, 1555381832, 1555381832);
+
 -- --------------------------------------------------------
 
 --
@@ -563,6 +627,27 @@ CREATE TABLE `results` (
   `created_date` int(10) NOT NULL,
   `modified_date` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`id`, `recipe_id`, `user_id`, `comment`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(13, 1554816158, 1, 'test', 1, 1555347899, 1555347899),
+(14, 1554816158, 1, 'very cools', 1, 1555347903, 1555426493),
+(15, 1554816158, 1, 'test', 1, 1555347908, 1555347908),
+(16, 1554816158, 1, 'hi', 1, 1555349331, 1555349331),
+(17, 1554816158, 1, 'hilo', 0, 1555349386, 1555427366),
+(18, 1554816159, 1, 'HAY', 0, 1555349415, 1555349415),
+(19, 1554816174, 4, 'Test', 0, 1555380966, 1555380966),
+(24, 1554816158, 1, 'hi', 0, 1555423832, 1555423832),
+(25, 1554816158, 1, 'Delicious', 0, 1555423908, 1555428037),
+(26, 1554816175, 4, 'Test', 0, 1555424021, 1555424021),
+(27, 1554816175, 4, 'Test', 1, 1555424258, 1555424258),
+(28, 1554816159, 4, 'Muffins', 1, 1555424637, 1555424637),
+(29, 1554816158, 1, 'testing again', 0, 1555424792, 1555424792),
+(30, 1554816158, 1, 'hay', 0, 1555424903, 1555424903),
+(31, 1554816159, 4, 'It&#39;s amazing', 0, 1555431252, 1555431252);
 
 -- --------------------------------------------------------
 
@@ -587,7 +672,7 @@ CREATE TABLE `result_images` (
 
 CREATE TABLE `units` (
   `id` int(2) NOT NULL,
-  `unit_name` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   `created_date` int(10) NOT NULL,
   `modified_date` int(10) NOT NULL
@@ -597,13 +682,17 @@ CREATE TABLE `units` (
 -- Dumping data for table `units`
 --
 
-INSERT INTO `units` (`id`, `unit_name`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'cups', 0, 2147483647, 2147483647),
-(2, 'slices', 0, 2147483647, 2147483647),
-(3, 'ml', 0, 2147483647, 2147483647),
-(4, 'grams', 0, 2147483647, 2147483647),
-(5, 'table spoon', 0, 2147483647, 2147483647),
-(6, 'tea spoon', 0, 2147483647, 2147483647);
+INSERT INTO `units` (`id`, `name`, `is_deleted`, `created_date`, `modified_date`) VALUES
+(1, 'Cups', 0, 2147483647, 2147483647),
+(2, 'Slices', 0, 2147483647, 2147483647),
+(3, 'Ml', 0, 2147483647, 2147483647),
+(4, 'Grams', 0, 2147483647, 2147483647),
+(5, 'Table Spoon', 0, 2147483647, 2147483647),
+(6, 'Tea Spoon', 0, 2147483647, 2147483647),
+(7, 'Piece', 0, 1555353753, 1555353753),
+(8, 'Pound', 0, 1555353777, 1555353777),
+(9, 'Nos', 0, 1555353777, 1555353777),
+(10, 'Oz', 0, 1555353777, 1555353777);
 
 -- --------------------------------------------------------
 
@@ -650,9 +739,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `last_login`, `role`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'johnsmith@testmail.com', '$2y$10$uo3MXEaAWqGV/oMeXp0AeOtU5yAZzKiFkfb3NLjkdLNmDu24mTkmG', 'John', 'Smith', 1555132721, 2, 0, 2147483647, 2147483647),
+(1, 'johnsmith@testmail.com', '$2y$10$bS9WqPXCx49enGjHnfOU7.ZrR6YQb5oCYiEznnvCECwcyYvBEIa0u', 'John', 'Smith', 1555428879, 1, 0, 2147483647, 2147483647),
 (2, 'test@gmail.com', '$2y$10$uo3MXEaAWqGV/oMeXp0AeOtU5yAZzKiFkfb3NLjkdLNmDu24mTkmG', 'Amandeep', 'Singh', 1555132698, 2, 0, 1554906839, 1554906874),
-(3, 'tes2@gmail.com', '$2y$10$a4desSbK2kQU18GcOLsSoOCD8MEIfkAt5yM88Z4jkOwYXLQrGgCRO', 'test2', 'test', 1554911883, 2, 0, 1554911853, 1554911853);
+(3, 'tes2@gmail.com', '$2y$10$a4desSbK2kQU18GcOLsSoOCD8MEIfkAt5yM88Z4jkOwYXLQrGgCRO', 'test2', 'test', 1554911883, 2, 0, 1554911853, 1554911853),
+(4, 'sam@mail.com', '$2y$10$oL4BYpGDiBLS3RVzfzYileowXHpHBd.7xjqYhKy.y3MsbpwTKx7QG', 'Sam', 'Smith', 1555429071, 2, 0, 1555356280, 1555356280),
+(5, 'erbirindersingh@gmail.com', '$2y$10$Mq6ZJ8u9Ozrsy1ztgwLk/eZPG2tSTgN8ZpM3xl0mTDFSS2WubfQly', 'Birinder', 'Singh', 1555427315, 2, 0, 1555356280, 1555356280);
 
 --
 -- Indexes for dumped tables
@@ -787,7 +878,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -805,19 +896,19 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `instructions`
 --
 ALTER TABLE `instructions`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `meal_plans`
@@ -835,13 +926,13 @@ ALTER TABLE `plan_categories`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1554816158;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1555430168;
 
 --
 -- AUTO_INCREMENT for table `recipe_images`
@@ -853,13 +944,13 @@ ALTER TABLE `recipe_images`
 -- AUTO_INCREMENT for table `recipe_requests`
 --
 ALTER TABLE `recipe_requests`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `result_images`
@@ -871,7 +962,7 @@ ALTER TABLE `result_images`
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usermessages`
@@ -883,7 +974,7 @@ ALTER TABLE `usermessages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

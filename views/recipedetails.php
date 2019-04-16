@@ -151,7 +151,7 @@
 											value="'.$_SESSION["userid"].'">
 											<input type="hidden" name="recipeid" id="recipeid"
 											value="'.$recipe->id.'">
-											<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>
+											<textarea rows = "5" cols = "63" name = "usermessage" placeholder="Enter details here..."></textarea>
 											<br>
 										</div>
 										<div class="modal-footer">
