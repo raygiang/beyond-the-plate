@@ -9,7 +9,7 @@
 <div>
   <?php
     if(isset($_SESSION['userid'])) {
-      echo '<a href="views/results/create.php?id=<?=$id?>">Create a new Result</a>';
+      echo "<a href='views/results/create.php?id=$id'>Create a new Result</a>";
     }
   ?>
   <div>

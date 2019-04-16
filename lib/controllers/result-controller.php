@@ -26,11 +26,7 @@
 
         $count = $result->addResult($recipeID, $_SESSION['userid'], $comment);
 
-        if($count) {
-            echo "Result has been added.";            
-        } else {
-            echo "Problem adding the result.";
-        }
+        header("Location: recipedetails.php?id=$recipeID");
     }
 
     /* Runs when the form in the update view is submitted, updates the result in question
@@ -53,11 +49,9 @@
     if(isset($_POST['delete_submit'])) {
         $count = $result->deleteResult($_POST['id']);
 
-        if($count) {
-            echo "Result has been deleted.";
-        } else {
-            echo "Problem deleting the result.";
-        }
+        $recipeID = $_POST['rec_id'];
+
+        header("Location: recipedetails.php?id=$recipeID");
     }
 
     function displayDetails($result, $id) {
@@ -66,7 +60,7 @@
         foreach($resultsList as $res) {
             $imagePath = "resultimages/$res->id";
 
-            if(file_exists($imagePath)) {
+            if($res->is_deleted !== '1' && file_exists($imagePath)) {
                 $imageDir = new DirectoryIterator($imagePath);
                 foreach($imageDir as $image) {
                     if($image->getFilename() !== '.' && $image->getFilename() !== '..') {
@@ -84,11 +78,38 @@
 
     function displayResult($result, $id) {
         $res = $result->getResult($id);
-        $userInfo = $result->getUserInfo($res['user_id']);
+        $recID = $res['id'];
+        $recipeName = $res['name'];
+        $firstName = $res['first_name'];
+        $lastName = $res['last_name'];
+        $comment = $res['comment'];
 
-        var_dump($res);
-        var_dump($userInfo);
+        echo "<h3>Recipe: $recipeName</h3>";
 
+        echo "<form action='views/results/update.php' method='post'>" .
+                "<input type='hidden' name = 'id' value='$id' />" .
+                "<input type='submit' name='edit_submit' value='Edit' />" .
+             "</form>";
+        echo "<form action='#' method='post'>" .
+                "<input type='hidden' name = 'id' value='$id' />" .
+                "<input type='hidden' name = 'rec_id' value='$recID' />" .
+                "<input type='submit' name='delete_submit' value='Delete' />" .
+             "</form>";
+
+        $imagePath = "resultimages/$id";
+        if(file_exists($imagePath)) {
+            $imageDir = new DirectoryIterator($imagePath);
+            foreach($imageDir as $image) {
+                if($image->getFilename() !== '.' && $image->getFilename() !== '..') {
+                    $filePath = $image->getPathname();
+
+                    echo "<img class='result-image' src='$filePath' alt='Picture of a Result' />";
+                }
+            }
+        }
+
+        echo "<div>Submitted by: $firstName $lastName</div>";
+        echo "<div>Comment: $comment</div>";
     }
 
     /* Function that will print a list of all the entries in the results_test table
