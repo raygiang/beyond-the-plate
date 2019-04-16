@@ -850,8 +850,6 @@ a:hover{
   width:1rem;
   background-size:contain;
 }
-
-<<<<<<< HEAD
 .ratingAndComments{
   padding:1em;
   border-bottom: 1px solid #ddd;
@@ -866,6 +864,7 @@ a:hover{
 .commentBlock::after {
   content: '"';
 }
-=======
-
->>>>>>> eb3f7ca2f72c293767be0ef8bcd299eae3792c34
+.category{
+  font-size: .7em;
+  font-style: italic;
+}
