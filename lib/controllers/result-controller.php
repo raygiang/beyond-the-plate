@@ -32,17 +32,14 @@
     /* Runs when the form in the update view is submitted, updates the result in question
        with the entered information */
     if(isset($_POST['update_submit'])) {
-        $recipeID = filter_var($_POST['recipe_id'], FILTER_SANITIZE_STRING);
-        $userID = filter_var($_POST['userid'], FILTER_SANITIZE_STRING);
+        $resultID = $_POST['id'];
+        $recipeID = $_POST['rec_id'];
+        $userID = $_SESSION['userid'];
         $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
 
-        $count = $result->updateResult($_POST['id'], $recipeID, $userID, $comment, time());
+        $count = $result->updateResult($resultID, $recipeID, $userID, $comment, time());
 
-        if($count) {
-            echo "Result has been updated.";
-        } else {
-            echo "Problem updating the result.";
-        }
+        header("Location: showresult.php?id=$resultID");
     }
 
     /* Runs when the user chooses to delete a result */
@@ -87,12 +84,14 @@
         echo "<h3>Recipe: $recipeName</h3>";
 
         echo "<form action='views/results/update.php' method='post'>" .
-                "<input type='hidden' name = 'id' value='$id' />" .
+                "<input type='hidden' name='id' value='$id' />" .
+                "<input type='hidden' name='rec_id' value='$recID' />" .
+                "<input type='hidden' name='comment' value='$comment' />" .
                 "<input type='submit' name='edit_submit' value='Edit' />" .
              "</form>";
         echo "<form action='#' method='post'>" .
-                "<input type='hidden' name = 'id' value='$id' />" .
-                "<input type='hidden' name = 'rec_id' value='$recID' />" .
+                "<input type='hidden' name='id' value='$id' />" .
+                "<input type='hidden' name='rec_id' value='$recID' />" .
                 "<input type='submit' name='delete_submit' value='Delete' />" .
              "</form>";
 
