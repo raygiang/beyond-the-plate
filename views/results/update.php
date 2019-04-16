@@ -19,19 +19,7 @@
                     <form action="../../results.php" method="post">
                         <input type="hidden" name="id" value="<?= $_POST['id'] ?>" />
                         <input type='hidden' name='rec_id' value='<?= $_POST['rec_id'] ?>' />
-
-                        <div class="form-group">
-                            <label class="col-form-label" for="recipe-id">Recipe ID: </label>
-                            <input class="form-control" type="text" id="recipe-id" name="recipe_id"
-                                value="<?= $resultToEdit['recipe_id']; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label" for="user-id">User ID: </label>
-                            <input class="form-control" type="text" id="user-id" name="user_id"
-                                value="<?= $resultToEdit['user_id']; ?>">
-                        </div>
-
+                        
                         <div class="form-group">
                             <label class="col-form-label" for="comment">Comment: </label>
                             <textarea class="form-control" id="comment" name="comment"><?= $_POST['comment'] ?></textarea>
