@@ -16,9 +16,9 @@
         ?>
       </nav>
 
-      <form id="search-form">
-        <input id="search-bar" type="text" name="search_bar">
-        <input class="main-button" type="submit" name="submit_button" value="Search">
+      <form action="recipes.php" method='GET' id="search-form">
+        <input id="search-bar" type="text" name="q">
+        <input class="main-button" type="submit" name="searchBtn" value="Search">
       </form>
     </div>
   </div>

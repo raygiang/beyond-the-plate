@@ -32,7 +32,7 @@
 			return $category->name;
 		}
 		public function getAllCategories($db){
-			$sql = "SELECT categories.name FROM categories WHERE 1";
+			$sql = "SELECT categories.id,categories.name FROM categories WHERE 1";
 			$pdostm = $db->prepare($sql);
 			$pdostm->execute();
 			$categories = $pdostm->fetchAll(PDO::FETCH_OBJ);
@@ -81,6 +81,31 @@
 			INNER JOIN users
 			ON recipes.user_id=users.id  where recipes.is_deleted=0";
 			$pdostm = $db->prepare($sql);
+			$pdostm->execute();
+			$recipes=$pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $recipes;
+		}
+		public function getCategoryRecipes($cid,$db)
+		{
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname'
+			FROM recipes
+			INNER JOIN users
+			ON recipes.user_id=users.id  where recipes.is_deleted=0 and recipes.category=:cid";
+			$pdostm = $db->prepare($sql);
+			$pdostm->bindParam(':cid',$cid);
+			$pdostm->execute();
+			$recipes=$pdostm->fetchAll(PDO::FETCH_OBJ);
+			return $recipes;
+		}
+		public function getSearchedRecipes($q,$db)
+		{
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname'
+			FROM recipes
+			INNER JOIN users
+			ON recipes.user_id=users.id  where recipes.is_deleted=0 and recipes.name like :q";
+			$pdostm = $db->prepare($sql);
+			$q = "%$q%";
+			$pdostm->bindParam(':q',$q,PDO::PARAM_STR);
 			$pdostm->execute();
 			$recipes=$pdostm->fetchAll(PDO::FETCH_OBJ);
 			return $recipes;
@@ -134,7 +159,7 @@
 			$i=0;
 			foreach($instructions as $instruction)
 			{
-				$sql = "INSERT INTO instructions(recipe_id,details,step,minutes,is_deleted,created_date,modified_date)
+				$sql = "INSERT INTO instructions(recipe_id,details,step,prep_time,is_deleted,created_date,modified_date)
 				VALUES(:id,:details,:step,:minutes,0,:created_date,:modified_date)";
 				$time=time();
 				$step=$i+1;
