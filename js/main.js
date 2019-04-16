@@ -1,8 +1,38 @@
-//Sticky header
+//Function that runs when the page loads
+function pageReady(){
+
+    var nav = document.getElementById("header");
+    var main = document.getElementById("main");
+    var height = nav.offsetTop;
+    var mHeight = nav.clientHeight;
+
+
+//Function that keeps the header on the top
+    function stickyMenuFunction() {
+        if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
+            nav.classList.add("sticky");
+            nav.classList.remove("flex-container");
+            main.style.marginTop = mHeight+"px";
+        }
+        else {
+            nav.classList.remove("sticky");
+            main.style.marginTop = "0px";
+        }
+    }
+    window.onscroll = stickyMenuFunction;
+
+//Function that shows timer on click "Cooking Timer" button
+    $('#timer-btn').click(function(){
+        $('#show').slideToggle();
+    });
+
+
+
+
 function addMore(filename) {
   $("<DIV>").load('input_'+filename+'.php', function() {
     $("#"+filename).append($(this).html());
-  }); 
+  });
 }
 
 function deleteRow() {
@@ -28,6 +58,7 @@ function render(val)
                 n++;
         }
 }
+<<<<<<< HEAD
 function pageReady(){
 	var nav = document.getElementById("header");
 	var main = document.getElementById("main");
@@ -46,6 +77,9 @@ function pageReady(){
 		}
 	}
 	window.onscroll = stickyMenuFunction;
+=======
+
+>>>>>>> 541fd3c1349695c291cefd4f29875a3e904ddf5f
 
 
     $("#uploadFile").change(function(){

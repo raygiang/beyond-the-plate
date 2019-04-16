@@ -18,7 +18,7 @@
 
       <form id="search-form">
         <input id="search-bar" type="text" name="search_bar">
-        <input id="submit-button" type="submit" name="submit_button" value="Search">
+        <input class="main-button" type="submit" name="submit_button" value="Search">
       </form>
     </div>
   </div>

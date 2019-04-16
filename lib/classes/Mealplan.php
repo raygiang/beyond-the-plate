@@ -119,7 +119,7 @@ class Mealplan extends Page
         $currentYear = $this->getRefDate()['year'];
         $user = $this->getUserID();
 
-        $sqlQuery = "SELECT mp.id, r.name, pc.category from meal_plans mp
+        $sqlQuery = "SELECT mp.id, r.name, pc.name from meal_plans mp
             JOIN recipes r
             ON r.id = mp.recipe_id
             JOIN plan_categories pc

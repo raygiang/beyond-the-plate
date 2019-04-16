@@ -9,7 +9,7 @@
             $this->dbh = $dbh;
         }
 
-        /* Method that will return a list of all entries in the results_test table */
+        /* Method that will return a list of all entries in the results table */
         public function listResults() {
             $sqlQuery = 'SELECT * FROM results';
 
@@ -21,21 +21,21 @@
             return $resultList;
         }
 
-        /* Method that will return a specific entry from the results_test table
+        /* Method that will return a specific entry from the results table
            Parameters: $id the id of the entry in question */
         public function getResult($id) {
-            $sqlQuery = 'SELECT * FROM results WHERE id = :resultID';
+            $sqlQuery = 'SELECT * FROM results WHERE recipe_id = :resultID';
 
             $pdoStatement = $this->dbh->prepare($sqlQuery);
             $pdoStatement->bindParam(':resultID', $id);
             $pdoStatement->execute();
 
-            $resultList = $pdoStatement->fetch();
+            $resultList = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
 
             return $resultList;
         }
 
-        /* Method that will add a new result to the results_test table
+        /* Method that will add a new result to the results table
            Parameters: $recipeID the id of the recipe that this result corresponds to
                        $userID the id of the user adding this result
                        $comment the comment for this result */
@@ -55,7 +55,7 @@
             return $pdoStatement->execute();
         }
 
-        /* Method that will update an existing result in the results_test table
+        /* Method that will update an existing result in the results table
            Parameters: $resultID the id of the result being updated
                        $recipeID the id of the recipe that this result corresponds to
                        $userID the id of the user that added this result
@@ -74,7 +74,7 @@
             return $pdoStatement->execute();
         }
 
-        /* Method that will delete (set is_deleted to 1) a result from the results_test table
+        /* Method that will delete (set is_deleted to 1) a result from the results table
            Parameters: $resultID the id of the result being deleted */
         public function deleteResult($resultID) {
             $sqlQuery = 'UPDATE results SET is_deleted = 1 WHERE id = :resultID';
@@ -94,6 +94,18 @@
             $result = $pdoStatement->fetch();
 
             return $result[0];
+        }
+
+        public function getUserInfo($id) {
+            $sqlQuery = 'SELECT * FROM users WHERE id = :userid';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->bindParam(':userid', $id);
+            $pdoStatement->execute();
+
+            $result = $pdoStatement->fetch();
+
+            return $result;
         }
     }
 ?>

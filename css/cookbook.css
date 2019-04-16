@@ -62,7 +62,15 @@ a {
   flex-flow: row wrap;
   justify-content: space-between;
 }
-
+.sub-head{
+  color: #ed1c24;
+  display: block;
+  margin: 0;
+  padding: 0.5em;
+}
+.hide{
+  display: none;
+}
 /*2.HEADER, SEARCH BAR, LOGO */
 
 #header {
@@ -90,8 +98,7 @@ a {
   height: 30px;
   border-radius: 5px;
 }
-
-#submit-button{
+.main-button{
   background-color: #ed1c24;
   padding: 0.5em;
   border-radius: 5px;
@@ -101,7 +108,7 @@ a {
   margin-left: 1em;
 }
 
-#submit-button:hover{
+.main-button:hover{
   background-color: #ffffff;
   color: #ed1c24;
   border: 1px solid #ed1c24;
@@ -286,6 +293,8 @@ a {
 
 #meal-plan-cal th,#meal-plan-cal td {
   border: 1px solid #000;
+  height: 5em;
+  width: 10%;
 }
 
 #meal-plan-cal th {
@@ -314,6 +323,12 @@ a {
 
 #plan-info a {
   color: darkblue;
+}
+
+/*********Recipe Results******************/
+
+.result-image {
+  width: 20%;
 }
 
 /*********Shopping List*******************/
@@ -405,7 +420,7 @@ input[type=file]{
 .footer{padding:10px; background:#333;margin-top:20px;}
 .btn-action{padding:10px;}
 .btn-action input[type="button"]{padding:5px; border:#CCCCCC 1px solid; border-radius: 4px;}
-input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 4px; background-color:#09f;color:#fff;}
+/*input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 4px; background-color:#09f;color:#fff;}*/
 .success{color:#66CC00;padding: 5px; font-weight:bold;}
 
 
@@ -787,7 +802,7 @@ input[type="submit"]{padding:5px 20px; border:#000000 1px solid; border-radius: 
   height:200px;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center; 
+  background-position: center;
   color:#FFF;
   text-decoration: none;
 }
@@ -833,10 +848,10 @@ a:hover{
   font-style: italic;
   text-align: justify;
 }
-.commentBlock::before { 
+.commentBlock::before {
   content: '"';
 }
-.commentBlock::after { 
+.commentBlock::after {
   content: '"';
 }
 .category{

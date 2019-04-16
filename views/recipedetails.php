@@ -17,7 +17,7 @@
 	if(isset($_SESSION['userid']))
 	{
 		$fav = $r->checkIfRecipeFav($id,$_SESSION['userid'],$db);
-	}	
+	}
 
 	if(isset($_POST['contactAuthorSubmit']))
 	{
@@ -42,7 +42,7 @@
 	}
 ?>
 <div class="page-wrapper">
-	<div class="row">
+	<div class="row" style="height: : 100vh, position:relative;">
 		<div class='col-lg-5 col-md-5 col-sm-12 col-xs-12'>
 			<div class='row'>
 				<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
@@ -57,7 +57,7 @@
 					{
 						echo "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6'>
 							<img src='$image'/ class='secondaryImage'>
-						</div>";					
+						</div>";
 					}
 				?>
 			</div>
@@ -85,8 +85,8 @@
 			<div class='recipeDetails'>
 				<div><?php echo $recipe->description; ?></div>
 				<div>By : <?php echo $recipe->authorfname." ".$recipe->authorlname; ?></div>
-				<div class='rating'>					
-					<?php 
+				<div class='rating'>
+					<?php
 						$str="";
 						$rt = new Rating();
 						if(isset($_SESSION["userid"])){
@@ -126,7 +126,7 @@
 			                            	<textarea id='comment' name='comment' style='width:100%' rows='4'></textarea>
 			                            	<input type='hidden' id='rating' name='rating' value='$i' class='form-control'>
 			                            	<input type='hidden' id='recipeid' name='recipeid' value='$id' class='form-control'>
-			      
+
 										</div>
 	                        			<div class='modal-footer'>
 	                                		<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
@@ -141,7 +141,7 @@
 					?>
 				</div>
 				<hr/>
-				<div class='recipeIngredients'><span class='h3'>Ingredients</span><br> 
+				<div class='recipeIngredients'><span class='h3'>Ingredients</span><br>
 					<?php
 						$ingredientStr="<ol>";
 						$ingredients = $r->getIngredients($id,$db);
@@ -153,26 +153,33 @@
 					?>
 				</div>
 				<hr/>
-				<div class='recipeInstructions'><span class='h3'>Instructions</span><br/> 
+				<div class='recipeInstructions'><span class='h3'>Instructions</span><br/>
 					<?php
 						$instructionStr="<ol>";
 						$instructions = $r->getInstructions($id,$db);
 						foreach ($instructions as $instruction) {
 							$instructionStr.="<li>$instruction->details";
-							if($instruction->minutes!=0)
+							if($instruction->prep_time!=0)
 							{
-								$instructionStr.=" for ".$instruction->minutes." minutes.</li>";
+								$instructionStr.=" for ".$instruction->prep_time." minutes.</li>";
 							}
 							else{
-								$instructionStr.="</li>";	
+								$instructionStr.="</li>";
 							}
 						}
 						$instructionStr.="</ol>";
 						echo $instructionStr;
 					?>
 				</div>
-
-			</div>
+				<div>
+					<a href="#" class="main-button" id="timer-btn">Cooking Timer</a>
+					</div>
+					<div class="hide" id="show">
+						<h2 class="sub-head">Timer</h2>
+						<?php
+							require_once('timer.php');
+						?>
+				</div>
 
 			<div>
 				<?php
@@ -213,20 +220,21 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-			<hr/>
-		</div>
+	<div>
+		<?php
+			if(isset($_SESSION['userid'])) {
+				require_once('views/results/details.php');
+			}
+		?>
 	</div>
-	<div class="row">
-		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-			<span class='h2'>Recent Comments</span>
-			<?php
-				echo $ratingAndCommentsHtml;
-			?>
-		</div>
+	<div>
+		<h2 class="sub-head">Recent Comments</h2>
+		<?php
+			echo $ratingAndCommentsHtml;
+		?>
 	</div>
 
+</div>
 </div>
 <script>
 	 function updateFavourite(status,uid,rid) {

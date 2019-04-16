@@ -6,7 +6,7 @@
     $result = new Result(Database::getDb(), 'Results');
 
     /* Runs when the form in the create view is submitted, inserts the entered info
-       into the results_test table */
+       into the results table */
     // Reference for uploading images: https://www.w3schools.com/php/php_file_upload.asp
     if(isset($_POST['create_submit'])) {
         $resultID = $result->getInsertID();
@@ -24,7 +24,7 @@
                 $resultImageDir . $resultID . "/result.".$imgExtension);
         }
 
-        $count = $result->addResult($recipeID, $_SESSION['user_id'], $comment);
+        $count = $result->addResult($recipeID, $_SESSION['userid'], $comment);
 
         if($count) {
             echo "Result has been added.";            
@@ -37,7 +37,7 @@
        with the entered information */
     if(isset($_POST['update_submit'])) {
         $recipeID = filter_var($_POST['recipe_id'], FILTER_SANITIZE_STRING);
-        $userID = filter_var($_POST['user_id'], FILTER_SANITIZE_STRING);
+        $userID = filter_var($_POST['userid'], FILTER_SANITIZE_STRING);
         $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
 
         $count = $result->updateResult($_POST['id'], $recipeID, $userID, $comment, time());
@@ -57,6 +57,28 @@
             echo "Result has been deleted.";
         } else {
             echo "Problem deleting the result.";
+        }
+    }
+
+    function displayDetails($result, $id) {
+        $resultsList = $result->getResult($id);
+
+        foreach($resultsList as $res) {
+            $imagePath = "resultimages/$res->id";
+
+            if(file_exists($imagePath)) {
+                $imageDir = new DirectoryIterator($imagePath);
+                foreach($imageDir as $image) {
+                    if($image->getFilename() !== '.' && $image->getFilename() !== '..') {
+                        $filePath = $image->getPathname();
+                        
+                        echo "<a href=''>";
+                        echo "<img class='result-image' src='$filePath' alt='Picture of a Result' />";
+                        echo "</a>";
+                    }
+                }
+            }
+            $userInfo = $result->getUserInfo($res->user_id);
         }
     }
 

@@ -6,14 +6,16 @@
 		private $user_id;
 		private $description;
 		private $category;
-		
+
 		public function __construct()
 		{
 
 		}
 		public function getRatingAndComments($rid,$db){
-			$sql = "SELECT ratings.comment,ratings.rating,users.first_name,users.last_name 
+
+			$sql = "SELECT ratings.rating,users.first_name,users.last_name 
 			FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.recipe_id=:rid 
+
 			ORDER BY ratings.modified_date DESC limit 0,10";
 			$pdostm = $db->prepare($sql);
 			$pdostm->bindParam(':rid',$rid);
@@ -31,9 +33,9 @@
 		}
 		public function getRecipe($id,$db)
 		{
-			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname'
 			FROM recipes
-			INNER JOIN users 
+			INNER JOIN users
 			ON recipes.user_id=users.id  where recipes.is_deleted=0 and recipes.id=:id";
 			$pdostm = $db->prepare($sql);
 			$pdostm->bindParam(':id',$id);
@@ -43,9 +45,9 @@
 		}
 		public function getIngredients($id,$db)
 		{
-			$sql = "SELECT ingredients.*,units.unit_name AS unit 
+			$sql = "SELECT ingredients.*,units.name AS unit
 			FROM ingredients INNER JOIN units
-			ON ingredients.unit_id = units.id 
+			ON ingredients.unit_id = units.id
 			WHERE ingredients.is_deleted=0 and recipe_id=:id";
 			$pdostm = $db->prepare($sql);
 			$pdostm->bindParam(':id',$id);
@@ -55,8 +57,8 @@
 		}
 		public function getInstructions($id,$db)
 		{
-			$sql = "SELECT * 
-			FROM instructions  
+			$sql = "SELECT *
+			FROM instructions
 			WHERE is_deleted=0 and recipe_id=:id
 			ORDER BY step ASC";
 			$pdostm = $db->prepare($sql);
@@ -67,9 +69,9 @@
 		}
 		public function getAllRecipes($db)
 		{
-			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname' 
+			$sql = "SELECT recipes.*,users.first_name AS 'authorfname',users.last_name AS 'authorlname'
 			FROM recipes
-			INNER JOIN users 
+			INNER JOIN users
 			ON recipes.user_id=users.id  where recipes.is_deleted=0";
 			$pdostm = $db->prepare($sql);
 			$pdostm->execute();
@@ -106,7 +108,7 @@
 		}
 		public function addRecipe($id,$name,$user_id,$description,$category,$is_deleted,$db)
 		{
-			$sql = "INSERT INTO recipes(id,name,user_id,description,category,is_deleted,created_date,modified_date) 
+			$sql = "INSERT INTO recipes(id,name,user_id,description,category,is_deleted,created_date,modified_date)
 			VALUES(:id,:name,:user_id,:description,:category,0,:created_date,:modified_date)";
 			$time=time();
 			$pst = $db->prepare($sql);
@@ -125,7 +127,7 @@
 			$i=0;
 			foreach($instructions as $instruction)
 			{
-				$sql = "INSERT INTO instructions(recipe_id,details,step,minutes,is_deleted,created_date,modified_date) 
+				$sql = "INSERT INTO instructions(recipe_id,details,step,minutes,is_deleted,created_date,modified_date)
 				VALUES(:id,:details,:step,:minutes,0,:created_date,:modified_date)";
 				$time=time();
 				$step=$i+1;
@@ -141,13 +143,13 @@
 			}
 			return $count;
 		}
-		
+
 		public function addRecipeIngredients($id,$ingredients,$ingredients_qty,$ingredients_unit,$db)
 		{
 			$i=0;
 			foreach($ingredients as $ingredient)
 			{
-				$sql = "INSERT INTO ingredients(name,recipe_id,quantity,unit_id,is_deleted,created_date,modified_date) 
+				$sql = "INSERT INTO ingredients(name,recipe_id,quantity,unit_id,is_deleted,created_date,modified_date)
 				VALUES(:name,:id,:quantity,:unit_id,0,:created_date,:modified_date)";
 				$time=time();
 				$pst = $db->prepare($sql);
@@ -175,8 +177,8 @@
 
 		public function updateRecipe($id,$name,$description,$category,$db)
 		{
-			$sql = "UPDATE recipes SET name=:name,$description=:description,category=:category 
-			WHERE id=:id"; 
+			$sql = "UPDATE recipes SET name=:name,$description=:description,category=:category
+			WHERE id=:id";
 			$pst = $db->prepare($sql);
 			$pst->bindParam(':name',$name);
 			$pst->bindParam(':description',$description);
@@ -196,8 +198,8 @@
 			$pdostm->bindParam(':userid',$userid);
 			$pdostm->bindParam(':recipeid',$recipeid);
 			$pdostm->execute();
-			
-			
+
+
 			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
 			{
 				return true;
@@ -207,7 +209,7 @@
 				return false;
 			}
 		}
-		
+
 		public function addFavouriteRecipe($recipeid,$userid,$db)
 		{
 			$sql = "SELECT * FROM favourites where user_id=:userid and recipe_id = :recipeid";
@@ -215,11 +217,11 @@
 			$pdostm->bindParam(':userid',$userid);
 			$pdostm->bindParam(':recipeid',$recipeid);
 			$pdostm->execute();
-			
-			
+
+
 			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
 			{
-				//if record already exist update the status 				
+				//if record already exist update the status
 				$sql = "UPDATE favourites SET is_deleted=0 WHERE user_id=:userid and recipe_id = :recipeid";
 				$pst = $db->prepare($sql);
 				$pst->bindParam(':userid',$userid);
@@ -233,7 +235,7 @@
 				imp: change column modified_date in favourites
 				*/
 				//if record doesn't exist create a new record
-				$sql = "INSERT INTO favourites(recipe_id,user_id,is_deleted,created_date,modified_date) 
+				$sql = "INSERT INTO favourites(recipe_id,user_id,is_deleted,created_date,modified_date)
 				VALUES(:recipe_id,:user_id,0,:created_date,:modified_date)";
 				$time=time();
 				$pst = $db->prepare($sql);
@@ -245,7 +247,7 @@
 				return "new inserted";
 			}
 		}
-		
+
 		public function removeFavouriteRecipe($recipeid,$userid,$db)
 		{
 			$sql = "SELECT * FROM favourites where user_id=:userid and recipe_id = :recipeid";
@@ -253,10 +255,10 @@
 			$pdostm->bindParam(':userid',$userid);
 			$pdostm->bindParam(':recipeid',$recipeid);
 			$pdostm->execute();
-			
+
 			if($favourites=$pdostm->fetch(PDO::FETCH_OBJ))
 			{
-				//if record already exist update the status 				
+				//if record already exist update the status
 				$sql = "UPDATE favourites SET is_deleted=1 WHERE user_id=:userid and recipe_id = :recipeid";
 				$pst = $db->prepare($sql);
 				$pst->bindParam(':userid',$userid);
@@ -266,16 +268,16 @@
 			}
 			else
 			{
-				// record does not exist				
+				// record does not exist
 				return "record does not exist";
 			}
 		}
-	
+
 		public function getAllFavRecipes($uid,$db)
 		{
-			$sql = "SELECT favourites.*,recipes.name 
-					FROM favourites 
-					INNER JOIN recipes 
+			$sql = "SELECT favourites.*,recipes.name
+					FROM favourites
+					INNER JOIN recipes
 					ON favourites.recipe_id=recipes.id
 					where favourites.user_id=:uid and favourites.is_deleted=0";
 			$pdostm = $db->prepare($sql);
@@ -284,5 +286,92 @@
 			$recipes=$pdostm->fetchAll(PDO::FETCH_OBJ);
 			return $recipes;
 		}
+
+		/* Method that will return a list of all entries in the results table */
+        public function listResults() {
+            $sqlQuery = 'SELECT * FROM results';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->execute();
+
+            $resultList = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
+
+            return $resultList;
+        }
+
+        /* Method that will return a specific entry from the results table
+           Parameters: $id the id of the entry in question */
+        public function getResult($id) {
+            $sqlQuery = 'SELECT * FROM results WHERE id = :resultID';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->bindParam(':resultID', $id);
+            $pdoStatement->execute();
+
+            $resultList = $pdoStatement->fetch();
+
+            return $resultList;
+        }
+
+        /* Method that will add a new result to the results table
+           Parameters: $recipeID the id of the recipe that this result corresponds to
+                       $userID the id of the user adding this result
+                       $comment the comment for this result */
+        public function addResult($recipeID, $userID, $comment) {
+            $sqlQuery = 'INSERT INTO results(recipe_id, user_id, comment, created_date, modified_date)
+                         VALUES (:recipeID, :userID, :comment, :createdDate, :modifiedDate)';
+
+            $currTime = time();
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->bindParam(':recipeID', $recipeID);
+            $pdoStatement->bindParam(':userID', $userID);
+            $pdoStatement->bindParam(':comment', $comment);
+            $pdoStatement->bindParam(':createdDate', $currTime);
+            $pdoStatement->bindParam(':modifiedDate', $currTime);
+
+            return $pdoStatement->execute();
+        }
+
+        /* Method that will update an existing result in the results table
+           Parameters: $resultID the id of the result being updated
+                       $recipeID the id of the recipe that this result corresponds to
+                       $userID the id of the user that added this result
+                       $comment the comment for this result
+                       $currDate the date that this result was modified */
+        public function updateResult($resultID, $recipeID, $userID, $comment, $currDate) {
+            $sqlQuery = 'UPDATE results SET recipe_id = :recipeID, user_id = :userID, comment = :comment, modified_date = :currDate WHERE id = :resultID';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->bindParam(':recipeID', $recipeID);
+            $pdoStatement->bindParam(':userID', $userID);
+            $pdoStatement->bindParam(':comment', $comment);
+            $pdoStatement->bindParam(':currDate', $currDate);
+            $pdoStatement->bindParam(':resultID', $resultID);
+
+            return $pdoStatement->execute();
+        }
+
+        /* Method that will delete (set is_deleted to 1) a result from the results table
+           Parameters: $resultID the id of the result being deleted */
+        public function deleteResult($resultID) {
+            $sqlQuery = 'UPDATE results SET is_deleted = 1 WHERE id = :resultID';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->bindParam(':resultID', $resultID);
+
+            return $pdoStatement->execute();
+        }
+
+        /* Method that will return the next available ID for the results table */
+        public function getInsertID() {
+            $sqlQuery = 'SELECT MAX(id)+1 from results';
+
+            $pdoStatement = $this->dbh->prepare($sqlQuery);
+            $pdoStatement->execute();
+            $result = $pdoStatement->fetch();
+
+            return $result[0];
+        }
 	}
 ?>
