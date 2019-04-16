@@ -38,7 +38,7 @@
         /* Method that will return a specific entry from the results table
            Parameters: $id the id of the entry in question */
         public function getResult($id) {
-            $sqlQuery = 'SELECT rec.id, rec.name, res.comment, u.first_name, u.last_name FROM results res
+            $sqlQuery = 'SELECT rec.id, rec.name, res.comment, u.first_name, u.last_name, u.id AS user_id FROM results res
                         JOIN users u
                         ON res.user_id = u.id
                         JOIN recipes rec

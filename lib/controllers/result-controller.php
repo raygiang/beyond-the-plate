@@ -81,19 +81,21 @@
         $lastName = $res['last_name'];
         $comment = $res['comment'];
 
-        echo "<h3>Recipe: $recipeName</h3>";
+        echo "<h3>Recipe: <a href='recipedetails.php?id=$recID'>$recipeName</a></h3>";
 
-        echo "<form action='views/results/update.php' method='post'>" .
-                "<input type='hidden' name='id' value='$id' />" .
-                "<input type='hidden' name='rec_id' value='$recID' />" .
-                "<input type='hidden' name='comment' value='$comment' />" .
-                "<input type='submit' name='edit_submit' value='Edit' />" .
-             "</form>";
-        echo "<form action='#' method='post'>" .
-                "<input type='hidden' name='id' value='$id' />" .
-                "<input type='hidden' name='rec_id' value='$recID' />" .
-                "<input type='submit' name='delete_submit' value='Delete' />" .
-             "</form>";
+        if(isset($_SESSION['userid']) && $_SESSION['userid'] === $res['user_id']) {
+            echo "<form action='views/results/update.php' method='post'>" .
+                    "<input type='hidden' name='id' value='$id' />" .
+                    "<input type='hidden' name='rec_id' value='$recID' />" .
+                    "<input type='hidden' name='comment' value='$comment' />" .
+                    "<input type='submit' name='edit_submit' value='Edit' />" .
+                 "</form>";
+            echo "<form action='#' method='post'>" .
+                    "<input type='hidden' name='id' value='$id' />" .
+                    "<input type='hidden' name='rec_id' value='$recID' />" .
+                    "<input type='submit' name='delete_submit' value='Delete' />" .
+                 "</form>";
+         }
 
         $imagePath = "resultimages/$id";
         if(file_exists($imagePath)) {
