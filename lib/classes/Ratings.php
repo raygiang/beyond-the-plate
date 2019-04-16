@@ -41,10 +41,7 @@
 		{
 			$sql = "SELECT sum(rating) as sumtotal,count(rating) as cnt FROM ratings where is_deleted=0 and recipe_id=:rid";
 			$pst = $db->prepare($sql);
-			//var_dump($pst);
-			
 			$pst->bindParam(':rid',$rid);
-			
 			$pst->execute();
 			$recipeRating=$pst->fetch(PDO::FETCH_OBJ);
 			$averageRating=$recipeRating->cnt==0?0:$recipeRating->sumtotal/$recipeRating->cnt;

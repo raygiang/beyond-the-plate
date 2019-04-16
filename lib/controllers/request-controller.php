@@ -25,7 +25,7 @@
 
 
 
-
+//echo $_SESSION['userid'];
 
     /* When edit form is successfully submitted, updated data inserts into the recipe_requests table */
 
@@ -68,26 +68,28 @@
                 $returnRequest .= "<td>" . $request->first_name . " " . $request->last_name . "</td>";
                 $returnRequest .= "<td>" . $request->title . "</td>";
                 $returnRequest .= "<td>" . $request->description . "</td>";
-                if(!$_SESSION['user_id'] || !$_SESSION['role'] == 1){
-                $returnRequest .= "<td>" .
-                    "<form action='userdash.php' method='post'>" .
-                        "<input type='submit' name='reply' value='Reply' class='btn btn-secondary' />" .
-                    "</form>" .
-                    "</td>";
-                    $returnRequest .= "</tr>";
-                }else{
+                if($_SESSION['userid'] == $request->user_id || $request->role == 1){
                 $returnRequest .= "<td>" .
                     "<form action='views/reciperequest/editrequest.php' method='post'>" .
                         "<input type='hidden' name = 'id' value='$request->id' />" .
-                        "<input type='submit' name='edit' value='Edit' class='btn btn-secondary' />" .
+                        "<input type='submit' name='edit' value='Edit' class='main-button' />" .
                     "</form>" .
                     "</td>";
                 $returnRequest .= "<td>" .
                     "<form action='#' method='post'>" .
                         "<input type='hidden' name = 'id' value='$request->id' />" .
-                        "<input type='submit' name='delete' value='Delete' class='btn btn-secondary' />" .
+                        "<input type='submit' name='delete' value='Delete' class='main-button' />" .
                     "</form>" .
                     "</td>";
+
+                $returnRequest .= "</tr>";
+                }else{
+                    $returnRequest .= "<td>" .
+                    "<form action='userdash.php' method='post'>" .
+                        "<input type='submit' name='reply' value='Reply' class='main-button' />" .
+                    "</form>" .
+                    "</td>";
+
                 $returnRequest .= "</tr>";
                 }
             }

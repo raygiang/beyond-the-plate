@@ -1,8 +1,10 @@
-//Sticky header
+//Function that runs when the page loads
+window.onload = pageReady;
+
 function addMore(filename) {
   $("<DIV>").load('input_'+filename+'.php', function() {
     $("#"+filename).append($(this).html());
-  }); 
+  });
 }
 
 function deleteRow() {
@@ -14,40 +16,53 @@ function deleteRow() {
     });
   });
 }
+
 function render(val)
 {
-        var n=1;
-        for(i=1;i<=val;i++)
-        {
-                document.getElementById("star"+n).style.backgroundImage="url('images/greenstar.png')";
-                n++;
-        }
-        for(i=1;i<=5-val;i++)
-        {
-                document.getElementById("star"+n).style.backgroundImage="url('images/greystar.png')";
-                n++;
-        }
+    var n=1;
+    for(i=1;i<=val;i++)
+    {
+            document.getElementById("star"+n).style.backgroundImage="url('images/greenstar.png')";
+            n++;
+    }
+    for(i=1;i<=5-val;i++)
+    {
+            document.getElementById("star"+n).style.backgroundImage="url('images/greystar.png')";
+            n++;
+    }
 }
-function pageReady(){
+
+
+//Function that keeps the header on the top
+
+//Function that shows timer on click "Cooking Timer" button
+$('#timer-btn').click(function(){
+    $('#show').slideToggle();
+});
+
+
+function pageReady()
+{
 	var nav = document.getElementById("header");
-	var main = document.getElementById("main");
-	var height = nav.offsetTop;
-	var mHeight = nav.clientHeight;
+    var main = document.getElementById("main");
+    var height = nav.offsetTop;
+    var mHeight = nav.clientHeight;
 
-	function stickyMenuFunction() {
-		if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
-			nav.classList.add("sticky");
-			nav.classList.remove("flex-container");
-			main.style.marginTop = mHeight+"px";
-		}
-		else {
-			nav.classList.remove("sticky");
-			main.style.marginTop = "0px";
-		}
-	}
-	window.onscroll = stickyMenuFunction;
+    window.onscroll = stickyMenuFunction;
 
-
+    function stickyMenuFunction() 
+    {
+        if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
+            nav.classList.add("sticky");
+            nav.classList.remove("flex-container");
+            main.style.marginTop = mHeight+"px";
+        }
+        else {
+            nav.classList.remove("sticky");
+            main.style.marginTop = "0px";
+        }
+    }
+    	
     $("#uploadFile").change(function(){
         $('#image_preview').html("");
         var total_file=document.getElementById("uploadFile").files.length;
@@ -56,7 +71,6 @@ function pageReady(){
           $('#image_preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'>");
         }
     });
-
 
 	var ms = $('#ms').magicSuggest({
         data: 'get_ingredients.php',
@@ -74,7 +88,4 @@ function pageReady(){
             return '<div class="name">' + data.name + '</div>';
         }
     });
-
 }
-window.onload = pageReady;
-
