@@ -69,7 +69,7 @@
                 $returnRequest .= "<td>" . $request->first_name . " " . $request->last_name . "</td>";
                 $returnRequest .= "<td>" . $request->title . "</td>";
                 $returnRequest .= "<td>" . $request->description . "</td>";
-                if(isset($_SESSION['userid']) === $request->user_id || $request->role === 1){
+                if(isset($_SESSION['userid']) == $request->user_id || $request->role == 1){
                 $returnRequest .= "<td>" .
                     "<form action='views/reciperequest/editrequest.php' method='post'>" .
                         "<input type='hidden' name = 'id' value='$request->id' />" .
@@ -84,7 +84,16 @@
                     "</td>";
 
                 $returnRequest .= "</tr>";
-                }else{
+                }else if(!isset($_SESSION['userid'])){
+                    $returnRequest .= "<td>" .
+                    "<form action='login.php' method='post'>" .
+                        "<input type='submit' name='reply' value='Reply' class='main-button' />" .
+                    "</form>" .
+                    "</td>";
+
+                $returnRequest .= "</tr>";
+                }
+                else{
                     $returnRequest .= "<td>" .
                     "<form action='userdash.php' method='post'>" .
                         "<input type='submit' name='reply' value='Reply' class='main-button' />" .

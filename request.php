@@ -40,10 +40,8 @@
     </div>
     <aside id=" request-sidebar">
       <ul id="sidebar-nav">
-        <a href="#"><li>Request a Recipe</li></a>
         <a href="#"><li>Create a Meal Plan</li></a>
         <a href="#"><li>Favourites List</li></a>
-        <a href="#"><li>Cooking Timer</li></a>
       </ul>
     </aside>
  </div>
