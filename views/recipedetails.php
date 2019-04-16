@@ -4,8 +4,53 @@
   	require_once('lib/classes/UserMessages.php');
 	$db = Database::getDb();
   	$r=new Recipe();
+  	$rt = new Rating();
+
   	$id = $_GET["id"];
 	$recipe=$r->getRecipe($id,$db);
+	$recipes=$r->getAllRecipes($db);
+
+	$n=0;
+	$similarRecipesHtml="";
+	foreach($recipes as $similarRecipe){
+		if($similarRecipe->id!=$id && $recipe->category==$similarRecipe->category)
+		{
+			$images=glob("recipeimages/$similarRecipe->id*");
+			$n++;
+			$str="";
+			$userRating = $rt->getAverageRatings($similarRecipe->id,$db);
+			$category = $r->getCategory($similarRecipe->id,$db);
+			for($i=1;$i<=5;$i++)
+			{
+				$image=$i<=$userRating?"greenstar":"greystar";
+				$str.="<div class='star' style=\"background-image:url('images/$image.png');\"></div>";
+			}
+
+			$similarRecipesHtml.="<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>
+					<a href='recipedetails.php?id=$similarRecipe->id'>
+					<div class='recipe' style=background-image:url('$images[0]');>
+						<div class='recipeOuter'>
+							$similarRecipe->name<br><span class='category'>$category</span><br>$str
+						</div>
+					</div>
+					</a>
+			</div>";		
+			if($n==4)
+			{
+				$similarRecipesHtml.="</div>
+				<div class='row'>
+						<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+							<hr/>
+						</div>
+				</div>
+				<div class='row'>";
+				$n=0;
+			}
+		}
+	}
+
+
+
 	$images=glob("recipeimages/$id*");
 
 	//Favourite
@@ -106,7 +151,7 @@
 											value="'.$_SESSION["userid"].'">
 											<input type="hidden" name="recipeid" id="recipeid"
 											value="'.$recipe->id.'">
-											<textarea rows = "5" cols = "105" name = "usermessage" placeholder="Enter details here..."></textarea>
+											<textarea rows = "5" cols = "63" name = "usermessage" placeholder="Enter details here..."></textarea>
 											<br>
 										</div>
 										<div class="modal-footer">
@@ -226,8 +271,17 @@
 			echo $ratingAndCommentsHtml;
 		?>
 	</div>
-
 </div>
+<div class="row">
+	<h3 class="sub-head">Similar Recipes</h3>
+	<hr/>
+</div>
+<div class="row">
+	<?php
+		echo $similarRecipesHtml;
+	?>
+</div>
+
 </div>
 
 <div class="page-wrapper">

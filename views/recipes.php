@@ -3,17 +3,34 @@
   	require_once('lib/classes/database.php');
 	$db = Database::getDb();
   	$r=new Recipe();
-	$recipes=$r->getAllRecipes($db);
+
+  	if(isset($_GET["searchBtn"]))
+  	{
+  		$recipes=$r->getSearchedRecipes($_GET["q"],$db);
+  	}
+  	else if(isset($_GET["id"]) && $_GET["id"]!=0){
+  		$recipes=$r->getCategoryRecipes($_GET["id"],$db);
+  	}
+  	else{
+		$recipes=$r->getAllRecipes($db);
+		$isChecked='checked';
+	}
 	$categories=$r->getAllCategories($db);
 	$rt = new Rating();
 
 
 	$filterHTML="<div class='row' id='filter'>
 		<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-		<h3>Filter Recipes</h3>";
+		<h3>Filter Recipes</h3>
+		<div><input type='checkbox' $isChecked value='$category->name' onChange=\"window.open('recipes.php?id=0','_self');\"> All</div>";
+		$isChecked='';
 		foreach($categories as $category)
 		{
-			$filterHTML.="<div><input type='checkbox' value='$category->name'> $category->name</div>";
+			if(isset($_GET["id"]))
+			{
+				$isChecked=$_GET["id"]==$category->id?'checked':'';
+			}
+			$filterHTML.="<div><input type='checkbox' $isChecked value='$category->name' onChange=\"window.open('recipes.php?id=$category->id','_self');\"> $category->name</div>";
 		}
 		$filterHTML.="</div>
 	</div>";

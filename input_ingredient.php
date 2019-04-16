@@ -16,7 +16,7 @@
 			$units=$r->getUnits($db);
 			foreach($units as $unit)
 			{
-				$str.="<option value='".$unit->id."'>".$unit->unit_name."</option>";
+				$str.="<option value='".$unit->id."'>".$unit->name."</option>";
 			}
 			echo $str;
 		?>
