@@ -7,7 +7,7 @@
 		<label for="result-images">Upload Result Images: </label>
 		<input type="file" id="result-images" name="result_images">
 	</div>
-    
+
     <div>
         <label for="comment">Comment: </label>
         <textarea id="comment" name="comment"></textarea>
