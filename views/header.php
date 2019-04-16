@@ -7,7 +7,7 @@
         </div>
       </a>
     </div>
-
+    <div id="responsive-menu" class="hide"><img src="images/menu.png"></div>
     <div id="search-and-nav" class="flex-container">
       <nav id="main-nav">
         <h2 class="hidden">Main Navigation</h2>

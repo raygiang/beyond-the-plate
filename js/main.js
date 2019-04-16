@@ -62,6 +62,11 @@ function pageReady()
         $('#show').slideToggle();
     });
 
+    //Function that shows menu on click "menu icon"
+    $('#responsive-menu').click(function(){
+        $('#main-nav > ul').slideToggle();
+    });
+
     $("#uploadFile").change(function(){
         $('#image_preview').html("");
         var total_file=document.getElementById("uploadFile").files.length;

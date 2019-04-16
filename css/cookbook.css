@@ -9,7 +9,18 @@
  * 6. FOOD CATEGORY
  * 7. SIDEBAR
  * 8. FOOTER
- * 9. ADMIN MODULE
+ * 9. RESPONSIVE DESIGN
+ * 10. MEAL PLAN
+ * 11. RECIPE RESULTS
+ * 12. SHOPPING LIST
+ * 13. REQUEST RECIPE
+ * 14. ADMIN MODULE
+ * 15. REGISTER USER
+ * 16. UPDATE PROFILE
+ * 17. FAVOURITE RECIPES
+ * 18. CONTACT AUTHOR
+ * 19. AUTO SUGGEST
+ * 20. RECIPE
  ***********************************************/
 
 
@@ -74,8 +85,12 @@ a {
 #show{
   margin: 0 2em;
 }
-/*2.HEADER, SEARCH BAR, LOGO */
 
+
+/*2.HEADER, SEARCH BAR, LOGO */
+#responsive-menu{
+  width: 4%;
+}
 #header {
   border-bottom: 5px solid #ed1c24;
   padding: 0.3em 0;
@@ -275,14 +290,39 @@ a {
   flex: 50%;
   text-align: right;
 }
-/* ***********************************************************************/
- @media (max-width: 599px) {
-  #main-nav nav{
-    display: none;
+
+/* ************ 9. RESPONSIVE DESIGN***********/
+
+@media only screen and (min-width: 950px) {
+ #main-nav ul{
+    display: block;
   }
 }
+@media only screen and (max-width: 950px) {
+  #main-nav ul{
+    display: none;
+  }
+  #responsive-menu{
+    display: block;
+    margin: 1em;
+  }
+  #main-nav li{
+    display: block;
+    margin-right: 1em;
+  }
+  #search-and-nav{
+    display: block;
+    margin-right: 1em;
+  }
+}
+@media only screen and (max-width: 650px) {
+    .banner-content, #banner-image, #logo-container{
+      display: none;
+    }
+}
 
-/*********Meal Plan******************/
+
+/********* 10. MEAL PLAN******************/
 .table-container {
   overflow-x: auto;
 }
@@ -331,14 +371,14 @@ a {
   color: darkblue;
 }
 
-/*********Recipe Results******************/
+/********* 11. RECIPE RESULTS******************/
 
 .result-image {
   width: 20%;
 }
 
 
-/*********Shopping List*******************/
+/********* 12. SHOPPING LIST*******************/
 
 #recipe-suggestions {
   margin: 1em 0;
@@ -354,7 +394,7 @@ a {
   font-weight: bold;
 }
 
-/*********Request Recipe******************/
+/********* 13. REQUEST RECIPE******************/
 .banner-content-request{
   font-family: Georgia;
   font-style: italic;
@@ -387,15 +427,12 @@ a {
 #request-tbl th{
   color: #ed1c24;
 }
-/*#addRequest{
-left: 30vw;
-}*/
 #addReq{
   margin: 0 0 2vw 4vw;
 }
 
 
-/*********Admin Module******************/
+/********* 14. ADMIN MODULE******************/
 #login{
   text-align: center;
   padding: 5em;
@@ -431,7 +468,7 @@ input[type=file]{
 .success{color:#66CC00;padding: 5px; font-weight:bold;}
 
 
-/*********** Register User ************/
+/*********** 15. REGISTER USER ************/
 
 #register{
   text-align: center;
@@ -441,7 +478,7 @@ input[type=file]{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/*********** Update Profile ************/
+/*********** 16. UPDATE PROFILE ************/
 
 #profile-general{
 	display:block;
@@ -450,7 +487,7 @@ input[type=file]{
 #profile-password{
 	display:none;
   }
-/******* Favorite Recipe **************/
+/******* 17. FAVOURITE RECIPES **************/
   .makefavouriteRecipe {
         width: 2.5em;
         height: auto;
@@ -491,7 +528,7 @@ input[type=file]{
 		cursor:pointer;
     }
 
-/***** Contact Author *****/
+/******* 18. CONTACT AUTHOR **************/
 #modelContact{
 		width: 50em;
 	}
@@ -500,7 +537,8 @@ input[type=file]{
   margin: 2em;
   display:block;
 }
-/* Auto Suggest */
+
+/******* 19. AUTO SUGGEST **************/
 .container{
     max-width: 500px;
     border-radius: 5px;
@@ -806,7 +844,8 @@ input[type=file]{
     right: 1px;
     border-radius: 0 3px 3px 0;
 }
-/****************************** Recipe ******************************/
+
+/******* 20. RECIPE **************/
 .recipe{
   width:100%;
   height:200px;
