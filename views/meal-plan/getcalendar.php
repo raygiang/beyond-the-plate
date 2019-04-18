@@ -30,10 +30,10 @@
             }
             else {
                 if($day[1]) {
-                    $calendarString .= '<td data-toggle="modal" data-target="#planModal" class="planDay">' . $day[0] . '</td>';    
+                    $calendarString .= '<td data-toggle="modal" data-target="#planModal" class="planDay">' . $day[0] . '</td>';
                 }
                 else {
-                    $calendarString .= '<td class="calDay">' . $day[0] . '</td>'; 
+                    $calendarString .= '<td class="calDay">' . $day[0] . '</td>';
                 }
             }
         }

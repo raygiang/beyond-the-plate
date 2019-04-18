@@ -58,13 +58,15 @@ function pageReady()
     }
 
     //Function that shows timer on click "Cooking Timer" button
-    $('#timer-btn').click(function(){
+    $('#timer-btn').click(function(e){
         $('#show').slideToggle();
+        e.preventDefault(); //stops page from jumping to the top
     });
 
     //Function that shows menu on click "menu icon"
-    $('#responsive-menu').click(function(){
+    $('#responsive-menu').click(function(e){
         $('#main-nav > ul').slideToggle();
+        e.preventDefault();
     });
 
     $("#uploadFile").change(function(){

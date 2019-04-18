@@ -26,22 +26,22 @@
 <body>
   <main id="main">
     <div class="page-wrapper">
-      <h2>Shopping List</h2>
+      <h2 class="sub-head">Shopping List</h2>
 
       <form action="" method="post">
         <input type="text" id="recipe-search">
         <input id="recipe-list" type="hidden" name="recipe_list">
-        <input type="submit" name="genShopList" value="Create Shopping List">
+        <input class="btn btn-danger" type="submit" name="genShopList" value="Create Shopping List">
       </form>
 
       <div id="selected-items">
-           <h4>Currently Selected:</h4>
+           <h4 class="sub-head">Currently Selected:</h4>
       </div>
 
       <div id="recipe-suggestions"></div>
 
       <div id="shopping-list">
-        <h3>Your Shopping List</h3>
+        <h3 class="sub-head">Your Shopping List</h3>
         <?php
           if(isset($sList)) {
             foreach($sList as $item) {
