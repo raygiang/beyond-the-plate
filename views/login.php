@@ -44,6 +44,7 @@
 		}
 	}
 ?>
+<main id="main">
 <div class="row">
 	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
 	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -71,7 +72,7 @@
 				<input type="submit" name="loginBtn" value="Log In" class="btn btn-danger">
 				<input type="button" value="Forgot Password" class="btn btn-primary">
 				<div>
-					<?php 
+					<?php
 						if(isset($_GET["e"]))
 						{
 							if($_GET["e"]==1)
@@ -82,7 +83,7 @@
 								echo '<div class="alert alert-danger" role="alert"> Invalid Username & Password!!!</div>';
 							}
 						}
-						
+
 					?>
 				</div>
 			</form>
@@ -90,3 +91,4 @@
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
 </div>
+</main>

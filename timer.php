@@ -9,15 +9,15 @@ session_start();
 	// print current($getTimer)['description'];
 	?>
 
-<html lang="en">
+<!-- <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Timer</title>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/timer.css">
 </head>
-<body>
-	<main id="main">
+<body> -->
+	<!-- <main id="main"> -->
 <!-- <div class="container">
 	<div class="row"> -->
 		<div>
@@ -34,8 +34,8 @@ session_start();
 		<span>
 			<input id="btnStop" type="button" value="STOP" class="btn btn-secondary"/>
 		</span>
-	</main>
-</body>
+	<!-- </main> -->
+<!-- </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
-</html>
+</html> -->

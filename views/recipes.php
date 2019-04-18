@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				</a>
-		</div>";		
+		</div>";
 		if($n==3)
 		{
 			$recipeHTML.="</div>
@@ -71,10 +71,11 @@
 		}
 	}
 ?>
+<main id="main">
 <div class="page-wrapper">
 	<div class="row">
 		<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>
-			<?php  
+			<?php
 				echo $filterHTML;
 			?>
 		</div>
@@ -87,3 +88,4 @@
 		</div>
 	</div>
 </div>
+</main>

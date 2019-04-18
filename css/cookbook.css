@@ -77,7 +77,7 @@ a {
   color: #ed1c24;
   display: block;
   margin: 0;
-  padding: 0.5em;
+  padding: 0.5em 0;
 }
 .hide{
   display: none;
@@ -319,6 +319,12 @@ a {
     .banner-content, #banner-image, #logo-container{
       display: none;
     }
+    #logo-text{
+      display: block;
+      float: left;
+      font-family: Georgia;
+      font-style: italic;
+    }
 }
 
 
@@ -385,13 +391,15 @@ a {
 }
 
 .search-results {
-  border: 1px solid #000;
+  box-shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
   padding: 1em;
   cursor: pointer;
+  margin-top: 0.5em;
 }
 
 .search-results div:first-child {
   font-weight: bold;
+  color: #ed1c24;
 }
 
 /********* 13. REQUEST RECIPE******************/
@@ -502,10 +510,15 @@ input[type=file]{
         top: 0;
         left: 0;
         z-index: 99;
+
+    }
+    .makefavouriteRecipe img{
+      margin-left: 0.5em;
     }
     .makefavouriteRecipe:hover .img-top {
         display: inline;
 		cursor:pointer;
+
     }
 	/*if already favourite Recipe*/
   .favouriteRecipe {
@@ -594,7 +607,7 @@ input[type=file]{
     height: auto;
 }
 .ms-inv{
-    border: 1px solid #CC0000;
+    border: 1px solid #ed1c24;
 }
 .ms-ctn-readonly{
     cursor: pointer;
@@ -786,7 +799,7 @@ input[type=file]{
     background: #FFF;
 }
 .ms-sel-ctn .ms-sel-item-active{
-    border: 1px solid red;
+    border: 1px solid #ed1c24;
     background: #757575;
 }
 .ms-stacked .ms-sel-item{
@@ -872,12 +885,21 @@ a:hover{
   text-align: justify;
   text-decoration: none;
 }
+#timer-btn:hover{
+  text-decoration: none;
+  color: #ed1c24 !important;
+  background-color: #ffffff !important;
+}
+#timer-btn{
+  color: #ffffff !important ;
+}
+
 .h3{
-  color:red;
+  color:#ed1c24;
   font-size:1.2em;
 }
 .h2{
-  color:red;
+  color:#ed1c24;
   font-size: 2em;
 }
 .secondaryImage{
