@@ -50,7 +50,7 @@
       <ul id="sidebar-nav">
         <a href="request.php"><li>Request a Recipe</li></a>
         <a href="mealplan.php"><li>Create a Meal Plan</li></a>
-        <a href="#"><li>Favourites List</li></a>
+        <a href="userdash.php"><li>Favourites List</li></a>
       </ul>
     </aside>
   </div>

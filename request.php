@@ -43,8 +43,8 @@
     </div>
     <aside id=" request-sidebar">
       <ul id="sidebar-nav">
-        <a href="#"><li>Create a Meal Plan</li></a>
-        <a href="#"><li>Favourites List</li></a>
+        <a href="mealplan.php"><li>Create a Meal Plan</li></a>
+        <a href="userdash.php"><li>Favourites List</li></a>
       </ul>
     </aside>
  </div>
