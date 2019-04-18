@@ -4,11 +4,11 @@
     if(isset($_POST['day'])){
         session_start();
         require_once '../../vendor/autoload.php';
-        $page = new Mealplan(Database::getDb(), 'Meal Plan', getdate(intval($_POST['day'])), $_SESSION['user_id']);
+        $page = new Mealplan(Database::getDb(), 'Meal Plan', getdate(intval($_POST['day'])), $_SESSION['userid']);
     }
     else {
         require_once 'vendor/autoload.php';
-        $page = new Mealplan(Database::getDb(), 'Meal Plan', getdate(), $_SESSION['user_id']);
+        $page = new Mealplan(Database::getDb(), 'Meal Plan', getdate(), $_SESSION['userid']);
     }
 
     $calendarArray = $page->generateCalendar();
