@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					</a>
-			</div>";		
+			</div>";
 			if($n==4)
 			{
 				$similarRecipesHtml.="</div>
@@ -266,14 +266,14 @@
 		</div>
 	</div>
 	<div>
-		<h3 class="sub-head">Recent Comments</h3>
+		<h3 class="h3" style="margin-left:0.8em;">Recent Comments</h3>
 		<?php
 			echo $ratingAndCommentsHtml;
 		?>
 	</div>
 </div>
-<div class="row">
-	<h3 class="sub-head">Similar Recipes</h3>
+<div class="row page-wrapper">
+	<h3 class="h3">Similar Recipes</h3>
 	<hr/>
 </div>
 <div class="row">
@@ -281,7 +281,6 @@
 		echo $similarRecipesHtml;
 	?>
 </div>
-
 </div>
 
 <div class="page-wrapper">
