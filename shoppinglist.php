@@ -27,19 +27,18 @@
   <main id="main">
     <div class="page-wrapper">
       <h2>Shopping List</h2>
-
-      <input type="text" id="recipe-search">
     
+      <form action="" method="post">
+        <input type="text" id="recipe-search">
+        <input id="recipe-list" type="hidden" name="recipe_list">
+        <input type="submit" name="genShopList" value="Create Shopping List">
+      </form>
+
       <div id="selected-items">
         <h4>Currently Selected:</h4>
       </div>
 
       <div id="recipe-suggestions"></div>
-
-      <form action="" method="post">
-        <input id="recipe-list" type="hidden" name="recipe_list">
-        <input type="submit" name="genShopList" value="Create Shopping List">
-      </form>
 
       <div id="shopping-list">
         <h3>Your Shopping List</h3>
@@ -55,6 +54,6 @@
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="<?= SCRIPTS ?>shoppinglist.js"></script>
+  <script src="<?= SCRIPTS ?>search.js"></script>
 </body>
 </html>

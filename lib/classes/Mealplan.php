@@ -51,15 +51,16 @@ class Mealplan extends Page
         return $pdoStatement->execute();
     }
 
-    public function movePlan($planID, $date) {
+    public function movePlan($planID, $date, $pc_id) {
         $currDate = time();
 
-        $sqlQuery = 'UPDATE meal_plans SET date = :date, modified_date = :modDate WHERE id = :planID';
+        $sqlQuery = 'UPDATE meal_plans SET date = :date, modified_date = :modDate, plan_category_id = :pc_id WHERE id = :planID';
 
         $pdoStatement = $this->dbh->prepare($sqlQuery);
         $pdoStatement->bindParam(':date', $date);
         $pdoStatement->bindParam(':modDate', $currDate);
         $pdoStatement->bindParam(':planID', $planID);
+        $pdoStatement->bindParam(':pc_id', $pc_id);
 
         return $pdoStatement->execute();
     }
@@ -119,7 +120,8 @@ class Mealplan extends Page
         $currentYear = $this->getRefDate()['year'];
         $user = $this->getUserID();
 
-        $sqlQuery = "SELECT mp.id, r.name, pc.name from meal_plans mp
+        $sqlQuery = "SELECT mp.id, date, r.id as rec_id, r.name, pc.id AS pc_id, pc.name AS category 
+            FROM meal_plans mp
             JOIN recipes r
             ON r.id = mp.recipe_id
             JOIN plan_categories pc
@@ -148,6 +150,22 @@ class Mealplan extends Page
         $categories = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
 
         return $categories;
+    }
+
+    function getOptions($pc_id=null) {
+        $categoryList = $this->getCategories();
+        $optionList = "";
+
+        foreach($categoryList as $category) {
+            if($category->id === $pc_id) {
+                $optionList .= "<option value='$category->id' selected>$category->name</option>";   
+            }
+            else {
+                $optionList .= "<option value='$category->id'>$category->name</option>";    
+            }
+        }
+
+        return $optionList;
     }
 }
 ?>

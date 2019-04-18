@@ -88,12 +88,12 @@
                     "<input type='hidden' name='id' value='$id' />" .
                     "<input type='hidden' name='rec_id' value='$recID' />" .
                     "<input type='hidden' name='comment' value='$comment' />" .
-                    "<input type='submit' name='edit_submit' value='Edit' />" .
+                    "<input type='submit' class='main-button' name='edit_submit' value='Edit' />" .
                  "</form>";
             echo "<form action='#' method='post'>" .
                     "<input type='hidden' name='id' value='$id' />" .
                     "<input type='hidden' name='rec_id' value='$recID' />" .
-                    "<input type='submit' name='delete_submit' value='Delete' />" .
+                    "<input type='submit' class='main-button' name='delete_submit' value='Delete' />" .
                  "</form>";
          }
 
