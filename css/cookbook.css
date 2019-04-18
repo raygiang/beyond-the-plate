@@ -319,6 +319,12 @@ a {
     .banner-content, #banner-image, #logo-container{
       display: none;
     }
+    #logo-text{
+      display: block;
+      float: left;
+      font-family: Georgia;
+      font-style: italic;
+    }
 }
 
 

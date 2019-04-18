@@ -20,9 +20,12 @@
     <p class="banner-content-request">Request a Recipe</p>
     <img id="banner-image" src="images/homepage-categories/appetizer-dark-delicious-326279.jpg" alt="Picture of table with salad">
   </div>
-   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addRequest" id="addReq">
+  <?php if(isset($_SESSION['userid'])){
+   echo '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addRequest" id="addReq">
     Add a Request
-  </button>
+  </button>';
+    }
+  ?>
   <div class="page-wrapper flex-container">
     <div class="col-12 col-md-10">
      <table class="table" id="request-tbl">

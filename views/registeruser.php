@@ -9,15 +9,15 @@
 		$lastname=$_POST["lastname"];
 		$email=$_POST["email"];
 		$password=$_POST["password"];
-		
-		$db = Database::getDb();		
+
+		$db = Database::getDb();
 		$u = new User();
-		
+
 		if($u->verifyEmailForNewUser($email,$db))
 		{
 			$user=$u->addUser($email,$password,$firstname,$lastname,$db);
 			header("location:registeruser.php?e=1");
-			
+
 		}
 		else
 		{
@@ -25,6 +25,7 @@
 		}
 	}
 ?>
+<main id="main">
 <div class="row">
 	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -73,7 +74,7 @@
 					<input type="submit" name="registerBtn" value="Create my profile" class="btn btn-danger">
 				</div>
 				<div>
-					<?php 
+					<?php
 						if(isset($_GET["e"]))
 						{
 							if($_GET["e"]==1)
@@ -84,7 +85,7 @@
 								echo '<div class="alert alert-danger" role="alert"> Email already exists.!!!</div>';
 							}
 						}
-						
+
 					?>
 				</div>
 			</form>
@@ -92,3 +93,4 @@
 	</div>
 	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
 </div>
+</main>

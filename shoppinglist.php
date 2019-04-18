@@ -28,10 +28,15 @@
     <div class="page-wrapper">
       <h2>Shopping List</h2>
 
-      <input type="text" id="recipe-search">
-    
+      <!-- <div class="form-group">
+        <label class="col-form-label" for="recipe-search">Currently Selected:</label>
+        <input type="text" class="form-control" id="recipe-search" data-error="Please enter name." required />
+        <div class="help-block with-errors"></div>
+      </div> -->
+
+      <h4>Currently Selected:</h4>
       <div id="selected-items">
-        <h4>Currently Selected:</h4>
+        <input type="text" id="recipe-search">
       </div>
 
       <div id="recipe-suggestions"></div>
