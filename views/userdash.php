@@ -125,7 +125,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" name="sbtBtn" class="btn btn-primary">Save changes</button>
+							<button type="submit" name="sbtBtn" class="btn btn-primary">Add Recipe</button>
 						</div>
 					</form>
 				</div>
@@ -160,7 +160,7 @@
 							<td>".$recipe->description."</td>
 							<td>".$recipe->authorfname." ".$recipe->authorlname."</td>
 							<td>".$userRatingHtml."</td>
-							<td><button class='btn btn-success'>Edit</button><button class='btn btn-danger'>Delete</button></td>
+							<td><form action='deleterecipe.php' method='GET'><input type='hidden' value='$recipe->id' name='recipeId'><button type='submit' class='btn btn-danger'>Delete</button></form></td>
 						</tr>";
 					}
 					echo $str."</table>";
