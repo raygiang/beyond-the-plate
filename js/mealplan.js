@@ -119,7 +119,7 @@ function pageInit() {
             main.style.marginTop = "0px";
         }
     }
-
+}
     $("#uploadFile").change(function(){
     $('#image_preview').html("");
     var total_file=document.getElementById("uploadFile").files.length;
@@ -129,13 +129,6 @@ function pageInit() {
     }
     });
 
-
-
-    //Function that shows menu on click "menu icon"
-    $('#responsive-menu').click(function(e){
-        $('#main-nav > ul').slideToggle();
-        e.preventDefault();
-    });
 
     var ms = $('#ms').magicSuggest({
         data: 'get_ingredients.php',
@@ -153,7 +146,6 @@ function pageInit() {
             return '<div class="name">' + data.name + '</div>';
         }
     });
-
 
     /* Actual Mealplan.js */
 

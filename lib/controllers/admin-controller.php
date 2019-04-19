@@ -56,7 +56,7 @@ if(isset($_POST['details'])) {
 
   $count = $admin->getUser($_POST['id']);
   if($count) {
-            header('Location: userdash.php?id=$id');
+            header('Location: userdash.php');
         }
 }
 
