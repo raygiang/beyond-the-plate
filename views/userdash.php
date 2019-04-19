@@ -255,7 +255,7 @@
 	</div>
 
 	<div class="tab-pane fade" id="pills-mealplan" role="tabpanel" aria-labelledby="pills-mealplan-tab">
-	Mealplan
+		<?php require_once('mealplan.php'); ?>
 	</div>
 
 	<!-- <div class="tab-pane fade" id="pills-requests" role="tabpanel" aria-labelledby="pills-requests-tab">

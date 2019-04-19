@@ -24,6 +24,8 @@
   <link rel="stylesheet" type="text/css" href="css/cookbook.css">
 </head>
 <body>
+  <?php $shopList->generateHeader(); ?>
+
   <main id="main">
     <div class="page-wrapper">
       <h2 class="sub-head">Shopping List</h2>
@@ -52,6 +54,8 @@
       </div>
     </div>
   </main>
+
+  <?php $shopList->generateFooter(); ?>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="<?= SCRIPTS ?>search.js"></script>
