@@ -44,7 +44,7 @@
     <aside id=" request-sidebar">
       <ul id="sidebar-nav">
         <a href="shoppinglist.php"><li>Shopping List</li></a>
-        <a href="#"><li>Favourites List</li></a>
+        <a href="userdash.php"><li>Favourites List</li></a>
       </ul>
     </aside>
  </div>
