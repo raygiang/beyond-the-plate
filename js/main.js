@@ -57,6 +57,7 @@ function pageReady()
         }
     }
 
+
     //Function that shows timer on click "Cooking Timer" button
     $('#timer-btn').click(function(e){
         $('#show').slideToggle();
@@ -66,8 +67,11 @@ function pageReady()
     //Function that shows menu on click "menu icon"
     $('#responsive-menu').click(function(e){
         $('#main-nav > ul').slideToggle();
-        e.preventDefault();
+         e.preventDefault();
     });
+
+
+
 
     $("#uploadFile").change(function(){
         $('#image_preview').html("");
