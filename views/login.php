@@ -21,12 +21,13 @@
 				$_SESSION["role"]=$user->role;
 				$_SESSION["userid"]=$user->id;
 				$u->successfulLogin($email,$db);   // To update last login fields in user table
-				var_dump($_POST);
+				//var_dump($user);
 				if(!empty($_POST["redirect"]))
 				{
 					header("location:".$_POST["redirect"]);
 				}
 				else{
+					echo $user->role;
 					if($user->role==1)
 					{
 						header("location:admindashboard.php");
