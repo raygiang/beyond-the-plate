@@ -28,6 +28,24 @@
  - uploadfile.php
  - userdash.php
 
+**Raymond's Features**
+
+**Meal Plan**
+  - mealplan.php
+  - views/meal-plan (all files inside)
+  - lib/classes/Mealplan.php
+  - js/mealplan.js
+
+**Result**
+  - views/results (all files inside)
+  - lib/controllers/result-controller.php
+  - lib/classes/Result.php
+
+**Shopping List**
+  - shoppinglist.php
+  - lib/classes/ShoppingList.php
+  - views/search-results.php
+  - js/search.js
 
  **********************************************************************************************************
 

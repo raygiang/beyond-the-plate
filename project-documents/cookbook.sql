@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: project-cookbook.caablfu69mfx.us-east-2.rds.amazonaws.com:3306:3306
--- Generation Time: Apr 16, 2019 at 06:40 PM
+-- Generation Time: Apr 20, 2019 at 05:29 AM
 -- Server version: 5.6.40-log
 -- PHP Version: 7.3.0
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cookbook`
 --
+CREATE DATABASE IF NOT EXISTS `cookbook` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `cookbook`;
 
 -- --------------------------------------------------------
 
@@ -348,7 +350,8 @@ CREATE TABLE `favourites` (
 INSERT INTO `favourites` (`id`, `recipe_id`, `user_id`, `is_deleted`, `created_date`, `modified_date`) VALUES
 (12, 1554816159, 4, 0, 1555419100, 1555419100),
 (13, 1554816158, 4, 0, 1555419461, 1555419461),
-(14, 1554816161, 1, 0, 1555427593, 1555427593);
+(14, 1554816161, 1, 0, 1555427593, 1555427593),
+(15, 1554816159, 2, 0, 1555722275, 1555722275);
 
 -- --------------------------------------------------------
 
@@ -495,6 +498,36 @@ CREATE TABLE `meal_plans` (
   `plan_category_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `meal_plans`
+--
+
+INSERT INTO `meal_plans` (`id`, `recipe_id`, `date`, `user_id`, `is_deleted`, `created_date`, `modified_date`, `plan_category_id`) VALUES
+(1, 1554816158, 1555560000, 1, 0, 1555521461, 1555610659, 4),
+(2, 1554816160, 1555905600, 1, 0, 1555616181, 1555616602, 5),
+(3, 1554816162, 1556596800, 1, 0, 1555616200, 1555616200, 3),
+(4, 1554816161, 1553054400, 1, 0, 1555616230, 1555616230, 3),
+(5, 1554816158, 1555473600, 1, 0, 1555616259, 1555616259, 2),
+(6, 1554816162, 1558152000, 1, 0, 1555616655, 1555616784, 3),
+(7, 1554816163, 1558497600, 1, 0, 1555616765, 1555616765, 1),
+(12, 1554816161, 1556337600, 1, 0, 1555624476, 1555624476, 4),
+(14, 1554816175, 1556510400, 1, 0, 1555624722, 1555624722, 4),
+(16, 1554816161, 1554264000, 1, 1, 1555624743, 1555624743, 3),
+(17, 1554816158, 1555646400, 4, 1, 1555625036, 1555625044, 1),
+(18, 1554816158, 0, 4, 0, 1555625065, 1555625065, 1),
+(19, 1554816158, 1555646400, 4, 0, 1555625083, 1555625083, 1),
+(20, 1554816160, 1555473600, 7, 1, 1555634423, 1555634423, 2),
+(21, 1554816159, 1554436800, 7, 0, 1555634474, 1555634484, 1),
+(22, 1554816162, 1555560000, 7, 0, 1555634520, 1555634520, 1),
+(23, 1554816160, 1556337600, 4, 0, 1555715194, 1555715194, 2),
+(24, 1554816160, 1555300800, 7, 0, 1555723721, 1555723907, 4),
+(25, 1554816160, 1555387200, 7, 0, 1555723800, 1555723810, 4),
+(26, 1554816161, 1555387200, 7, 0, 1555723931, 1555723931, 3),
+(27, 1554816158, 1557892800, 7, 0, 1555723979, 1555723979, 1),
+(28, 1554816160, 1554868800, 7, 1, 1555724352, 1555724352, 1),
+(29, 1554816163, 1554868800, 7, 0, 1555724765, 1555724765, 2),
+(30, 1555359154, 1555473600, 7, 0, 1555725009, 1555725009, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -514,7 +547,11 @@ CREATE TABLE `plan_categories` (
 --
 
 INSERT INTO `plan_categories` (`id`, `name`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'Breakfast', 0, 1552696665, 1552696665);
+(1, 'Breakfast', 0, 1552696665, 1552696665),
+(2, 'Lunch', 0, 1552696665, 1552696665),
+(3, 'Dinner', 0, 1552696665, 1552696665),
+(4, 'Snacks', 0, 1552696665, 1552696665),
+(5, 'Dessert', 0, 1552696665, 1552696665);
 
 -- --------------------------------------------------------
 
@@ -538,7 +575,9 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`id`, `recipe_id`, `user_id`, `rating`, `comment`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(2, 1554816158, 5, 3, 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ', 0, 1555423128, 1555423128);
+(6, 1554816175, 4, 5, 'The best mango smoothie I\'ve ever eaten.', 0, 1555624241, 1555624241),
+(7, 1554816158, 5, 5, 'I love the recipe. Its so easy to make and taste great!!!', 0, 1555709346, 1555709346),
+(8, 1555430167, 5, 4, 'Great Taste', 0, 1555709569, 1555709569);
 
 -- --------------------------------------------------------
 
@@ -609,8 +648,10 @@ CREATE TABLE `recipe_requests` (
 --
 
 INSERT INTO `recipe_requests` (`id`, `user_id`, `title`, `description`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 4, 'Apple Pie', 'I am looking for the most delicious apple pie.\r\n', 0, 1555361566, 1555361566),
-(4, 4, 'Tuna Salad', 'I&#39;m looking for the best tuna salad recipe.', 0, 1555381832, 1555381832);
+(1, 4, 'Apple Pie', 'I am looking for the most delicious apple pie. Sweet\r\n', 0, 1555361566, 1555361566),
+(4, 4, 'Tuna Salad', 'I&#39;m looking for the best tuna salad recipe.', 0, 1555381832, 1555381832),
+(5, 4, 'Cherry tart', 'I am looking for a cherry tart recipe.', 1, 1555607517, 1555607517),
+(6, 4, 'Cherry tart', 'I would like to ..', 0, 1555727206, 1555727206);
 
 -- --------------------------------------------------------
 
@@ -642,12 +683,14 @@ INSERT INTO `results` (`id`, `recipe_id`, `user_id`, `comment`, `is_deleted`, `c
 (19, 1554816174, 4, 'Test', 0, 1555380966, 1555380966),
 (24, 1554816158, 1, 'hi', 0, 1555423832, 1555423832),
 (25, 1554816158, 1, 'Delicious', 0, 1555423908, 1555428037),
-(26, 1554816175, 4, 'Test', 0, 1555424021, 1555424021),
+(26, 1554816175, 4, 'Test', 1, 1555424021, 1555424021),
 (27, 1554816175, 4, 'Test', 1, 1555424258, 1555424258),
 (28, 1554816159, 4, 'Muffins', 1, 1555424637, 1555424637),
 (29, 1554816158, 1, 'testing again', 0, 1555424792, 1555424792),
 (30, 1554816158, 1, 'hay', 0, 1555424903, 1555424903),
-(31, 1554816159, 4, 'It&#39;s amazing', 0, 1555431252, 1555431252);
+(31, 1554816159, 4, 'It&#39;s amazing', 0, 1555431252, 1555431252),
+(32, 1554816158, 7, 'test', 0, 1555727454, 1555727454),
+(33, 1554816175, 7, 'Test', 0, 1555727479, 1555727479);
 
 -- --------------------------------------------------------
 
@@ -739,11 +782,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `last_login`, `role`, `is_deleted`, `created_date`, `modified_date`) VALUES
-(1, 'johnsmith@testmail.com', '$2y$10$bS9WqPXCx49enGjHnfOU7.ZrR6YQb5oCYiEznnvCECwcyYvBEIa0u', 'John', 'Smith', 1555428879, 1, 0, 2147483647, 2147483647),
-(2, 'test@gmail.com', '$2y$10$uo3MXEaAWqGV/oMeXp0AeOtU5yAZzKiFkfb3NLjkdLNmDu24mTkmG', 'Amandeep', 'Singh', 1555132698, 2, 0, 1554906839, 1554906874),
+(1, 'johnsmith@testmail.com', '$2y$10$bS9WqPXCx49enGjHnfOU7.ZrR6YQb5oCYiEznnvCECwcyYvBEIa0u', 'John', 'Smith', 1555730230, 1, 0, 2147483647, 2147483647),
+(2, 'test@test.com', '$2y$10$uo3MXEaAWqGV/oMeXp0AeOtU5yAZzKiFkfb3NLjkdLNmDu24mTkmG', 'Test', 'Test', 1555722254, 2, 1, 1554906839, 1554906874),
 (3, 'tes2@gmail.com', '$2y$10$a4desSbK2kQU18GcOLsSoOCD8MEIfkAt5yM88Z4jkOwYXLQrGgCRO', 'test2', 'test', 1554911883, 2, 0, 1554911853, 1554911853),
-(4, 'sam@mail.com', '$2y$10$oL4BYpGDiBLS3RVzfzYileowXHpHBd.7xjqYhKy.y3MsbpwTKx7QG', 'Sam', 'Smith', 1555429071, 2, 0, 1555356280, 1555356280),
-(5, 'erbirindersingh@gmail.com', '$2y$10$Mq6ZJ8u9Ozrsy1ztgwLk/eZPG2tSTgN8ZpM3xl0mTDFSS2WubfQly', 'Birinder', 'Singh', 1555427315, 2, 0, 1555356280, 1555356280);
+(4, 'sam@mail.com', '$2y$10$oL4BYpGDiBLS3RVzfzYileowXHpHBd.7xjqYhKy.y3MsbpwTKx7QG', 'Sam', 'Smith', 1555726358, 2, 0, 1555356280, 1555356280),
+(5, 'erbirindersingh@gmail.com', '$2y$10$Mq6ZJ8u9Ozrsy1ztgwLk/eZPG2tSTgN8ZpM3xl0mTDFSS2WubfQly', 'Birinder', 'Singh', 1555730337, 2, 0, 1555356280, 1555356280),
+(6, 'test@test3.com', '$2y$10$bOlWTqdwudNaNpjLNPMto.DZMIS/e1Lc5MXK1jMTJFvMyZOtB6IZO', 'Testy', 'Test', 0, 2, 0, 1555604946, 1555604946),
+(7, 'bobjim@test.com', '$2y$10$OXJLaVIqcKOOTOl0RmLLBewxDd17e3YX6mnVoeuzHUjtonpfS6upu', 'Bob', 'Jim', 1555719989, 2, 0, 1555634194, 1555634194);
 
 --
 -- Indexes for dumped tables
@@ -896,7 +941,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `ingredients`
@@ -914,19 +959,19 @@ ALTER TABLE `instructions`
 -- AUTO_INCREMENT for table `meal_plans`
 --
 ALTER TABLE `meal_plans`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `plan_categories`
 --
 ALTER TABLE `plan_categories`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `recipes`
@@ -944,13 +989,13 @@ ALTER TABLE `recipe_images`
 -- AUTO_INCREMENT for table `recipe_requests`
 --
 ALTER TABLE `recipe_requests`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `result_images`
@@ -974,7 +1019,7 @@ ALTER TABLE `usermessages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -1053,6 +1098,11 @@ ALTER TABLE `results`
 --
 ALTER TABLE `result_images`
   ADD CONSTRAINT `resultimagesresult` FOREIGN KEY (`result_id`) REFERENCES `results` (`id`);
+--
+-- Database: `innodb`
+--
+CREATE DATABASE IF NOT EXISTS `innodb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `innodb`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
