@@ -21,4 +21,5 @@
     <span id="copyright-info">&copy; Copyright 2019, Webcoholics</span>
   </div>
  <script type="text/javascript" src="js/main.js" ></script>
+ <script type="text/javascript" src="js/mealplan.js" ></script>
 </footer>
