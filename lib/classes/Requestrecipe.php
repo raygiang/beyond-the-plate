@@ -5,18 +5,18 @@ class Requestrecipe extends Page
 		private $db;
 
 		/* Constructor function for Request
-           Parameters: $db the PDO for the database */
-    public function __construct($db, $title, $custLinks=null)
-    {
-        parent::__construct($title, $custLinks);
-         $this->db = $db;
-    }
+		       Parameters: $db the PDO for the database */
+		public function __construct($db, $title, $custLinks=null)
+		{
+		    parent::__construct($title, $custLinks);
+		     $this->db = $db;
+		}
 
 		/*Method that gets full name and role from users table
 		and posted requests from the recipe_requeststable
 		WHERE is_deleted: 0 - means the request is not deleted */
 
-    public function getAllRequests(){
+		public function getAllRequests(){
 
 		$sql = "SELECT first_name, last_name, role, recipe_requests.user_id, recipe_requests.id, title, description, recipe_requests.is_deleted
 						FROM users
@@ -108,6 +108,19 @@ class Requestrecipe extends Page
 		return $count;
 
 	}
+
+/*Method that allows to search the request */
+	 public function getSearchRequest($title) {
+            $sql = "SELECT title, description FROM recipe_requests
+            WHERE title LIKE '%$title%'";
+
+            $pst = $this->db->prepare($sql);
+            $pst->execute();
+
+            $resultList = $pst->fetchAll(PDO::FETCH_OBJ);
+
+            return $resultList;
+        }
 
 }
 ?>

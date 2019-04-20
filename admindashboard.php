@@ -28,9 +28,9 @@
         <a class="nav-link admtop" href="logout.php">Log out</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+     <form class="form-inline my-2 my-lg-0" action="recipes.php" method='GET' id="search-form">
+      <input class="form-control mr-sm-2" id="search-bar" type="text" name="q">
+      <button class="btn btn-default my-2 my-sm-0" type="submit" name="searchBtn">Search</button>
     </form>
   </div>
 </nav>
@@ -55,12 +55,6 @@
             <a class="nav-link" href="#" id="recipes" >
               <i class="far fa-clock"></i>
               Recently Posted Recipies
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-fire-alt"></i>
-              Popular Recipies
             </a>
           </li>
           <li class="nav-item">

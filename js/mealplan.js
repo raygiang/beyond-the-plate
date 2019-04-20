@@ -69,7 +69,7 @@ function initCalendarListeners() {
 
     for(let i=0; i < planDays.length; i++) {
         planDays[i].addEventListener("click", function() {
-            let unixTime = parseInt(refDay) + 86400 * 
+            let unixTime = parseInt(refDay) + 86400 *
                 (planDays[i].textContent - 1);
             $.post('views/meal-plan/viewmealplans.php',
                 { date: unixTime },
@@ -88,7 +88,7 @@ function populateMonthDropDown(monthDropDown) {
         let monthSelectOption = document.createElement("option");
 
         monthSelectOption.value = Math.round(referenceMonths[i].getTime()/1000);
-        monthSelectOption.innerHTML = monthNames[monthReference] 
+        monthSelectOption.innerHTML = monthNames[monthReference]
             + " " + yearReference;
 
         if(i === 3) {
@@ -119,7 +119,7 @@ function pageInit() {
             main.style.marginTop = "0px";
         }
     }
-
+}
     $("#uploadFile").change(function(){
     $('#image_preview').html("");
     var total_file=document.getElementById("uploadFile").files.length;
@@ -129,17 +129,6 @@ function pageInit() {
     }
     });
 
-    //Function that shows timer on click "Cooking Timer" button
-    $('#timer-btn').click(function(e){
-        $('#show').slideToggle();
-        e.preventDefault(); //stops page from jumping to the top
-    });
-
-    //Function that shows menu on click "menu icon"
-    $('#responsive-menu').click(function(e){
-        $('#main-nav > ul').slideToggle();
-        e.preventDefault();
-    });
 
     var ms = $('#ms').magicSuggest({
         data: 'get_ingredients.php',
@@ -158,7 +147,6 @@ function pageInit() {
         }
     });
 
-    
     /* Actual Mealplan.js */
 
     initScrollingHeader();
