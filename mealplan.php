@@ -61,13 +61,13 @@
           </button>
         </div>
         <div id="add-info" class="modal-body">
-          <form action="#" method="post">
+          <form id="add-plan-form" action="#" method="post">
             <input id="selected-recipe" type="hidden" name="selected_recipe">
             <div class="form-row"><input type="text" id="recipe-search"></div>
             <div id="recipe-suggestions"></div>
             <div class="form-row"><input type='date' name='new_date'></div>
             <div class="form-row"><select name='pc-dropdown'><?= $page->getOptions($plan->pc_id) ?></select></div>
-            <input type="submit" name="add_plan" value="Add Meal Plan">
+            <input id="add-plan-submit" type="submit" name="add_plan" value="Add Meal Plan">
           </form>
         </div>
         <div class="modal-footer">

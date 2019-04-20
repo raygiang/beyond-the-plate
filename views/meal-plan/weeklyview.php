@@ -1,38 +1,43 @@
 <?php
+    session_start();
     date_default_timezone_set('Canada/Eastern');
 
-    require_once 'vendor/autoload.php';
-    $page = new Mealplan(Database::getDb(), 'Meal Plan', getdate(), $_SESSION['userid']);
+    require_once '../../vendor/autoload.php';
 
-    $calendarArray = $page->generateCalendar();
+    $dateInfo = explode(',', $_POST['refDate']);
+    $monthStartRef = $dateInfo[1] . '-' . $dateInfo[0] . '-1';
+    $monthStartDate = new DateTime($monthStartRef);
+    $monthStart = getdate($monthStartDate->getTimestamp());
 
-    $calendarString = '<table id="meal-plan-cal"><thead><tr>'
-        . '<th>Sunday</th>'
-        . '<th>Monday</th>'
-        . '<th>Tuesday</th>'
-        . '<th>Wednesday</th>'
-        . '<th>Thursday</th>'
-        . '<th>Friday</th>'
-        . '<th>Saturday</th>'
-        . '</tr></thead><tbody>';
-    foreach($calendarArray as $week) {
-        $calendarString .= '<tr>';
-        foreach($week as $day) {
-            if($day === null) {
-                $calendarString .= '<td></td>';
-            }
-            else {
-                if($day[1]) {
-                    $calendarString .= '<td data-toggle="modal" data-target="#planModal" class="planDay">' . $day[0] . '</td>';
+    $page = new Mealplan(Database::getDb(), 'Meal Plan', $monthStart, $_SESSION['userid']);
+
+    $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $dateInfo[0], $dateInfo[1]);
+    $dayOffset = intval($monthStart['wday']);
+
+    $resultsString = "<div class='week-view'>";
+    for($i=1; $i<=$daysInMonth; $i++) {
+        if(ceil(($dayOffset + $i) / 7) - 1 == $_POST['currWeek']) {
+            $resultsString .= "<div class='day-info'>";
+                
+            $dayDetails = $page->getPlans($i);
+            $currentCategory = '';
+
+            $refDate = $page->getRefDate();
+            $dateString = $refDate['weekday'] . ', ' . $refDate['month'] . ' ' . $i;
+            $resultsString .= "<h3>$dateString</h3>";
+
+            foreach($dayDetails as $plan) {
+                if($plan->category !== $currentCategory) {
+                    $currentCategory = $plan->category;
+                    $resultsString .= "<div class='plan-category'>$currentCategory</div>";
+                    $resultsString .= "<div><a href='recipedetails.php?id=$plan->rec_id'>$plan->name </a></div>";
                 }
-                else {
-                    $calendarString .= '<td class="calDay">' . $day[0] . '</td>';
-                }
             }
+
+            $resultsString .= "</div>";
         }
-        $calendarString .= '</tr>';
     }
-    $calendarString .= '</tbody></table>';
+    $resultsString .= "</div>";
 
-    echo $calendarString;
+    echo $resultsString;
 ?>

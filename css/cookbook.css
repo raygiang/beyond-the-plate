@@ -373,6 +373,16 @@ a {
   font-size: 1.5em;
 }
 
+.week-view {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.day-info {
+   flex: 14.2%;
+   text-align: center;
+}
+
 #plan-info a {
   color: darkblue;
 }

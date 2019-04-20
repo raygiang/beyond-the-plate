@@ -14,6 +14,7 @@
     $calendarArray = $page->generateCalendar();
 
     $calendarString = '<table id="meal-plan-cal"><thead><tr>'
+        . '<th></th>'
         . '<th>Sunday</th>'
         . '<th>Monday</th>'
         . '<th>Tuesday</th>'
@@ -24,6 +25,8 @@
         . '</tr></thead><tbody>';
     foreach($calendarArray as $week) {
         $calendarString .= '<tr>';
+        $refDate = $page->getRefDate()['mon'] . ',' . $page->getRefDate()['year'];
+        $calendarString .= "<td><button class='weekly-view-button' data-toggle='modal' data-target='#planModal' value='$refDate'>View Weekly Plan</button></td>";
         foreach($week as $day) {
             if($day === null) {
                 $calendarString .= '<td></td>';

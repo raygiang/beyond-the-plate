@@ -81,6 +81,23 @@ function initCalendarListeners() {
     }
 }
 
+function initWeeklyListeners() {
+    let weeklyButtons = document.getElementsByClassName("weekly-view-button");
+
+    for(let i=0; i<weeklyButtons.length; i++) {
+        weeklyButtons[i].addEventListener("click", function(e) {
+            $.post('views/meal-plan/weeklyview.php',
+                { 
+                    refDate : e.target.value,
+                    currWeek : i
+                },
+                function(data) {
+                    $('#plan-info').html(data);
+                });
+        });
+    }
+}
+
 function populateMonthDropDown(monthDropDown) {
     for (let i = 0; i < referenceMonths.length; i++) {
         let yearReference = referenceMonths[i].getFullYear();
@@ -101,6 +118,7 @@ function populateMonthDropDown(monthDropDown) {
 function pageInit() {
     initScrollingHeader();
     initCalendarListeners();
+    initWeeklyListeners();
 
     const monthDropDown = document.getElementById("month-select");
     const addButton = document.getElementById("add-plan-button");
@@ -116,6 +134,7 @@ function pageInit() {
             function(data) {
                 $('#calendar-area').html(data);
                 initCalendarListeners();
+                initWeeklyListeners();
             }
         )
     });

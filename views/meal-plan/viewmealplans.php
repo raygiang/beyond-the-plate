@@ -15,12 +15,12 @@
 	foreach($dayDetails as $plan) {
 		$strDate = date('Y-m-d', $plan->date);
 
-		if($plan->name !== $currentCategory) {
+		if($plan->category !== $currentCategory) {
 			$currentCategory = $plan->category;
 			$planString .= "<div class='plan-category'>$currentCategory</div>";
 		}
 
-		$planString .= "<div><a href='recipedetails.php?id=$plan->rec_id'>$plan->name </a>";
+		$planString .= "<div><a href='recipedetails.php?id=$plan->rec_id'>$plan->name </a></div>";
 		$planString .= 
 			"<form action='#' method='POST'>" .
 			"<input type='hidden' name='plan_id' value='$plan->id'>" .
