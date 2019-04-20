@@ -5,14 +5,14 @@
 ** Birinder's Pages
 
  - css/cookbook.css
- 
+
  - js/main.js
  - js/magicsuggest.js
- 
+
  - lib/Comments.php
  - lib/Rating.php
  - lib/Recipe.php
- 
+
  - views/deleterecipe.php
  - views/recipedetails.php
  - views/recipes.php
@@ -46,6 +46,30 @@
   - lib/classes/ShoppingList.php
   - views/search-results.php
   - js/search.js
+
+
+
+**Mariya's Features**
+
+**Request Recipe**
+  - request.php
+  - views/requestrecipe (all files inside)
+  - lib/classes/Requestrecipe.php
+  - lib/controllers/request-controller.php
+  - js/request-search.js
+
+**Admin Dashboard**
+- admindashboard.php
+- lib/classes/Admin.php
+- lib/controllers/admin-controller.php
+- js/admin.js
+
+
+**Cooking Timer**
+- timer.php
+- lib/classes/Timer.php
+- lib/controllers/timer-controller.php
+- js/timer.js
 
  **********************************************************************************************************
 
