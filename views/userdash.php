@@ -33,9 +33,6 @@
   <li class="nav-item">
     <a class="nav-link" id="pills-mealplan-tab" data-toggle="pill" href="#pills-mealplan" role="tab" aria-controls="pills-mealplan" aria-selected="false">My Mealplans</a>
   </li>
-  <!-- <li class="nav-item">
-    <a class="nav-link" id="pills-requests-tab" data-toggle="pill" href="#pills-requests" role="tab" aria-controls="pills-requests" aria-selected="false">My Recipe Requests</a>
-  </li> -->
   <li class="nav-item">
     <a class="nav-link" id="pills-favourite-tab" data-toggle="pill" href="#pills-favourite" role="tab" aria-controls="pills-favourite" aria-selected="false">My Favourite Recipe's</a>
   </li>
@@ -128,7 +125,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" name="sbtBtn" class="btn btn-primary">Save changes</button>
+							<button type="submit" name="sbtBtn" class="btn btn-primary">Add Recipe</button>
 						</div>
 					</form>
 				</div>
@@ -163,7 +160,7 @@
 							<td>".$recipe->description."</td>
 							<td>".$recipe->authorfname." ".$recipe->authorlname."</td>
 							<td>".$userRatingHtml."</td>
-							<td><button class='btn btn-success'>Edit</button><button class='btn btn-danger'>Delete</button></td>
+							<td><form action='deleterecipe.php' method='GET'><input type='hidden' value='$recipe->id' name='recipeId'><button type='submit' class='btn btn-danger'>Delete</button></form></td>
 						</tr>";
 					}
 					echo $str."</table>";
@@ -257,15 +254,6 @@
 	<div class="tab-pane fade" id="pills-mealplan" role="tabpanel" aria-labelledby="pills-mealplan-tab">
 		<?php require_once('mealplan.php'); ?>
 	</div>
-
-	<!-- <div class="tab-pane fade" id="pills-requests" role="tabpanel" aria-labelledby="pills-requests-tab">
-	<?php
-	//require_once("requestrecipe.php");
-	?>
-	Request
-	</div>
-	-->
-
 	<!-- Favourite Recipe -->
 	<div class="tab-pane fade" id="pills-favourite" role="tabpanel" aria-labelledby="pills-favourite-tab">
 	<hr/>

@@ -59,6 +59,12 @@ $(document).ready(function(){
 	startButton.onclick = start;
 	endButton.onclick = stopTimer;
 
+  //Function that shows timer on click "Cooking Timer" button
+    $('#timer-btn').click(function(e){
+        $('#show').slideToggle();
+        e.preventDefault(); //stops page from jumping to the top
+    });
+
 });
 
 

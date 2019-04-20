@@ -1,5 +1,36 @@
 # Beyond the Plate
 
+## Pages
+
+** Birinder's Pages
+
+ - css/cookbook.css
+ 
+ - js/main.js
+ - js/magicsuggest.js
+ 
+ - lib/Comments.php
+ - lib/Rating.php
+ - lib/Recipe.php
+ 
+ - views/deleterecipe.php
+ - views/recipedetails.php
+ - views/recipes.php
+ - views/userdash.php
+
+ - addrecipe.php
+ - deleterecipe.php
+ - get_ingredients.php
+ - input_ingredient.php
+ - input_instruction.php
+ - recipedetails.php
+ - recipes.php
+ - uploadfile.php
+ - userdash.php
+
+
+ **********************************************************************************************************
+
 ## March 22 Update
 
 **Amandeep - Login Feature**
@@ -32,6 +63,9 @@
   - added CRUD for the results feature
   - has admin view for results, public view will be added to the recipe page
 
+**Birinder - Recipe Feature**
+  - Can add comments and ratings.
+
 ## March 31 Update
 
 **Mariya - Admin Dashboard**
@@ -39,27 +73,37 @@
 - added donutchart to display food categories
 - can count number of recipies posted by a user
 
+
+**Birinder - Recipe Feature**
+  - Dashboard Complete
+
 ## April 6 Update
 
 **Raymond - Shopping List Feature**
   - Allows users to search through recipes and add them to their selected recipes
   - Using the selected recipes, a shopping list will be generated for them
 
+
+**Birinder - Recipe Feature**
+  - Worked on Filter Recipe
+  - Autosuggest is working now
+
 ## April 9
 
 **Amandeep Singh -Profile Update**
   - User can update there profile details and password
-<<<<<<< HEAD
 
-  ## April 11
+## April 11
 
 **Amandeep Singh -Profile Update**
   - User can make a recipe favorite
 
-  ## April 12
+## April 12
 
 **Amandeep Singh -Profile Update**
   - User can send message to the author of the recipe
+**Birinder - Recipe Feature**
+  - Added Timing to Instructions
 
 ## April 14 Update
 
@@ -67,3 +111,8 @@
 - added Timer class, timer-controller
 - can see the list of instructions
 - can start/stop timer
+
+
+## April 19 Update
+**Birinder - Recipe Feature**
+  - Finalized the project

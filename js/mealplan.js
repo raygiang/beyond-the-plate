@@ -69,7 +69,7 @@ function initCalendarListeners() {
 
     for(let i=0; i < planDays.length; i++) {
         planDays[i].addEventListener("click", function() {
-            let unixTime = parseInt(refDay) + 86400 * 
+            let unixTime = parseInt(refDay) + 86400 *
                 (planDays[i].textContent - 1);
             $.post('views/meal-plan/viewmealplans.php',
                 { date: unixTime },
@@ -105,7 +105,7 @@ function populateMonthDropDown(monthDropDown) {
         let monthSelectOption = document.createElement("option");
 
         monthSelectOption.value = Math.round(referenceMonths[i].getTime()/1000);
-        monthSelectOption.innerHTML = monthNames[monthReference] 
+        monthSelectOption.innerHTML = monthNames[monthReference]
             + " " + yearReference;
 
         if(i === 3) {
@@ -116,6 +116,56 @@ function populateMonthDropDown(monthDropDown) {
 }
 
 function pageInit() {
+
+    /* Code from main.js as we can only 1 listener to window.onload */
+    var nav = document.getElementById("header");
+    var main = document.getElementById("main");
+    var height = nav.offsetTop;
+    var mHeight = nav.clientHeight;
+
+    window.onscroll = stickyMenuFunction;
+    function stickyMenuFunction()
+    {
+        if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
+            nav.classList.add("sticky");
+            nav.classList.remove("flex-container");
+            main.style.marginTop = mHeight+"px";
+        }
+        else {
+            nav.classList.remove("sticky");
+            main.style.marginTop = "0px";
+        }
+    }
+}
+    $("#uploadFile").change(function(){
+    $('#image_preview').html("");
+    var total_file=document.getElementById("uploadFile").files.length;
+    for(var i=0;i<total_file;i++)
+    {
+      $('#image_preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'>");
+    }
+    });
+
+
+    var ms = $('#ms').magicSuggest({
+        data: 'get_ingredients.php',
+        valueField: 'id',
+        displayField: 'name',
+        mode: 'remote',
+        renderer: function(data){
+            return '<div>'+data.name+'</div>';
+        },
+        resultAsString: true,
+        selectionRenderer: function(data){
+            //alert(data.countryName);
+            $("#ms").val("");
+            $('input[name^=ingredient_text').last().val(data.name);
+            return '<div class="name">' + data.name + '</div>';
+        }
+    });
+
+    /* Actual Mealplan.js */
+
     initScrollingHeader();
     initCalendarListeners();
     initWeeklyListeners();
